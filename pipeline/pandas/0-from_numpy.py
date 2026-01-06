@@ -3,7 +3,6 @@
     Module: 0-from_numpy
     This module is a part of 'Pandas' project.
 """
-import numpy as np
 import pandas as pd
 
 
