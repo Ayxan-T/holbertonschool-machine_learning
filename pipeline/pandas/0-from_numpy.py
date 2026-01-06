@@ -16,4 +16,4 @@ def from_numpy(array):
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     cols_num = array.shape[1]
     cols = [letter for letter in alphabet[:cols_num]]
-    return pd.DataFrame(array, columns = cols)
+    return pd.DataFrame(array, columns=cols)
