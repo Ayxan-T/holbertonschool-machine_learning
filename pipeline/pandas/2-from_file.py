@@ -7,5 +7,13 @@ import pandas as pd
 
 
 def from_file(filename, delimiter):
+    """
+        Reads a CSV file and constructs a Data Frame.
+        args:
+            filename -- the csv file to be read
+            delimiter -- the delimiter used in the csv file
+        output:
+            a pandas DataFrame object
+    """
 
-    return pd.DataFrame(filename, sep=delimiter)
+    return pd.read_csv(filename, sep=delimiter)
