@@ -4,7 +4,7 @@
     This module is a part of 'Pandas' project.
 """
 import pandas as pd
-
+# import string
 
 def from_numpy(array):
     """
@@ -13,7 +13,11 @@ def from_numpy(array):
     returns:
         df -- pandas.DataFrame
     """
-    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
     cols_num = array.shape[1]
-    cols = [letter for letter in alphabet[:cols_num]]
+    # cols = list(string.ascii_uppercase[:cols_num])
+    
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    cols = list(alphabet[:cols_num])
+    
     return pd.DataFrame(array, columns=cols)
