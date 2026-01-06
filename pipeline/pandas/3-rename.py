@@ -20,6 +20,4 @@ def rename(df):
 
     df['DateTime'] = pd.to_datetime(df['DateTime']) 
 
-    df = df[['DateTime', 'Close']]
-
-    return df
+    return df[['DateTime', 'Close']]
