@@ -16,7 +16,7 @@ def rename(df):
     Display only the Datetime and Close column
     Returns: the modified pd.DataFrame
     """
-    df.rename(columns={'TimeStamp':'DateTime'}, inplace=True)
+    df = df.rename(columns={'TimeStamp':'DateTime'})
 
     df['DateTime'] = pd.to_datetime(df['DateTime']) 
 
