@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-    Module: 3-rename 
+    Module: 3-rename
     This module is a part of 'Pandas' project.
 """
 import pandas as pd
@@ -16,8 +16,8 @@ def rename(df):
     Display only the Datetime and Close column
     Returns: the modified pd.DataFrame
     """
-    df = df.rename(columns={'Timestamp':'Datetime'})
+    df = df.rename(columns={'Timestamp': 'Datetime'})
 
-    df['Datetime'] = pd.to_datetime(df['Datetime'], unit='s') 
+    df['Datetime'] = pd.to_datetime(df['Datetime'], unit='s')
 
     return df[['Datetime', 'Close']]
