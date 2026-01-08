@@ -11,4 +11,3 @@ def index(df):
     """
 
     return df.set_index('Timestamp')
-
