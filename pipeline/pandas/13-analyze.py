@@ -4,9 +4,6 @@
     This module is a part of 'Pandas' project.
 """
 
-import pandas as pd
-index = __import__('10-index').index
-
 
 def analyze(df):
     """
