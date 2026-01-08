@@ -6,5 +6,9 @@
 
 
 def flip_switch(df):
+    """
+        Sorts in reverse chronological order and transposes.
+    """
+
     df.sort_values(by='Timestamp', ascending=False, inplace=True)
     return df.T
