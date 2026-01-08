@@ -18,6 +18,6 @@ def concat(df1, df2):
 
     df2 = df2.loc[:1417411920]
 
-    df = pd.concat([df2, df1], keys=['bitstamp', 'coinbase'])   
+    df = pd.concat([df2, df1], keys=['bitstamp', 'coinbase'])
 
     return df
