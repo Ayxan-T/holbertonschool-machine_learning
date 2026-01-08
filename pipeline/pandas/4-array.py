@@ -10,4 +10,4 @@ def array(df):
         Converts the last 10 rows of a Data Frame into a numpy array.
     """
 
-    return df.tail(10).values
+    return df[["High", "Close"]].tail(10).values
