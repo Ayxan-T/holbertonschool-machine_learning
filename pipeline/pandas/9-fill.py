@@ -21,3 +21,5 @@ def fill(df):
 
     df['Volume_(BTC)'] = df['Volume_(BTC)'].fillna(0)
     df['Volume_(Currency)'] = df['Volume_(Currency)'].fillna(0)
+
+    return df
