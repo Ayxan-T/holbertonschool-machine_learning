@@ -13,4 +13,5 @@ def analyze(df):
         Return descriptive analytics of df DataFrame.
     """
 
-    return df.describe()
+    columns_not_included = ['Timestamp']
+    return df.drop(columns=columns_not_included).describe()
