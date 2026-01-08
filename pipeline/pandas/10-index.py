@@ -9,6 +9,6 @@ def index(df):
     """
         Sets the 'Timestamp' column as index column.
     """
-    
+
     return df.set_index('Timestamp')
-    
+
