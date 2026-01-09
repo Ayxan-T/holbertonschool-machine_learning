@@ -9,5 +9,5 @@ def slice(df):
     """
         Selects every 60th row in the Data Frame.
     """
-    df = df[['High', 'Low', 'Close', 'Volume_BTC']]
+    df = df[['High', 'Low', 'Close', 'Volume_(BTC)']]
     return df[::60]
