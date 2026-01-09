@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
+"""
+    Module: 1-scatter
+    This module is a part of 'Plotting' project.
+"""
 import numpy as np
 import matplotlib.pyplot as plt
 
 
 def scatter():
+    """
+        scatteringg
+    """
 
     mean = [69, 0]
     cov = [[15, 8], [8, 15]]
