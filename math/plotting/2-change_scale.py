@@ -1,8 +1,16 @@
 #!/usr/bin/env python3
+"""
+    Module: 2-change_scale.py
+    This module is a part of 'Plotting' project.
+"""
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def change_scale():
+    """
+        DONTREADME
+    """
     x = np.arange(0, 28651, 5730)
     r = np.log(0.5)
     t = 5730
