@@ -17,5 +17,6 @@ def line():
 
     x = np.arange(0, 11)
 
+    plt.xlim(0, 10)
     plt.plot(x, y, 'r')
     plt.show()
