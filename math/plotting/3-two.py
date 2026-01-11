@@ -1,8 +1,17 @@
 #!/usr/bin/env python3
+"""
+    Module:
+    This module is a part of 'Plotting' project.
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def two():
+    """
+    Docstring for 'two' function.
+    """
 
     x = np.arange(0, 21000, 1000)
     r = np.log(0.5)
