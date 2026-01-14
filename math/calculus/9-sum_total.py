@@ -5,13 +5,10 @@ This module is a part of 'Calculus' project.
 """
 
 def summation_i_squared(n):
-    """
-    Docstring for 'summation_i_squared' function.
-    """
-    if n < 1:
-        return None
+    """Computes the sum of squares from 1 to n recursively."""
+    # Base Case: if n is 0, the sum is 0
+    if n <= 0:
+        return 0
     
-    try:
-        return n ** 2 + summation_i_squared(n - 1)
-    except TypeError:
-        return n ** 2
+    # Recursive Step
+    return n**2 + summation_i_squared(n - 1)
