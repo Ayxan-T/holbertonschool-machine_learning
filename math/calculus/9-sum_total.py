@@ -10,10 +10,8 @@ def summation_i_squared(n):
     """
     if n < 1:
         return None
-
-    Sum = 0
-    for i in range(1, n + 1):
-        Sum += i ** 2
-
-    return Sum
-
+    
+    try:
+        return n ** 2 + summation_i_squared(n - 1)
+    except TypeError:
+        return n ** 2
