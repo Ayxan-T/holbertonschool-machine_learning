@@ -17,5 +17,5 @@ def summation_i_squared(n):
     arr = np.arange(1, n+1)
     arr = arr ** 2
     Sum = np.sum(arr)
-    
+
     return Sum
