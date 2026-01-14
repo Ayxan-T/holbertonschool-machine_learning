@@ -14,6 +14,15 @@ def poly_derivative(poly):
     if type(poly) is not list:
         return None
 
+    empty_with_0s = True
+    for item in poly:
+        if item: 
+            empty_with_0s = False
+            break
+
+    if empty_with_0s:
+        return None
+        
     res = []
     for i in range(1, len(poly)):
         res.append(poly[i] * i)
@@ -22,7 +31,7 @@ def poly_derivative(poly):
         if item:
             return res
 
-    # if len(res) == 0:
-    return None
+    if len(res) == 0:
+        return None
 
-    # return [0]
+    return [0]
