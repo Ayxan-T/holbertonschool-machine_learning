@@ -23,5 +23,6 @@ def poly_derivative(poly):
             return res
 
     # if len(res) == 0:
-    #    return None
-    return [0]
+    return None
+
+    # return [0]
