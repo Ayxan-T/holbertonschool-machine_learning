@@ -14,11 +14,12 @@ def poly_derivative(poly):
     if type(poly) is not list:
         return None
 
-    for i in range(len(poly)):
-        poly[i] = poly[i] * i
+    res = []
+    for i in range(1, len(poly)):
+        res.append(poly[i] * i)
 
-    for item in poly:
+    for item in res:
         if item:
-            return poly
+            return res
 
     return [0]
