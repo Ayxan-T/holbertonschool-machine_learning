@@ -22,6 +22,6 @@ def poly_derivative(poly):
         if item:
             return res
 
-    if len(res) == 0:
-        return None
+    # if len(res) == 0:
+    #    return None
     return [0]
