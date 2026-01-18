@@ -14,6 +14,9 @@ def poly_derivative(poly):
     if type(poly) is not list:
         return None
 
+    if len(poly) == 0:
+        return None
+
     empty_with_0s = True
     for item in poly:
         if item: 
