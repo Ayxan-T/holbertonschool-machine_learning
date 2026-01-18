@@ -6,7 +6,6 @@ This module is a part of 'Calculus' project.
 
 
 def poly_derivative(poly):
-    
     """
     Docstring for '10-mattise' function.
     """
@@ -22,13 +21,13 @@ def poly_derivative(poly):
 
     empty_with_0s = True
     for item in poly:
-        if item: 
+        if item:
             empty_with_0s = False
             break
 
     if empty_with_0s:
         return None
-        
+
     res = []
     for i in range(1, len(poly)):
         res.append(poly[i] * i)
