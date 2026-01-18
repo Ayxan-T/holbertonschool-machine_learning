@@ -14,10 +14,14 @@ def poly_integral(poly, C=0):
     if type(C) is not int or type(poly) is not list:
         return None
 
+    # if poly is empty
+    if len(poly) == 0:
+        return None
+
     res = [C]
 
-    if len(poly) == 1 and type(poly[0]) is bool:
-        return 'got you!'
+    # if len(poly) == 1 and type(poly[0]) is bool:
+        # return 'got you!'
 
     # if poly is 0
     if len(poly) == 1 and poly[0] == 0:
