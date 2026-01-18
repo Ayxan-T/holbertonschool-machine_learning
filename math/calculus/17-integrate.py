@@ -9,7 +9,7 @@ def poly_integral(poly, C=0):
     """
     Docstring for 'poly_integral' function.
     """
-    
+
     # if C or poly is not valid
     if type(C) is not int or type(poly) is not list:
         return None
@@ -19,9 +19,6 @@ def poly_integral(poly, C=0):
         return None
 
     res = [C]
-
-    # if len(poly) == 1 and type(poly[0]) is bool:
-        # return 'got you!'
 
     # if poly is 0
     if len(poly) == 1 and poly[0] == 0:
@@ -36,7 +33,7 @@ def poly_integral(poly, C=0):
             new_coef = int(new_coef)
 
         res.append(new_coef)
-        
+
         idx_plus_one += 1
 
     return res
