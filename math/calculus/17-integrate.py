@@ -18,7 +18,14 @@ def poly_integral(poly, C=0):
 
     idx_plus_one = 1
     for coef in poly:
-        res.append(coef / idx_plus_one)
+        new_coef = coef / idx_plus_one
+
+        # if new_coef has no fraction part, save it as an int
+        if new_coef - int(new_coef) == 0:
+            new_coef = int(new_coef)
+
+        res.append(new_coef)
+        
         idx_plus_one += 1
 
     return res
