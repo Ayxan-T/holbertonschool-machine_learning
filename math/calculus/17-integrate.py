@@ -14,7 +14,7 @@ def poly_integral(poly, C=0):
     if type(C) is not int or type(poly) is not list:
         return None
 
-    res = list(C)
+    res = [C]
 
     idx_plus_one = 1
     for coef in poly:
