@@ -16,7 +16,7 @@ def poly_integral(poly, C=0):
 
     res = [C]
 
-    if poly[0] == False:
+    if len(poly) == 1 and poly[0] == False:
         return 'got you!'
 
     # if poly is 0
