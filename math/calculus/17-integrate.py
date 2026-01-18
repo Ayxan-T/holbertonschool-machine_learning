@@ -16,6 +16,10 @@ def poly_integral(poly, C=0):
 
     res = [C]
 
+    # if poly is 0
+    if len(poly) == 1 and poly[0] == 0:
+        return res
+
     idx_plus_one = 1
     for coef in poly:
         new_coef = coef / idx_plus_one
