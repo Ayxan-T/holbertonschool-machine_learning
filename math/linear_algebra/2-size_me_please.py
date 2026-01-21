@@ -7,7 +7,7 @@ This module is a part of 'Linear Algebra' project.
 
 def matrix_shape(matrix):
     """
-    Given the nested list of lists, 
+    Given the nested list of lists,
     the function returns the shape of the 'matrix'.
     """
     size = [len(matrix)]
