@@ -7,14 +7,15 @@ This module is a part of 'Linear Algebra' project.
 
 def matrix_shape(matrix):
     """
-    Given the nested list of lists, the function returns the shape of the 'matrix'.
+    Given the nested list of lists, 
+    the function returns the shape of the 'matrix'.
     """
     size = [len(matrix)]
 
     while True:
         try:
             dim = len(matrix[0])
-        except:
+        except TypeError:
             break
 
         size.append(dim)
