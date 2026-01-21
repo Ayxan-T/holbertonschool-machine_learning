@@ -13,8 +13,11 @@ def matrix_shape(matrix):
 
     while True:
         try:
-            matrix = matrix[0]
+            dim = len(matrix[0])
         except:
             break
 
-        size.append(len(matrix))
+        size.append(dim)
+        matrix = matrix[0]
+
+    return size
