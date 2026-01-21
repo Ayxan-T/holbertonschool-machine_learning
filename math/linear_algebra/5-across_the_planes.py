@@ -8,7 +8,7 @@ def add_matrices2D(mat1, mat2):
     """
     Docstring for 'add_matrices2D' function.
     """
- 
+
     if len(mat1) != len(mat2) or len(mat1[0]) != len(mat2[0]):
         return None
 
