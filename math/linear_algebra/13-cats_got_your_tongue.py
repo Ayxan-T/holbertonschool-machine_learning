@@ -7,4 +7,7 @@ import numpy as np
 
 
 def np_cat(mat1, mat2, axis=0):
+    """
+    Docstring for 'np_cat' function
+    """
     return np.concatenate((mat1, mat2), axis=axis)
