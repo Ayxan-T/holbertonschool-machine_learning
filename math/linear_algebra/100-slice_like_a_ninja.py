@@ -16,4 +16,4 @@ def np_slice(matrix, axes={}):
         else:
             slicers.append(slice(None))
 
-    return matrix[slicer for slicer in slicers]
+    return matrix[*tuple(slicers)]
