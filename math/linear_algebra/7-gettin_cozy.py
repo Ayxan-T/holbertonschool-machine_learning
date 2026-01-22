@@ -26,7 +26,8 @@ def cat_matrices2D(mat1, mat2, axis=0):
         if mat1_shape[0] != mat2_shape[0]:
             return None
         else:
-            for row_idx, row in enumerate(mat2):
-                mat1[row_idx] += row
-            
-            return mat1
+            # Create a new matrix for horizontal concatenation
+            result_matrix = []
+            for row_idx in range(mat1_shape[0]):
+                result_matrix.append(mat1[row_idx] + mat2[row_idx])
+            return result_matrix
