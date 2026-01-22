@@ -19,10 +19,13 @@ def mat_mul(mat1, mat2):
     mat = [[] for _ in range(mat1_shape[0])]
 
     for row_mat1_idx, row_mat1 in enumerate(mat1):
-        Sum = 0
-        for row_mat2, row_mat1_elm in zip(mat2, row_mat1):
-            Sum += row_mat2[row_mat1_idx] * row_mat1_elm
+        col_idx = 0
+        while col_idx < mat2_shape[1]:
+            Sum = 0
+            for row_mat2, row_mat1_elm in zip(mat2, row_mat1):
+                Sum += row_mat2[col_idx] * row_mat1_elm
 
-        mat[row_mat1_idx].append(Sum)
-        
+            mat[row_mat1_idx].append(Sum)
+            col_idx += 1
+
     return mat
