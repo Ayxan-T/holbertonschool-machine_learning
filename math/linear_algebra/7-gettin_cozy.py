@@ -13,7 +13,7 @@ def cat_matrices2D(mat1, mat2, axis=0):
     mat2_shape = [len(mat2), len(mat2[0])]
 
     # axis=0 -> vertical concat
-    if axis == 0: 
+    if axis == 0:
         # if cannot be concat, return None
         if mat1_shape[1] != mat2_shape[1]:
             return None
