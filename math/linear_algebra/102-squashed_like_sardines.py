@@ -12,7 +12,8 @@ def cat_matrices(mat1, mat2, axis=0):
         if cur_axis == axis:
             return mat1 + mat2
         else:
-            return [cat_recur(row_mat1, row_mat2, cur_axis+1) for row_mat1, row_mat2 in zip(mat1, mat2)]
+            return [cat_recur(row_mat1, row_mat2, cur_axis+1)\
+                    for row_mat1, row_mat2 in zip(mat1, mat2)]
 
     shape = []
 
@@ -31,4 +32,3 @@ def cat_matrices(mat1, mat2, axis=0):
         cur_axis += 1
 
     return cat_recur(mat1, mat2)
-
