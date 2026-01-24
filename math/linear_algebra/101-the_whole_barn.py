@@ -21,10 +21,10 @@ def add_matrices(mat1, mat2):
             break
 
         m1, m2 = m1[0], m2[0]
-    
-    return add_recur(mat1, mat2);
 
-    
+    return add_recur(mat1, mat2)
+
+
 def add_recur(mat1, mat2):
     """
     Helper function: adds two matrices recursively
