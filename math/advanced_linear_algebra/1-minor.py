@@ -8,7 +8,7 @@ def minor(matrix):
     """
     Docstring for 'minor' function
     """
-    if type(matrix) is not list or len(matrix) == 0): 
+    if type(matrix) is not list or len(matrix) == 0: 
         raise TypeError("matrix must be a list of lists")
 
     for row in matrix:
