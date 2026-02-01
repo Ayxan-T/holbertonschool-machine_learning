@@ -20,6 +20,8 @@ def minor(matrix):
         if len(row) != size:
             raise ValueError("matrix must be a square matrix")
 
+    result = [[0 for _ in range(size)] for _ in range(size)]
+
     def helper(mat, s):
         if s == 1:
             return mat[0][0]
@@ -38,6 +40,6 @@ def minor(matrix):
     for row_idx, row in enumerate(matrix):
         for col_idx, elm in enumerate(row):
             minor = [row[:col_idx] + row[col_idx+1:] for row in matrix[:row_idx] + matrix[row_idx+1:]]
-            matrix[row_idx][col_idx] = helper(minor, size-1)
+            result[row_idx][col_idx] = helper(minor, size-1)
 
     return matrix
