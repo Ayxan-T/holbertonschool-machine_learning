@@ -28,7 +28,7 @@ def minor(matrix):
             return mat[0][0]*mat[1][1] - mat[0][1]*mat[1][0]
 
         det = 0
-        for idx, elm in mat[0]:
+        for idx, elm in enumerate(mat[0]):
             k = (-1)**idx
             minor = [row[:idx] + row[idx+1:] for row in mat[1:]]
             det += k*elm*helper(minor, s-1)
