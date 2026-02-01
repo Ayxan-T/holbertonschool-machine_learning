@@ -41,7 +41,7 @@ def minor(matrix):
     for row_idx, row in enumerate(matrix):
         for col_idx, elm in enumerate(row):
             minor = [row[:col_idx] + row[col_idx+1:]
-                    for row in matrix[:row_idx] + matrix[row_idx+1:]]
+                     for row in matrix[:row_idx] + matrix[row_idx+1:]]
             result[row_idx][col_idx] = helper(minor, size-1)
 
     return result
