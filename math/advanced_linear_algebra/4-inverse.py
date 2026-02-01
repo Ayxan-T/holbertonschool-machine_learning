@@ -60,8 +60,8 @@ def inverse(matrix):
             adjugate[i][j] = adjugate[j][i]
             adjugate[j][i] = temp
 
-    for row in adjugate:
-        for elm in row:
-            elm = elm / det
+    for i in range(len(adjugate)):
+    for j in range(len(adjugate[i])):
+        adjugate[i][j] = adjugate[i][j] / det
 
     return adjugate
