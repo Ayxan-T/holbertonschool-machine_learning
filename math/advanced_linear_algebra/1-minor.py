@@ -21,6 +21,9 @@ def minor(matrix):
             raise ValueError("matrix must be a square matrix")
 
     def helper(mat, s):
+        if s == 1:
+            return mat[0][0]
+
         if s == 2:
             return mat[0][0]*mat[1][1] - mat[0][1]*mat[1][0]
 
