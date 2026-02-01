@@ -22,6 +22,9 @@ def definiteness(matrix):
     if not is_square:
         return None
 
+    if not np.allclose(matrix, matrix.T):
+        return None
+
     dets = []
     for i in range(shape[0]):
         dets.append(np.linalg.det(matrix[:i+1, :i+1]))
