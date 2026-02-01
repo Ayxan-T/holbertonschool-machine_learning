@@ -8,7 +8,7 @@ def determinant(matrix):
     """
     Docstring for 'determinant' function
     """
-    if type(matrix) is not list or len(matrix) == 0: 
+    if type(matrix) is not list or len(matrix) == 0:
         raise TypeError("matrix must be a list of lists")
 
     for row in matrix:
@@ -36,7 +36,6 @@ def determinant(matrix):
             k = (-1)**idx
             minor = [row[:idx] + row[idx+1:] for row in mat[1:]]
             det += k*elm*helper(minor, s-1)
-        
         return det
 
     return helper(matrix, size)
