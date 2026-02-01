@@ -38,8 +38,8 @@ def definiteness(matrix):
     # checking negative definiteness
     check_successful = True
     for idx, elm in enumerate(dets):
-        if (idx % 2 == 0 and elm <= 0) or
-        (idx % 2 == 1 and elm >= 0):
+        if ((idx % 2 == 0 and elm <= 0) or
+            (idx % 2 == 1 and elm >= 0)):
             check_successful = False
             break
     if check_successful:
