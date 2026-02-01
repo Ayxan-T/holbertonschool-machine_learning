@@ -37,7 +37,7 @@ def cofactor(matrix):
             det += k*elm*helper(minor, s-1)
         return det
 
-   for row_idx, row in enumerate(matrix):
+    for row_idx, row in enumerate(matrix):
         for col_idx, elm in enumerate(row):
             minor = [row[:col_idx] + row[col_idx+1:]
                      for row in matrix[:row_idx] + matrix[row_idx+1:]]
