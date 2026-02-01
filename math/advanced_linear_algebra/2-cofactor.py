@@ -18,6 +18,11 @@ def cofactor(matrix):
         if not isinstance(row, list):
             raise TypeError("matrix must be a list of lists")
 
+    size = len(matrix)
+    for row in matrix:
+        if len(row) != size:
+            raise ValueError("matrix must be a non-empty square matrix")
+
     result = [[0 for _ in range(size)] for _ in range(size)]
 
     def helper(mat, s):
