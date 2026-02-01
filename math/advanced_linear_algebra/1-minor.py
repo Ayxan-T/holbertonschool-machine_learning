@@ -35,8 +35,8 @@ def minor(matrix):
         
         return det
 
-    for row_idx, row in matrix:
-        for col_idx, elm in row:
+    for row_idx, row in enumerate(matrix):
+        for col_idx, elm in enumerate(row):
             minor = [row[:col_idx] + row[col_idx+1:] for row in mat[:row_idx] + mat[row_idx+1:]]
             matrix[row_idx][col_idx] = helper(minor, s-1)
 
