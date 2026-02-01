@@ -13,7 +13,7 @@ def minor(matrix):
 
     # if zero matrix ( [[]] )
     if len(matrix[0]) == 0:
-        return 1
+        return TypeError("matrix must be a list of lists") 
 
     size = len(matrix)
     for row in matrix:
