@@ -18,7 +18,7 @@ def minor(matrix):
     size = len(matrix)
     for row in matrix:
         if len(row) != size:
-            raise ValueError("matrix must be a square matrix")
+            raise ValueError("matrix must be a non-empty square matrix")
 
     result = [[0 for _ in range(size)] for _ in range(size)]
 
