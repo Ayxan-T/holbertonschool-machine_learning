@@ -8,7 +8,7 @@ def determinant(matrix):
     """
     Docstring for 'determinant' function
     """
-    if type(matrix[0]) is not list:
+    if type(matrix[0]) is not list or type(matrix) is not list:
         raise TypeError("matrix must be a list of lists")
 
     # if zero matrix ( [[]] )
