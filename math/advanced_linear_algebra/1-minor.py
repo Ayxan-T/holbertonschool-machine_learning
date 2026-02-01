@@ -23,6 +23,9 @@ def minor(matrix):
     result = [[0 for _ in range(size)] for _ in range(size)]
 
     def helper(mat, s):
+        if s == 0:
+            return 1
+
         if s == 1:
             return mat[0][0]
 
