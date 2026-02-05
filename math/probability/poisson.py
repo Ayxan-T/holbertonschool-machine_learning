@@ -25,6 +25,7 @@ class Poisson:
             self.lambtha = sum(data) / len(data)
 
     def pmf(self, k):
+        k = int(k)
         e = 2.7182818285
         fac = k
         for i in range(1, k):
