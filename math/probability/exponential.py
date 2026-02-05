@@ -20,7 +20,7 @@ class Exponential:
                 raise ValueError("data must contain multiple values")
 
             # calculating lambtha (average)
-            self.lambtha = sum(data) / len(data)
+            self.lambtha = 1 / (sum(data) / len(data))
 
     def fact(n):
         """
