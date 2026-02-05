@@ -25,6 +25,9 @@ class Poisson:
             self.lambtha = sum(data) / len(data)
 
     def pmf(self, k):
+        """
+        Method: pmf
+        """
         if k < 0:
             return 0
         k = int(k)
