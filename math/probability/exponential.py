@@ -19,7 +19,7 @@ class Exponential:
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
 
-            # calculating lambtha (average)
+            # calculating lambtha (the average number of occurances per unit of time period)
             self.lambtha = 1 / (sum(data) / len(data))
 
     def fact(n):
