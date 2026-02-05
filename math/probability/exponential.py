@@ -5,6 +5,9 @@ Module: exponential
 
 
 class Exponential:
+    """
+    Class: Exponential
+    """
     def __init__(self, data=None, lambtha=1.):
         self.data = data
         if lambtha <= 0:
