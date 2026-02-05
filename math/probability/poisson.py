@@ -25,3 +25,11 @@ class Poisson:
             for elm in data:
                 Sum += elm
             self.lambtha = Sum / len(data)
+
+    def pmf(self, k):
+        count = 0
+        for elm in data:
+            if elm == k:
+                count += 1
+        
+        return count / Sum
