@@ -22,13 +22,13 @@ class Poisson:
                 raise ValueError("data must contain multiple values")
 
             # calculating lambtha (average)
-            self.Sum = sum(data)
-            self.lambtha = self.Sum / len(data)
+            self.lambtha = sum(data) / len(data)
 
     def pmf(self, k):
-        count = 0
-        for elm in self.data:
-            if elm == k:
-                count += 1
-        
-        return count / len(self.data)
+        e = 2.7182818285
+        fac = k
+        for i in range(1, k):
+            fac *= i
+        P = (self.lambtha**k) * e**(-self.lambtha) / fac
+
+        return P
