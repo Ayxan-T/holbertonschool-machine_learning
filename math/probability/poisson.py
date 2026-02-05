@@ -29,7 +29,7 @@ class Poisson:
 
     def pmf(self, k):
         count = 0
-        for elm in data:
+        for elm in self.data:
             if elm == k:
                 count += 1
         
