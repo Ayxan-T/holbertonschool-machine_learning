@@ -8,7 +8,9 @@ class Poisson:
     """
     Class: Poisson
     """
+    data = []
     def __init__(self, data=None, lambtha=1.):
+        data = data
         if lambtha <= 0:
             raise ValueError("lambtha must be a positive value")
         if data is None:
