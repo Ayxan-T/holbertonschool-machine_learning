@@ -3,6 +3,7 @@
 Module: poisson
 """
 
+
 class Poisson:
     """
     Class: Poisson
