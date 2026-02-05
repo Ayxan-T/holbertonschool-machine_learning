@@ -24,6 +24,15 @@ class Poisson:
             # calculating lambtha (average)
             self.lambtha = sum(data) / len(data)
 
+    def fact(n):
+        if n == 0:
+            return 1
+        res = 1
+        for i in range(1, n + 1):
+            res *= i
+
+        return res
+
     def pmf(self, k):
         """
         Method: pmf
@@ -32,9 +41,21 @@ class Poisson:
             return 0
         k = int(k)
         e = 2.7182818285
-        fac = k
-        for i in range(1, k):
-            fac *= i
+        fac = Poisson.fact(k)
         P = (self.lambtha**k) * e**(-self.lambtha) / fac
 
         return P
+
+    def cdf(self, k):
+        """
+        Method: cdf
+        """
+        if k < 0:
+            return 0
+        k = int(k)
+        cdf = 0
+        for i in range(k + 1):
+            cdf += self.pmf(i)
+
+        return cdf
+        
