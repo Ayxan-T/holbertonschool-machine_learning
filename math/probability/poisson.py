@@ -25,6 +25,9 @@ class Poisson:
             self.lambtha = sum(data) / len(data)
 
     def fact(n):
+        """
+        helper
+        """
         if n == 0:
             return 1
         res = 1
@@ -58,4 +61,3 @@ class Poisson:
             cdf += self.pmf(i)
 
         return cdf
-        
