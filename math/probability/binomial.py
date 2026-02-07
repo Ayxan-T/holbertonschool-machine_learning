@@ -30,7 +30,7 @@ class Binomial:
             p = 1 - mean / var
             n = mean / p
             
-            p = mean / n
+            # p = mean / n
 
             temp = dict()
             for elm in data:
@@ -38,6 +38,10 @@ class Binomial:
                     temp[elm] = 1
                 else:
                     temp[elm] += 1
+
+            temp = sorted(temp, key=lambda Key: temp[Key], reverse=True)
+            p = temp[0] / n
+
 
 
         self.p = float(p)
