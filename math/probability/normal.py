@@ -18,12 +18,11 @@ class Normal:
 
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
-        
+
             mean = sum(data) / len(data)
-            
-            sqrd_residuals= [(mean - elm)**2 for elm in data]
+
+            sqrd_residuals = [(mean - elm)**2 for elm in data]
             stddev = (sum(sqrd_residuals) / len(data))**0.5
 
         self.mean = mean
         self.stddev = stddev
-
