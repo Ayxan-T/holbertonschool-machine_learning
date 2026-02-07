@@ -26,3 +26,15 @@ class Normal:
 
         self.mean = mean
         self.stddev = stddev
+
+    def z_score(self, x):
+        """
+        Method: z_score
+        """
+        return (x - self.mean) / self.stddev
+
+    def x_score(self, z):
+        """
+        Method: x_score
+        """
+        return self.mean + z * self.stddev
