@@ -33,8 +33,8 @@ class Normal:
         """
         return (x - self.mean) / self.stddev
 
-    def x_score(self, z):
+    def x_value(self, z):
         """
-        Method: x_score
+        Method: x_value
         """
         return self.mean + z * self.stddev
