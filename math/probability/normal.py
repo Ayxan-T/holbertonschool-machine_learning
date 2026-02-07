@@ -47,3 +47,12 @@ class Normal:
         pi = 3.1415926536
         return (1 / (self.stddev * (2 * pi)**0.5)) * \
             e**(-0.5 * ((x - self.mean) / self.stddev)**2)
+
+    def cdf(self, x):
+        """
+        Method: cdf
+        """
+        pi = 3.1415926536
+        z = (x - self.mean) / self.stddev
+        return 2 / pi**0.5 * (z - z**3 / 3 + z**5 / 10 - x**7 / 42 + x**9 / 216)
+
