@@ -37,3 +37,15 @@ class Exponential:
             res *= i
 
         return res
+
+    def pdf(self, x):
+        """
+        Method: pdf
+        """
+        if x < 0:
+            return 0
+
+        e = 2.7182818285
+        pdf = self.lambtha * e**(-self.lambtha * x)
+
+        return pdf
