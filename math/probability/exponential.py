@@ -49,3 +49,15 @@ class Exponential:
         pdf = self.lambtha * e**(-self.lambtha * x)
 
         return pdf
+
+    def cdf(self, x):
+        """
+        Method: cdf
+        """
+        if x < 0:
+            return 0
+
+        e = 2.7182818285
+        cdf = 1 - e**(-self.lambtha * x)
+
+        return cdf
