@@ -38,3 +38,11 @@ class Normal:
         Method: x_value
         """
         return self.mean + z * self.stddev
+
+    def pdf(self, x):
+        """
+        Method: pdf
+        """
+        e = 2.7182818285
+        pi = 3.1415926536
+        return (1 / (self.stddev * (2 * pi) ** 0.5) * e**(-0.5 * ((x - self.mean) / self.stddev)**2)
