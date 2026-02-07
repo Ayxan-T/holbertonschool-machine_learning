@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+"""
+Module: normal
+"""
+
+
+class Normal:
+    """
+    Class: Normal
+    """
+    def __init__(self, data=None, mean=0., stddev=1.):
+        if stddev <= 0:
+            raise ValueError("stddev must be a positive value")
+
+        if data is not None:
+            if type(data) is not list:
+                raise TypeError("data must be a list")
+
+            if len(data) < 2:
+                raise ValueError("data must contain multiple values")
+        
+            mean = sum(data) / len(data)
+            
+            sqrd_residuals= [(mean - elm)**2 for elm in data]
+            stddev = (sum(sqrd_residuals) / len(data))**0.5
+
+        self.mean = mean
+        self.stddev = stddev
+
