@@ -54,5 +54,5 @@ class Normal:
         """
         pi = 3.1415926536
         z = (x - self.mean) / self.stddev
-        return 2 / pi**0.5 * (z - z**3 / 3 + z**5 / 10 - x**7 / 42 + x**9 / 216)
+        return (2 / pi**0.5) * (z - z**3 / 3 + z**5 / 10 - z**7 / 42 + z**9 / 216)
 
