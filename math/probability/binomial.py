@@ -31,14 +31,13 @@ class Binomial:
             n = mean / p
             
             p = mean / n
-            /*
+
             temp = dict()
             for elm in data:
                 if temp.get(elm, None) is None:
                     temp[elm] = 1
                 else:
                     temp[elm] += 1
-            */
 
 
         self.p = float(p)
