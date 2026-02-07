@@ -28,7 +28,7 @@ class Binomial:
             var = sum(sqrd_residuals) / len(data)
 
             p = 1 - mean / var
-            n = mean / p
+            n = round(mean / p)
             
             # p = mean / n
 
