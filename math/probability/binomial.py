@@ -30,8 +30,6 @@ class Binomial:
             p = 1 - mean / var
             n = round(mean / p)
             
-            p = mean / n
-
 
         self.p = float(p)
         self.n = int(n)
