@@ -8,7 +8,7 @@ class Binomial:
     """
     Class: Binomial
     """
-    def __init__(self, data=None, n=1, p=0.5):                
+    def __init__(self, data=None, n=1, p=0.5):
         if data is None:
             if n <= 0:
                 raise ValueError("n must be a positive value")
