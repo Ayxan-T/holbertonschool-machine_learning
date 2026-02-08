@@ -6,12 +6,12 @@ Module: binomial
 
 class Binomial:
     def __init__(self, data=None, n=1, p=0.5):
-        if data is None:
-            # Validate provided n and p
-            if n <= 0:
+        if n <= 0:
                 raise ValueError("n must be a positive value")
-            if 1 < p or p < 0:
+        if 1 < p or p < 0:
                 raise ValueError("p must be greater than 0 and less than 1")
+                
+        if data is None:
             self.n = int(n)
             self.p = float(p)
         else:
