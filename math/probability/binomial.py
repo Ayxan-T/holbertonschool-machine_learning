@@ -31,8 +31,8 @@ class Binomial:
             n = round(mean / p)
             
 
-        self.p = float(p)
         self.n = int(n)
+        self.p = float(mean / self.n)
 
     def z_score(self, x):
         """
