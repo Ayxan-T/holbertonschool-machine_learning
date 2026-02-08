@@ -5,15 +5,16 @@ Module: binomial
 
 
 class Binomial:
-    def __init__(self, data=None, n=1, p=0.5):
-        if n <= 0:
-                raise ValueError("n must be a positive value")
-        if 1 < p or p < 0:
-                raise ValueError("p must be greater than 0 and less than 1")
-                
+    def __init__(self, data=None, n=1, p=0.5):                
         if data is None:
+            if n <= 0:
+                raise ValueError("n must be a positive value")
+            if 1 <= p or p <= 0:
+                raise ValueError("p must be greater than 0 and less than 1")
+            
             self.n = int(n)
             self.p = float(p)
+            
         else:
             # Validate data list
             if not isinstance(data, list):
