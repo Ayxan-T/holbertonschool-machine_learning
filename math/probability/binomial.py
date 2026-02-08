@@ -11,10 +11,10 @@ class Binomial:
                 raise ValueError("n must be a positive value")
             if 1 <= p or p <= 0:
                 raise ValueError("p must be greater than 0 and less than 1")
-            
+
             self.n = int(n)
             self.p = float(p)
-            
+
         else:
             # Validate data list
             if not isinstance(data, list):
@@ -30,7 +30,7 @@ class Binomial:
             # p = 1 - (variance / mean)
             estimated_p = 1 - (variance / mean)
             estimated_n = round(mean / estimated_p)
-            
+
             # Recalculate p based on the rounded n
             self.n = int(estimated_n)
             self.p = float(mean / self.n)
