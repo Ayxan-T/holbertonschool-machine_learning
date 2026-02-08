@@ -29,10 +29,10 @@ class Binomial:
 
             p = 1 - mean / var
             n = round(mean / p)
-            
+            p = mean / n
 
         self.n = int(n)
-        self.p = float(mean / self.n)
+        self.p = float(p)
 
     def z_score(self, x):
         """
