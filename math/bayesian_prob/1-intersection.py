@@ -35,7 +35,7 @@ def intersection(x, n, P):
         if elm < 0 or elm > 1:
             raise ValueError("All values in Pr must be in the range [0, 1]")
 
-    if !np.isclose(sum(Pr), 1):
+    if not np.isclose(sum(Pr), 1):
         raise ValueError("Pr must sum to 1")
 
     combinations = np.math.factorial(n) / \
