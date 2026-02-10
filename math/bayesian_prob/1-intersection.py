@@ -7,7 +7,7 @@ Module: 0-likelihood
 import numpy as np
 
 
-def intersection(x, n, P):
+def intersection(x, n, P, Pr):
     """
     Function: likelihood
     """
