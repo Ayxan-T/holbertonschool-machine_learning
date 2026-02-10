@@ -20,7 +20,7 @@ def likelihood(x, n, P):
     if x > n:
         raise ValueError("x cannot be greater than n")
 
-    if type(P) is not numpy.ndarray or P.ndim != 1:
+    if type(P) is not np.ndarray or P.ndim != 1:
         raise ValueError("P must be a 1D numpy.ndarray")
 
     for elm in P:
