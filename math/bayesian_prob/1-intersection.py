@@ -7,7 +7,7 @@ Module: 0-likelihood
 import numpy as np
 
 
-def likelihood(x, n, P):
+def intersection(x, n, P):
     """
     Function: likelihood
     """
@@ -34,6 +34,9 @@ def likelihood(x, n, P):
     for elm in Pr:
         if elm < 0 or elm > 1:
             raise ValueError("All values in Pr must be in the range [0, 1]")
+
+    if !np.isclose(sum(Pr), 1):
+        raise ValueError("Pr must sum to 1")
 
     combinations = np.math.factorial(n) / \
         (np.math.factorial(n - x) * np.math.factorial(x))
