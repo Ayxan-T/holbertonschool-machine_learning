@@ -41,6 +41,6 @@ def intersection(x, n, P, Pr):
     combinations = np.math.factorial(n) / \
         (np.math.factorial(n - x) * np.math.factorial(x))
 
-    prob = combinations * (P**x) * ((1 - P)**(n - x))
+    prob = combinations * (P**x) * ((1 - P)**(n - x)) * Pr
 
     return prob
