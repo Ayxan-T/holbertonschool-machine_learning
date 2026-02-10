@@ -11,7 +11,7 @@ def likelihood(x, n, P):
     """
     Function: likelihood
     """
-    if n <= 0:
+    if type(n) is not int or  n <= 0:
         raise ValueError("n must be a positive integer")
 
     if x < 0:
