@@ -27,7 +27,7 @@ def likelihood(x, n, P):
         if elm < 0 or elm > 1:
             raise ValueError("All values in P must be in the range [0, 1]")
 
-    conminations = np.math.factorial(n) / np.math.factorial(n - x) * np.math.factorial(x)
+    combinations = np.math.factorial(n) / np.math.factorial(n - x) * np.math.factorial(x)
 
     prob = combinations * (P**x) * ((1 - P)**(n - x))
     
