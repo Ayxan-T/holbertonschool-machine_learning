@@ -42,9 +42,9 @@ def marginal(x, n, P, Pr):
         (np.math.factorial(n - x) * np.math.factorial(x))
 
     likelihoods = combinations * (P**x) * ((1 - P)**(n - x))
-    
+
     intersection = likelihoods * Pr
-    
+
     marginal_prob = np.sum(intersection)
 
     return marginal_prob
