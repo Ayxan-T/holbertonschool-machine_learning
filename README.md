@@ -1,1 +1,1 @@
-This repository contains my solutions for the 'Pandas' project.
+This repository contains my solutions for the Machine Learning track.
