@@ -20,9 +20,9 @@ def specificity(confusion):
 
     tp = np.diag(confusion)
 
-    fp = predicted_total - tp
+    fp = predicteds_total - tp
 
-    tn = total_samples - actuals_total - (predicted_total - tp)
+    tn = total_samples - actuals_total - (predicteds_total - tp)
 
     specifities = tn / (tn + fp)
 
