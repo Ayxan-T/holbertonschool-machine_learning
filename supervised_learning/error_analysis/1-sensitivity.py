@@ -14,7 +14,6 @@ def sensitivity(confusion):
     diag_nums = np.diag(confusion)
     sums_across_cols = np.sum(confusion, axis=1)
 
-
     sensitivities = diag_nums / sums_across_cols
 
     return sensitivities
