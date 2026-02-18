@@ -11,9 +11,10 @@ def sensitivity(confusion):
     Function: sensitivity
     """
 
-    sensitivities = []
-    for idx in range(confusion.shape[0]):
-        senst = confusion[idx, idx] / confusion[idx].sum()
-        sensitivities.append(senst)
+    diag_nums = np.diag(confusion)
+    sums_across_cols = np.sum(confusion, axis=1)
 
-    return np.array(sensitivities)
+
+    sensitivities = diag_nums / sums_across_cols
+
+    return sensitivities
