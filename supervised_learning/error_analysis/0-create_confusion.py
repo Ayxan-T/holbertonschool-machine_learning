@@ -11,7 +11,7 @@ def create_confusion_matrix(labels, logits):
     Function: create_confusion_matrix
     """
 
-    conf_mat = np.zeros(labels.shape[1], labels.shape[1])
+    conf_mat = np.zeros((labels.shape[1], labels.shape[1]), dtype=int)
 
     true_vals = np.argmax(labels, axis=1)
     pred_vals = np.argmax(logits, axis=1)
