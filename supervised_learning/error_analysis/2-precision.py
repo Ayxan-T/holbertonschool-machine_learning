@@ -16,4 +16,4 @@ def precision(confusion):
         prec = confusion[col_idx, col_idx] / np.sum(confusion[:, col_idx])
         precisions.append(prec)
 
-    return numpy.array(precisions)
+    return np.array(precisions)
