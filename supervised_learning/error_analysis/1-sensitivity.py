@@ -16,4 +16,4 @@ def sensitivity(confusion):
         senst = confusion[idx, idx] / confusion[idx].sum()
         sensitivities.append(senst)
 
-    return sensitivities
+    return np.array(sensitivities)
