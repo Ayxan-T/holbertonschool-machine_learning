@@ -11,9 +11,8 @@ def precision(confusion):
     Function: precision
     """
 
-    precisions = []
-    for col_idx in range(confusion.shape[1]):
-        prec = confusion[col_idx, col_idx] / np.sum(confusion[:, col_idx])
-        precisions.append(prec)
+    diag_nums = np.diag(confusion)
+    sums_across_rows = np.sum(confusion, axis=0)
 
-    return np.array(precisions)
+    precisions = diag_nums / sums_across_rows
+    return precisions
