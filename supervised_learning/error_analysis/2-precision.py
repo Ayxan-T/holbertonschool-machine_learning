@@ -13,7 +13,7 @@ def precision(confusion):
 
     precisions = []
     for col_idx in range(confusion.shape[1]):
-        prec = confusion[col_idx, col_idx] / np.sum(confusion[:, col_idx], axis=1)
+        prec = confusion[col_idx, col_idx] / np.sum(confusion[:, col_idx])
         precisions.append(prec)
 
     return numpy.array(precisions)
