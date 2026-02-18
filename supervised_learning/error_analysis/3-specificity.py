@@ -6,7 +6,7 @@ Module: 3-specifity
 import numpy as np
 
 
-def specifity(confusion):
+def specificity(confusion):
     """
     Function: specifity
     """
