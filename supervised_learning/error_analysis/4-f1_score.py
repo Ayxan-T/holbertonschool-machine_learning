@@ -5,6 +5,9 @@ Module: 4-f1_score
 
 
 def f1_score(confusion):
+    """
+    Function: f1_score
+    """
     sensitivity = __import__('1-sensitivity').sensitivity
     precision = __import__('2-precision').precision
 
