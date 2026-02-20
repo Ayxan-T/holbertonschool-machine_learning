@@ -42,7 +42,7 @@ class Node:
             num_nodes += 1
 
         num_nodes += self.right_child \
-                .count_nodes_below(only_leaves=only_leaves)
+            .count_nodes_below(only_leaves=only_leaves)
         num_nodes += self.left_child.count_nodes_below(only_leaves=only_leaves)
 
         return num_nodes
