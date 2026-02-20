@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+Module: 0-build_decision_tree
+"""
 
 import numpy as np
 
