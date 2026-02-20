@@ -22,7 +22,7 @@ class Node:
         self.depth = depth
 
     def __str__(self):
-        self_type = 'root' if self.is_root else 'node'
+        self_type = 'root' if self.is_root else '-> node'
         tree = "{} [feature={}, threshold={}]\n".format(self_type, self.feature, self.threshold)
         
         left_child_tree = str(self.left_child) 
