@@ -40,8 +40,9 @@ class Node:
         if not only_leaves and not self.is_leaf:
             # then iclude it, too
             num_nodes += 1
-            
-        num_nodes += self.right_child.count_nodes_below(only_leaves=only_leaves)
+
+        num_nodes += self.right_child
+                     .count_nodes_below(only_leaves=only_leaves)
         num_nodes += self.left_child.count_nodes_below(only_leaves=only_leaves)
 
         return num_nodes
