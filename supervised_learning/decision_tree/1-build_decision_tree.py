@@ -34,16 +34,15 @@ class Node:
         """
         Function: count_nodes_below
         """
-        num_nodes = 1
-        if not only_leaves and not self.right_child.is_leaf:
-            num_nodes += 1 + self.right_child.count_nodes_below()
-        else:
-            num_nodes += self.right_child.count_nodes_below()
+        num_nodes = 0
 
-        if not only_leaves and not self.left_child.is_leaf:
-            num_nodes += 1 + self.left_child.count_nodes_below()
-        else:
-            num_nodes += self.left_child.count_nodes_below()
+        # if counting all nodes and current node is not a leaf
+        if not only_leaves and not self.is_leaf:
+            # then iclude it, too
+            num_nodes += 1
+            
+        num_nodes += self.right_child.count_nodes_below()
+        num_nodes += self.left_child.count_nodes_below()
 
         return num_nodes
 
