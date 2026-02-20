@@ -71,7 +71,8 @@ class Node:
         lines=text.split("\n")
         if len(lines) == 1:
             new_text="    +--"+lines[0]
-        new_text="    +--"+lines[0]+"\n"
+        else:
+            new_text="    +--"+lines[0]+"\n"
         
         if len(lines) == 2:
             new_text += "       "+lines[1]
