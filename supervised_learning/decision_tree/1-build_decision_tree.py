@@ -34,7 +34,7 @@ class Node:
         """
         Function: count_nodes_below
         """
-        num_nodes = 0
+        num_nodes = 1
         if not only_leaves and not self.right_child.is_leaf:
             num_nodes += 1 + self.right_child.count_nodes_below()
         else:
