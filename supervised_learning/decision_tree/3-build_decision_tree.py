@@ -91,11 +91,11 @@ class Node:
         """
         Function: get_leaves_below
         """
-        num_leaves = 0
-        num_leaves += self.left_child.get_leaves_below()
-        num_leaves += self.right_child.get_leaves_below()
+        leaves = []
+        leaves.append(self.left_child.get_leaves_below())
+        leaves.append(self.right_child.get_leaves_below())
 
-        return num_leaves
+        return leaves
 
 
 class Leaf(Node):
