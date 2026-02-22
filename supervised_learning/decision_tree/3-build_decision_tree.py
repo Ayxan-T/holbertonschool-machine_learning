@@ -24,7 +24,7 @@ class Node:
     def __str__(self):
         self_type = 'root' if self.is_root else '-> node'
         tree = "{} [feature={}, threshold={}]\n" \
-                .format(self_type, self.feature, self.threshold)
+            .format(self_type, self.feature, self.threshold)
 
         left_child_tree = str(self.left_child)
         right_child_tree = str(self.right_child)
@@ -34,7 +34,6 @@ class Node:
 
         return tree
 
-
     def max_depth_below(self):
         """
         Function: max_depth_below
@@ -43,7 +42,6 @@ class Node:
         right_depth = self.right_child.max_depth_below()
 
         return max(left_depth, right_depth)
-
 
     def count_nodes_below(self, only_leaves=False):
         """
@@ -83,7 +81,7 @@ class Node:
 
         if len(lines) > 2:
             for x in lines[1:-1]:
-                new_text += ("       "+ x) + "\n"
+                new_text += ("       " + x) + "\n"
 
             new_text += ("       " + lines[-1])
 
