@@ -111,16 +111,16 @@ class Node:
 
     def update_bounds_below(self):
         if self.is_root:
-            # Initialize root with infinite bounds for feature 0 
+            # Initialize root with infinite bounds for feature 0
             # (or all features if the dataset dimensions were known)
-            self.upper = {0 : np.inf}
-            self.lower = {0 : -1 * np.inf}
+            self.upper = {0: np.inf}
+            self.lower = {0: -1 * np.inf}
 
         for child in [self.left_child, self.right_child]:
             # 1. Copy the current node's bounds to the child
             child.lower = self.lower.copy()
             child.upper = self.upper.copy()
-            
+
             # 2. Update the specific bound changed by this split
             if child == self.left_child:
                 # Left child takes values <= threshold
@@ -132,6 +132,7 @@ class Node:
         # Recursively call the method for children to propagate further down
         for child in [self.left_child, self.right_child]:
             child.update_bounds_below()
+
 
 class Leaf(Node):
     """
