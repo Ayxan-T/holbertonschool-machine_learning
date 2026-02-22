@@ -79,10 +79,12 @@ class Node:
 
             return new_text
         
-        for x in lines[1:-1]:
-            new_text+=("       "+x)+"\n"
+        if len(lines) > 2:
+            for x in lines[1:-1]:
+                new_text+=("       "+x)+"\n"
 
-        new_text +=("       "+lines[-1])
+            new_text +=("       "+lines[-1])
+
         return (new_text)    
 
 
