@@ -95,6 +95,8 @@ class Node:
         leaves.append(leaf for leaf in self.left_child.get_leaves_below())
         leaves.append(leaf for leaf in self.right_child.get_leaves_below())
 
+        print(leaves)
+
         return leaves
 
 
