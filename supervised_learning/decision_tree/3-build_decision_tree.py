@@ -92,8 +92,8 @@ class Node:
         Function: get_leaves_below
         """
         leaves = []
-        leaves.append(self.left_child.get_leaves_below())
-        leaves.append(self.right_child.get_leaves_below())
+        leaves.append(leaf for leaf in self.left_child.get_leaves_below())
+        leaves.append(leaf for leaf in self.right_child.get_leaves_below())
 
         return leaves
 
