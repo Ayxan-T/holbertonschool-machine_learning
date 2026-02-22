@@ -61,6 +61,9 @@ class Node:
         return num_nodes
 
     def left_child_add_prefix(self, text):
+        """
+        Function: left_child_add_prefix
+        """
         lines = text.split("\n")
         new_text = "    +--" + lines[0] + "\n"
         for x in lines[1:]:
@@ -68,6 +71,9 @@ class Node:
         return (new_text)
 
     def right_child_add_prefix(self, text):
+        """
+        Function: right_child_add_prefix
+        """
         lines = text.split("\n")
         if len(lines) == 1:
             new_text = "    +--" + lines[0]
