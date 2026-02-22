@@ -110,6 +110,9 @@ class Node:
         return leaves
 
     def update_bounds_below(self):
+        """
+        Function: update_bounds_below
+        """
         if self.is_root:
             # Initialize root with infinite bounds for feature 0
             # (or all features if the dataset dimensions were known)
