@@ -23,9 +23,10 @@ class Node:
 
     def __str__(self):
         self_type = 'root' if self.is_root else '-> node'
-        tree = "{} [feature={}, threshold={}]\n".format(self_type, self.feature, self.threshold)
-        
-        left_child_tree = str(self.left_child) 
+        tree = "{} [feature={}, threshold={}]\n" \
+                .format(self_type, self.feature, self.threshold)
+
+        left_child_tree = str(self.left_child)
         right_child_tree = str(self.right_child)
 
         tree += self.left_child_add_prefix(left_child_tree)
@@ -42,6 +43,7 @@ class Node:
         right_depth = self.right_child.max_depth_below()
 
         return max(left_depth, right_depth)
+
 
     def count_nodes_below(self, only_leaves=False):
         """
@@ -60,32 +62,32 @@ class Node:
 
         return num_nodes
 
-    def left_child_add_prefix(self,text):
-        lines=text.split("\n")
-        new_text="    +--"+lines[0]+"\n"
+    def left_child_add_prefix(self, text):
+        lines = text.split("\n")
+        new_text = "    +--" + lines[0] + "\n"
         for x in lines[1:]:
-            new_text+=("    |  "+x)+"\n"
+            new_text += ("    |  " + x) + "\n"
         return (new_text)
 
-    def right_child_add_prefix(self,text):
-        lines=text.split("\n")
+    def right_child_add_prefix(self, text):
+        lines = text.split("\n")
         if len(lines) == 1:
-            new_text="    +--"+lines[0]
+            new_text = "    +--" + lines[0]
         else:
-            new_text="    +--"+lines[0]+"\n"
-        
+            new_text = "    +--" + lines[0] + "\n"
+
         if len(lines) == 2:
             new_text += "       "+lines[1]
 
             return new_text
-        
+
         if len(lines) > 2:
             for x in lines[1:-1]:
-                new_text+=("       "+x)+"\n"
+                new_text += ("       "+ x) + "\n"
 
-            new_text +=("       "+lines[-1])
+            new_text += ("       " + lines[-1])
 
-        return (new_text)    
+        return (new_text)
 
     def get_leaves_below(self):
         """
