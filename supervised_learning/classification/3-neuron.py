@@ -49,4 +49,4 @@ class Neuron:
         Y.shape = (1, m)
         """
         m = Y.shape[1]
-        return (1/m) * np.sum(Y * np.log(A) + (1 - Y) * np.log(1 - A))
+        return (1/m) * np.sum(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
