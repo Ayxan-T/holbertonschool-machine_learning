@@ -52,6 +52,9 @@ class Neuron:
         return -(1/m) * np.sum(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
 
     def evaluate(self, X, Y):
+        """
+        function: evaluate
+        """
         preds = self.forward_prop(X)
         cost = self.cost(Y, preds)
         return preds, cost
