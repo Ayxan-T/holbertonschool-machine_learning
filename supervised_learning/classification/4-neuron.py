@@ -56,5 +56,6 @@ class Neuron:
         function: evaluate
         """
         preds = self.forward_prop(X)
+
         cost = self.cost(Y, preds)
-        return preds, cost
+        return preds > 0.5, cost
