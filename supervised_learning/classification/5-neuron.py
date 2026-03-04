@@ -64,6 +64,7 @@ class Neuron:
         """
         Function: gradient_descent
         """
+        m = X.shape[1]
         dz = A - Y
         dw = (1 / m) * np.matmul(dz, X.T)
         db = (1 / m) * np.sum(dz)
