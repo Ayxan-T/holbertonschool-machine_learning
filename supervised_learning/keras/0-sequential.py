@@ -15,23 +15,24 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
 
     reg = K.regularizers.L2(lambtha)
 
-    model.add(K.layers.Dense(
-        layers[0],
-        activation=activations[0],
-        kernel_regularizer=reg,
-        input_shape=(nx,)
-    ))
-
-    model.add(K.layers.Dropout(1 - keep_prob))
-    
-    for i in range(1, len(layers)):
-        model.add(K.layers.Dense(
-            layers[i],
-            activation=activations[i],
-            kernel_regularizer=reg,
-        ))
-
+    for i in range(len(layers)):
+        if i == 0:
+            # The first layer must define the input_shape (nx,)
+            model.add(K.layers.Dense(
+                layers[i], 
+                activation=activations[i], 
+                kernel_regularizer=reg, 
+                input_shape=(nx,)
+            ))
+        else:
+            model.add(K.layers.Dense(
+                layers[i], 
+                activation=activations[i], 
+                kernel_regularizer=reg
+            ))
+            
+        # Add Dropout after every layer except the last (output) layer
         if i < len(layers) - 1:
             model.add(K.layers.Dropout(1 - keep_prob))
-
+            
     return model
