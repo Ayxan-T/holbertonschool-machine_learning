@@ -6,7 +6,11 @@ Module: 1-input
 
 import tensorflow.keras as K
 
+
 def build_model(nx, layers, activations, lambtha, keep_prob):
+    """
+    Function: build_model
+    """
     # 1. Start the chain
     inputs = K.layers.Input(shape=(nx,))
     reg = K.regularizers.l2(lambtha)
