@@ -6,7 +6,7 @@ Module: 6-train
 import tensorflow.keras as K
 
 
-train_model(network, data,
+def train_model(network, data,
             labels, batch_size,
             epochs, validation_data=None,
             early_stopping=False,
