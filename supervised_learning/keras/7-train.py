@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+"""
+Module: 7-train
+"""
+
+import tensorflow.keras as K
+
+
+def train_model(network, data,
+                labels, batch_size,
+                epochs, validation_data=None,
+                early_stopping=False,
+                patience=0, learning_rate_decay=False,
+                alpha=0.1, decay_rate=1, verbose=True,
+                shuffle=False):
+    """
+    Function: train_model
+    """
+    callbacks = []
+    if early_stopping and validation_data is not None:
+
+        early_stopping = K.callbacks.EarlyStopping(
+            monitor='val_loss',
+            patience=patience
+        )
+
+        callbacks.append(early_stopping)
+
+    if learning_rate_decay and validation_data is not None:
+
+        def reverse_time_decay(epoch):    # normally defined with epoch and lr parameters
+            return alpha / (1 + decay_rate * epoch)
+
+        lr_scheduler = K.callbacks.LearningRateScheduler(scheduler, verbose=1)
+
+        callbacks.append(lr_scheduler)
+
+    History = network.fit(
+        x=data,
+        y=labels,
+        batch_size=batch_size,
+        epochs=epochs,
+        verbose=verbose,
+        shuffle=shuffle,
+        validation_data=validation_data,
+        callbacks=callbacks if callbacks else None
+    )    
+
+    return History
