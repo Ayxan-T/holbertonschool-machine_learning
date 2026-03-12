@@ -32,7 +32,7 @@ def train_model(network, data,
         def reverse_time_decay(epoch):
             return alpha / (1 + decay_rate * epoch)
 
-        lr_scheduler = K.callbacks
+        lr_scheduler = K.callbacks \
                         .LearningRateScheduler(reverse_time_decay, verbose=1)
 
         callbacks.append(lr_scheduler)
