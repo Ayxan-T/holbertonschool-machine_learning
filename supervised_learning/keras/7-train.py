@@ -28,10 +28,12 @@ def train_model(network, data,
 
     if learning_rate_decay and validation_data is not None:
 
-        def reverse_time_decay(epoch):    # normally defined with epoch and lr parameters
+        # normally defined with epoch and lr parameters
+        def reverse_time_decay(epoch):
             return alpha / (1 + decay_rate * epoch)
 
-        lr_scheduler = K.callbacks.LearningRateScheduler(reverse_time_decay, verbose=1)
+        lr_scheduler = K.callbacks
+                        .LearningRateScheduler(reverse_time_decay, verbose=1)
 
         callbacks.append(lr_scheduler)
 
@@ -44,6 +46,6 @@ def train_model(network, data,
         shuffle=shuffle,
         validation_data=validation_data,
         callbacks=callbacks if callbacks else None
-    )    
+    )
 
     return History
