@@ -41,7 +41,7 @@ def train_model(network, data,
     if save_best:
 
         best_saver = K.callbacks \
-                      .ModelCheckpoint(filepath=filepath, save_only_best=True)
+                      .ModelCheckpoint(filepath=filepath, save_best_only=True)
 
         callbacks.append(best_saver)
 
