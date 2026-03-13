@@ -16,4 +16,4 @@ def test_model(network, data, labels, verbose=True):
         verbose=verbose
     )
 
-    return test_loss, test_acc
+    return [test_loss, test_acc]
