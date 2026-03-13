@@ -17,6 +17,7 @@ def save_config(network, filename):
 
     return None
 
+
 def load_config(filename):
     """
     Function: load_config
