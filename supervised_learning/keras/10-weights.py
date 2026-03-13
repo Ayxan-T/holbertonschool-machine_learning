@@ -13,6 +13,7 @@ def save_weights(network, filename, save_format='keras'):
     network.save_weights(filename, save_format=save_format)
     return None
 
+
 def load_weights(network, filename):
     """
     Function: load_weights
