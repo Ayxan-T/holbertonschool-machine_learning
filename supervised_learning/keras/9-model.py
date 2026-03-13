@@ -13,6 +13,7 @@ def save_model(network, filename):
     network.save(filename)
     return None
 
+
 def load_model(filename):
     """
     Function: load_model
