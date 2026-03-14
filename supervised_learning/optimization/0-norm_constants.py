@@ -12,6 +12,6 @@ def normalization_constants(X):
     returns mean and stddev for each feature
     """
     mean = X.mean(axis=0)
-    stdev = X.stdev(axis=0)
+    stdev = X.std(axis=0)
 
     return mean, stdev
