@@ -13,8 +13,7 @@ def create_mini_batches(X, Y, batch_size):
     """
     X, Y = shuffle_data(X, Y)
     mini_batches = []
-    num_batches = np.ceil(X.shape[0] / batch_size)
-    for i in range(int(num_batches)):
+    for i in range(0, X.shape[0], batch_size):
         start = i * batch_size
         end = (i + 1) * batch_size
         mini_batch_X = X[start:end]
