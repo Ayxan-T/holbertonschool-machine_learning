@@ -4,7 +4,6 @@ Module: 2-shuffle_data
 """
 
 import numpy as np
-import tensorflow.keras as K
 
 
 def shuffle_data(X, Y):
