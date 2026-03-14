@@ -7,8 +7,8 @@ import numpy as np
 
 
 def normalize(X, m, s):
-  """
-  for X<d, nx>, mean m, stdev s,
-  returns normalized X
-  """
-  return (X - m) / s
+    """
+    for X<d, nx>, mean m, stdev s,
+    returns normalized X
+    """
+    return (X - m) / s
