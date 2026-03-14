@@ -14,8 +14,8 @@ def create_mini_batches(X, Y, batch_size):
     X, Y = shuffle_data(X, Y)
     mini_batches = []
     for i in range(0, X.shape[0], batch_size):
-        start = i * batch_size
-        end = (i + 1) * batch_size
+        start = i
+        end = i + batch_size
         mini_batch_X = X[start:end]
         mini_batch_Y = Y[start:end]
         mini_batches.append((mini_batch_X, mini_batch_Y))
