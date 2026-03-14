@@ -4,7 +4,6 @@ Module: 1-normalize
 """
 
 import numpy as np
-import tensorflow.keras as K
 
 
 def normalize(X, m, s):
