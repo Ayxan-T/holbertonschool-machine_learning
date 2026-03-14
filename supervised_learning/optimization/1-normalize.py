@@ -11,4 +11,4 @@ def normalize(X, m, s):
   for X<d, nx>, mean m, stdev s,
   returns normalized X
   """
-  return (x - m) / s
+  return (X - m) / s
