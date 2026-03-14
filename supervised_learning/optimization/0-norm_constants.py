@@ -3,6 +3,8 @@
 Module: 0-norm_constants
 """
 
+import numpy as np
+
 
 def normalization_constants(X):
     """
