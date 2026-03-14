@@ -3,7 +3,7 @@
 Module: 3-mini_batch
 """
 
-import numpy as np
+shuffle_data = __import__('2-shuffle_data').shuffle_data
 
 
 def create_mini_batches(X, Y, batch_size):
@@ -11,6 +11,7 @@ def create_mini_batches(X, Y, batch_size):
     for X<m, nx>, Y<m, ny>,
     returns mini-batches of size batch_size
     """
+    X, Y = shuffle_data(X, Y)
     mini_batches = []
     num_batches = np.ceil(X.shape[0] / batch_size)
     for i in range(int(num_batches)):
