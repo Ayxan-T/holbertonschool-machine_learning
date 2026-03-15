@@ -7,6 +7,9 @@ import numpy as np
 
 
 def moving_average(data, beta):
+    """
+    Function: moving_average
+    """
     v = 0  # Initialize the moving average at 0
     ma_corrected = []
     
