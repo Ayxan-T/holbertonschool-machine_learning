@@ -3,7 +3,6 @@
 Module: 6-momentum.py
 """
 
-import numpy as np
 import tensorflow.keras as K
 
 
