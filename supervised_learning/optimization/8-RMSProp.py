@@ -11,4 +11,4 @@ def create_RMSProp_op(alpha, beta2, epsilon):
     Function: create_RMSProp_op
     """
     return tf.keras.optimizers \
-            .RMSprop(learning_rate=alpha, rho=beta2, epsilon=epsilon)
+        .RMSprop(learning_rate=alpha, rho=beta2, epsilon=epsilon)
