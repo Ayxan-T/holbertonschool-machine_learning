@@ -6,8 +6,8 @@ Module: 8-RMSProp
 import tensorflow as tf
 
 
-def create_RMSprop_op(alpha, beta2, epsilon):
+def create_RMSProp_op(alpha, beta2, epsilon):
     """
     Function: create_RMSProp_op
     """
-    return tf.keras.optimizers.RMSProp(learning_rate=alpha, rho=beta2, epsilon=epsilon)
+    return tf.keras.optimizers.RMSprop(learning_rate=alpha, rho=beta2, epsilon=epsilon)
