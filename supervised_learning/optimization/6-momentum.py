@@ -3,13 +3,13 @@
 Module: 6-momentum.py
 """
 
-import tensorflow.keras as K
+import tensorflow as tf
 
 
 def create_momentum_op(alpha, beta1):
     """
     Function: create_momentum_op
     """
-    optimizer = K.optimizers.SGD(learning_rate=alpha, momentum=beta1)
+    optimizer = tf.keras.optimizers.SGD(learning_rate=alpha, momentum=beta1)
 
     return optimizer
