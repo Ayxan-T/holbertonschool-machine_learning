@@ -18,5 +18,5 @@ def update_variables_Adam(alpha, beta1, beta2, epsilon, var, grad, v, s, t):
     momentum = beta1 * v + (1 - beta1) * grad
     momentum_corrected = momentum / bias_cor
 
-    var = var - alpha * (momentum_corrected / (np.sqrt(momentum_second_corrected + epsilon)))
+    var = var - alpha * (momentum_corrected / (np.sqrt(momentum_second_corrected) + epsilon))
     return var, momentum, momentum_second
