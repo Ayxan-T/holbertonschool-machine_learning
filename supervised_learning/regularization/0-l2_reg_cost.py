@@ -15,4 +15,4 @@ def l2_reg_cost(cost, lambtha, weights, L, m):
         key = "W" + str(i + 1)
         L2_reg += np.sum(weights[key]**2)
 
-    return cost / m + lambtha * L2_reg
+    return cost + lambtha * L2_reg
