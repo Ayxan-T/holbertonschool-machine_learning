@@ -3,6 +3,8 @@
 Module: 0-l2_reg_cost
 """
 
+import numpy as np
+
 
 def l2_reg_cost(cost, lambtha, weights, L, m):
     """
