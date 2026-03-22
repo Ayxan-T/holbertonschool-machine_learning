@@ -12,7 +12,7 @@ def l2_reg_cost(cost, model):
     accounting for L2 regularization.
     """
     # Sum all L2 penalty scalars into one scalar
-    l2_total = tf.add_n(model.losses)
+    l2_total = model.losses
 
     # Add that scalar to the existing cost tensor
-    return cost, cost + l2_total
+    return cost + l2_total
