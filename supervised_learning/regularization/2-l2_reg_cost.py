@@ -15,4 +15,4 @@ def l2_reg_cost(cost, model):
     l2_total = tf.add_n(model.losses)
 
     # Add that scalar to the existing cost tensor
-    return cost + l2_total
+    return cost, cost + l2_total
