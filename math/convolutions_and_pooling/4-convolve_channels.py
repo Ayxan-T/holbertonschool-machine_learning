@@ -6,7 +6,7 @@ import numpy as np
 def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
     """ Performs a convolution on grayscale images """
     m, h, w, _ = images.shape
-    kh, kw = kernel.shape
+    kh, kw, c = kernel.shape
     sh, sw = stride
 
     if padding == 'same':
@@ -32,8 +32,6 @@ def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
 
     convolved = np.zeros((m, oh, ow))
 
-    kernel3D = kernel[:, :, np.newaxis]
-
     # Loop over output dimensions
     for i in range(oh):
         for j in range(ow):
@@ -41,6 +39,6 @@ def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
             hs, ws = i * sh, j * sw
             # Extract slice and multiply by kernel
             receptive_field = images_padded[:, hs:hs+kh, ws:ws+kw, :]
-            convolved[:, i, j] = np.sum(receptive_field * kernel3D, axis=(1, 2))
+            convolved[:, i, j] = np.sum(receptive_field * kernel, axis=(1, 2))
 
     return convolved
