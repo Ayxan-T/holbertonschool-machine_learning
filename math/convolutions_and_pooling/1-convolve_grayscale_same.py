@@ -26,24 +26,19 @@ def convolve_grayscale_same(images, kernel):
     p = (kh - 1) / 2
     """
     kh, kw = kernel.shape
-    
+    m, h, w = images.shape
+
     # Calculate pad width using formula in docstring
     ph = kh // 2
     pw = kw // 2
 
-    images = np.pad(images, ((0,), (ph,), (pw,)), "constant", constant_values=(0))
+    padded_images = np.pad(images, ((0,), (ph,), (pw,)), "constant", constant_values=0)
 
-    m, h, w = images.shape
+    convolved = np.zeros((m, h, w))
 
-    # Calculate output dimensions
-    oh = h - kh + 1
-    ow = w - kw + 1
-
-    convolved = np.zeros((m, oh, ow))
-
-    for i in range(oh):
-        for j in range(ow):
+    for i in range(h):
+        for j in range(w):
             convolved[:, i, j] = np. \
-                sum(images[:, i:i+kh, j:j+kw]*kernel, axis=(1, 2))
+                sum(padded_images[:, i:i+kh, j:j+kw]*kernel, axis=(1, 2))
 
     return convolved
