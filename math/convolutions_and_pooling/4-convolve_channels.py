@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+""" Module: 4-convolve_channels """
+import numpy as np
+
+
+def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
+    """ Performs a convolution on grayscale images """
+    m, h, w, _ = images.shape
+    kh, kw = kernel.shape
+    sh, sw = stride
+
+    if padding == 'same':
+        # Calculate padding to ensure output is ceil(h/sh, w/sw)
+        ph = int(((h - 1) * sh + kh - h) / 2) + 1 \
+            if ((h - 1) * sh + kh - h) % 2 \
+            else int(((h - 1) * sh + kh - h) / 2)
+        pw = int(((w - 1) * sw + kw - w) / 2) + 1 \
+            if ((w - 1) * sw + kw - w) % 2 \
+            else int(((w - 1) * sw + kw - w) / 2)
+    elif padding == 'valid':
+        ph, pw = 0, 0
+    else:
+        ph, pw = padding
+
+    # Apply padding once for all cases
+    images_padded = np.pad(images, ((0, 0), (ph, ph), (pw, pw)),
+                           mode='constant', constant_values=0)
+
+    # Calculate output dimensions (standard formula)
+    oh = (h + 2 * ph - kh) // sh + 1
+    ow = (w + 2 * pw - kw) // sw + 1
+
+    convolved = np.zeros((m, oh, ow))
+
+    kernel3D = kernel[:, :, np.newaxis]
+
+    # Loop over output dimensions
+    for i in range(oh):
+        for j in range(ow):
+            # Calculate start positions in the padded image
+            hs, ws = i * sh, j * sw
+            # Extract slice and multiply by kernel
+            receptive_field = images_padded[:, hs:hs+kh, ws:ws+kw, :]
+            convolved[:, i, j] = np.sum(receptive_field * kernel3D, axis=(1, 2))
+
+    return convolved
