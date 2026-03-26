@@ -1,56 +1,39 @@
 #!/usr/bin/env python3
-"""
-Module: 3-convolve_grayscale
-"""
-
+""" Module: 3-convolve_grayscale """
 import numpy as np
 
-
 def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
-    """
-    images is a numpy.ndarray with shape (m, h, w) containing multiple grayscale images
-        m is the number of images
-        h is the height in pixels of the images
-        w is the width in pixels of the images
-    kernel is a numpy.ndarray with shape (kh, kw) containing the kernel for the convolution
-        kh is the height of the kernel
-        kw is the width of the kernel
-    padding is either a tuple of (ph, pw), 'same', or 'valid'
-        if 'same', performs a same convolution
-        if 'valid', performs a valid convolution
-        if a tuple:
-            ph is the padding for the height of the image
-            pw is the padding for the width of the image
-    the image is padded with 0s
-    stride is a tuple of (sh, sw)
-        sh is the stride for the height of the image
-        sw is the stride for the width of the image
-    Returns: a numpy.ndarray containing the convolved images
-    """
-    kh, kw = kernel.shape
+    """ Performs a convolution on grayscale images """
     m, h, w = images.shape
-    
-    if padding == "same":
-            ph = kh // 2
-            pw = kw // 2
-            images = np.pad(images,
-                           ((0,), (ph,), (pw,)), "constant", constant_values=0)
-            oh, ow = h, w
-    elif padding == "valid":
-            oh = h - kh + 1
-            ow = w - kw + 1
+    kh, kw = kernel.shape
+    sh, sw = stride
+
+    if padding == 'same':
+        # Calculate padding to ensure output is ceil(h/sh, w/sw)
+        ph = int(((h - 1) * sh + kh - h) / 2) + 1 if ((h - 1) * sh + kh - h) % 2 else int(((h - 1) * sh + kh - h) / 2)
+        pw = int(((w - 1) * sw + kw - w) / 2) + 1 if ((w - 1) * sw + kw - w) % 2 else int(((w - 1) * sw + kw - w) / 2)
+    elif padding == 'valid':
+        ph, pw = 0, 0
     else:
-            ph, pw = padding
-            images = np.pad(images,
-                           ((0,), (ph,), (pw,)), "constant", constant_values=0)
-            oh = h + 2*ph - kh + 1
-            ow = w + 2*pw - kw + 1
-    
+        ph, pw = padding
+
+    # Apply padding once for all cases
+    images_padded = np.pad(images, ((0, 0), (ph, ph), (pw, pw)), 
+                           mode='constant', constant_values=0)
+
+    # Calculate output dimensions (standard formula)
+    oh = (h + 2 * ph - kh) // sh + 1
+    ow = (w + 2 * pw - kw) // sw + 1
+
     convolved = np.zeros((m, oh, ow))
 
+    # Loop over output dimensions
     for i in range(oh):
         for j in range(ow):
-            convolved[:, i, j] = np. \
-                sum(images[:, i:i+kh, j:j+kw]*kernel, axis=(1, 2))
+            # Calculate start positions in the padded image
+            hs, ws = i * sh, j * sw
+            # Extract slice and multiply by kernel
+            receptive_field = images_padded[:, hs:hs+kh, ws:ws+kw]
+            convolved[:, i, j] = np.sum(receptive_field * kernel, axis=(1, 2))
 
     return convolved
