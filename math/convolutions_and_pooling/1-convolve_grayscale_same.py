@@ -28,8 +28,8 @@ def convolve_grayscale_same(images, kernel):
     kh, kw = kernel.shape
     
     # Calculate pad width using formula in docstring
-    ph = (kh - 1) // 2
-    pw = (kw - 1) // 2
+    ph = kh // 2
+    pw = kw // 2
 
     images = np.pad(images, ((0,), (ph,), (pw,)), "constant", constant_values=(0))
 
