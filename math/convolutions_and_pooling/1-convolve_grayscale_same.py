@@ -6,7 +6,7 @@ Module: 1-convolve_grayscale_same
 import numpy as np
 
 
-def convolve_grayscale_valid(images, kernel):
+def convolve_grayscale_same(images, kernel):
     """
     images is a numpy.ndarray with shape
     (m, h, w) containing multiple grayscale images
