@@ -2,6 +2,7 @@
 """ Module: 3-convolve_grayscale """
 import numpy as np
 
+
 def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
     """ Performs a convolution on grayscale images """
     m, h, w = images.shape
@@ -10,15 +11,17 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
 
     if padding == 'same':
         # Calculate padding to ensure output is ceil(h/sh, w/sw)
-        ph = int(((h - 1) * sh + kh - h) / 2) + 1 if ((h - 1) * sh + kh - h) % 2 else int(((h - 1) * sh + kh - h) / 2)
-        pw = int(((w - 1) * sw + kw - w) / 2) + 1 if ((w - 1) * sw + kw - w) % 2 else int(((w - 1) * sw + kw - w) / 2)
+        ph = int(((h - 1) * sh + kh - h) / 2) + 1 \
+            if ((h - 1) * sh + kh - h) % 2 else int(((h - 1) * sh + kh - h) / 2)
+        pw = int(((w - 1) * sw + kw - w) / 2) + 1 \
+            if ((w - 1) * sw + kw - w) % 2 else int(((w - 1) * sw + kw - w) / 2)
     elif padding == 'valid':
         ph, pw = 0, 0
     else:
         ph, pw = padding
 
     # Apply padding once for all cases
-    images_padded = np.pad(images, ((0, 0), (ph, ph), (pw, pw)), 
+    images_padded = np.pad(images, ((0, 0), (ph, ph), (pw, pw)),
                            mode='constant', constant_values=0)
 
     # Calculate output dimensions (standard formula)
