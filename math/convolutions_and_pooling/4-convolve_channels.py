@@ -39,6 +39,6 @@ def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
             hs, ws = i * sh, j * sw
             # Extract slice and multiply by kernel
             receptive_field = images_padded[:, hs:hs+kh, ws:ws+kw, :]
-            convolved[:, i, j] = np.sum(receptive_field * kernel, axis=(1, 2))
+            convolved[:, i, j] = np.sum(receptive_field * kernel, axis=(1, 2, 3))
 
     return convolved
