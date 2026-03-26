@@ -1,0 +1,1 @@
+This folder contains my solutions for the "Convolutions and Pooling" project
