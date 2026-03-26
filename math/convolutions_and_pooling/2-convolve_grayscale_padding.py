@@ -33,8 +33,8 @@ def convolve_grayscale_padding(images, kernel, padding):
 
     convolved = np.zeros((m, oh, ow))
 
-    for i in range(h):
-        for j in range(w):
+    for i in range(oh):
+        for j in range(ow):
             print(f"loop {i}-{j}")
             convolved[:, i, j] = np. \
                 sum(padded_images[:, i:i+kh, j:j+kw]*kernel, axis=(1, 2))
