@@ -30,7 +30,7 @@ def convolve(images, kernels, padding='same', stride=(1, 1)):
     oh = (h + 2 * ph - kh) // sh + 1
     ow = (w + 2 * pw - kw) // sw + 1
 
-    convolved = np.zeros((m, oh, ow))
+    convolved = np.zeros((m, oh, ow, nk))
 
     # Loop over output dimensions
     for i in range(oh):
