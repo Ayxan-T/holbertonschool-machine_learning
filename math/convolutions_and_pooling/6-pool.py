@@ -13,7 +13,7 @@ def pool(images, kernel_shape, stride, mode='max'):
     oh = (h - kh) // sh + 1
     ow = (w - kw) // sw + 1
 
-    convolved = np.zeros((m, oh, ow, c))
+    convolved = np.zeros((m, oh, ow))
 
     # Loop over output dimensions
     for i in range(oh):
