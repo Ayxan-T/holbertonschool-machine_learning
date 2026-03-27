@@ -13,7 +13,7 @@ def pool(images, kernel_shape, stride, mode='max'):
     oh = (h - kh) // sh + 1
     ow = (w - kw) // sw + 1
 
-    convolved = np.zeros((m, oh, ow))
+    convolved = np.zeros((m, oh, ow, c))
 
     # Loop over output dimensions
     for i in range(oh):
@@ -25,9 +25,9 @@ def pool(images, kernel_shape, stride, mode='max'):
             
             if mode == 'max':
                 convolved[:, i, j] = \
-                    np.max(receptive_field, axis=2)
+                    np.max(receptive_field, axis=3)
             elif mode == 'avg':
                 convolved[:, i, j] = \
-                    np.average(receptive_field, axis=2)
+                    np.average(receptive_field, axis=3)
 
     return convolved
