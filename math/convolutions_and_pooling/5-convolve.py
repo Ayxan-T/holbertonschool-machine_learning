@@ -43,6 +43,6 @@ def convolve(images, kernels, padding='same', stride=(1, 1)):
             for k in range(nk):
                 convolved[:, i, j, k] = \
                     np.sum(receptive_field *
-                            kernels[:, :, :, k], axis=(1, 2, 3))
+                           kernels[:, :, :, k], axis=(1, 2, 3))
 
     return convolved
