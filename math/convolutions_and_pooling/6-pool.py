@@ -24,10 +24,10 @@ def pool(images, kernel_shape, stride, mode='max'):
             receptive_field = images[:, hs:hs+kh, ws:ws+kw, :]
             
             if mode == 'max':
-                convolved[:, i, j, :] = \
+                convolved[:, i, j] = \
                     np.max(receptive_field, axis=2)
             elif mode == 'avg':
-                convolved[:, i, j, :] = \
+                convolved[:, i, j] = \
                     np.average(receptive_field, axis=2)
 
     return convolved
