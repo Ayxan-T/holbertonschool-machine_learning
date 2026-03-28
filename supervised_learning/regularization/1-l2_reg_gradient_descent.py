@@ -16,14 +16,11 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
 
     """
     m = cache["A0"].shape[1]
-    print(cache['A' + str(L-1)].shape)
-    print(weights['W' + str(L)].shape)
 
     grads = dict()  # dW's, db's
 
     # Calculate last layer's output (before activation) grad
     dZ_cache = Y * (cache['A' + str(L)] - 1) + (1 - Y) * cache['A' + str(L)]
-    print(dZ_cache.shape)
 
     grads["dW" + str(L)] = np.matmul(dZ_cache, cache['A' + str(L - 1)].T) / m + (lambtha / m) * weights["W" + str(L)] 
     grads["db" + str(L)] = np.average(dZ_cache, axis=1, keepdims=True)
