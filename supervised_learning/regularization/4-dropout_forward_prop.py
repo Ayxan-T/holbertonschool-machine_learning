@@ -29,7 +29,8 @@ def dropout_forward_prop(X, weights, L, keep_prob):
         cache["A" + str(i)] = A * mask
 
     # Calculate final layer output
-    Z = np.matmul(weights["W" + str(L)], cache["A" + str(L-1)]) + weights["b" + str(L)]
+    Z = np.matmul(weights["W" + str(L)], cache["A" + str(L-1)]) +\
+        weights["b" + str(L)]
     Z_exp = np.exp(Z)
     cache["A" + str(L)] = Z_exp / np.sum(Z_exp, axis=0, keepdims=True)
 
