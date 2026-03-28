@@ -12,13 +12,13 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
 
     Y<#classes, m>,
     weights['Wn']<#neurons, #Ws>, weights['bn']<#neurons, 1>, 
-    cache['An']<#Ws, m>
+    cache['An']<#Neurons, m> for last layer: <#classes, m>
 
     """
     m = cache["A0"].shape[1]
-    # print(m)
     print(cache['A' + str(L)].shape)
-    print(Y.shape)
+    print(weights['W' + str(L)].shape)
+    print(weights["W" + str(L)].shape)
 
     grads = dict()  # dW's, db's
 
