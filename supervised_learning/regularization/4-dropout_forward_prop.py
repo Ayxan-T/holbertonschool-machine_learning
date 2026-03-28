@@ -15,8 +15,10 @@ def dropout_forward_prop(X, weights, L, keep_prob):
         Z = np.matmul(weights["W" + str(layer)], cache["A" + str(layer-1)]) + weights["b" + str(layer)]
 
         # Create Dropout mask and save it
-        dropout_mask = (np.random.rand(Z.shape[0], Z.shape[1]) < keep_prob).astype(int)
+        dropout_mask = np.random.rand(Z.shape[0], Z.shape[1]) < keep_prob
+        dropout_mask = dropout_mask.astype(float) / keep_prob
         cache["D" + str(layer)] = dropout_mask
+        print(cache["D" + str(layer)])
 
         # Calculate A, apply mask and save it
         A = np.tanh(Z)
@@ -25,7 +27,7 @@ def dropout_forward_prop(X, weights, L, keep_prob):
     # Calculate final layer output
     Z = np.matmul(weights["W" + str(L)], cache["A" + str(L-1)]) + weights["b" + str(L)]
     Z_exp = np.exp(Z)
-    cache["A" + str(L)] = Z_exp / np.sum(Z_exp, axis=0)
+    cache["A" + str(L)] = Z_exp / np.sum(Z_exp, axis=0, keepdims=True)
 
     return cache
 
