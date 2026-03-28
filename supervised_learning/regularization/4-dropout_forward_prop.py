@@ -20,12 +20,12 @@ def dropout_forward_prop(X, weights, L, keep_prob):
         # 2. Activation
         A = np.tanh(Z)
         
-        # 3. Mask (Generate exactly here to maintain random state)
-        mask = (np.random.rand(A.shape[0], A.shape[1]) < keep_prob).astype(int)
-        
+        # 3. Mask
+        mask = np.random.rand(A.shape[0], A.shape[1]) < keep_prob
+        cache["D" + str(i)] = mask.astype(int)
+
         # 4. Scale and Apply
-        mask /= keep_prob
-        cache["D" + str(i)] = mask
+        mask = mask.astype(float) / keep_prob
         cache["A" + str(i)] = A * mask
     
     # Calculate final layer output
