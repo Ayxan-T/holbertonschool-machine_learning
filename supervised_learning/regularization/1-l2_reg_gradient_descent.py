@@ -16,7 +16,8 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
 
     """
     m = cache["A0"].shape[1]
-    print(m)
+    # print(m)
+    print(cache['A' + str(L)].shape)
 
     grads = dict()  # dW's, db's
 
