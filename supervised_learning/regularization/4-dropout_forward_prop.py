@@ -21,7 +21,7 @@ def dropout_forward_prop(X, weights, L, keep_prob):
         A = np.tanh(Z)
         
         # 3. Mask (Generate exactly here to maintain random state)
-        mask = (np.random.rand(A.shape[0], A.shape[1]) < keep_prob).astype(float)
+        mask = (np.random.rand(A.shape[0], A.shape[1]) < keep_prob).astype(int)
         
         # 4. Scale and Apply
         mask /= keep_prob
