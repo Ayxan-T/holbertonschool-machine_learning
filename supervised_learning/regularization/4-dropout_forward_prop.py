@@ -10,18 +10,23 @@ def dropout_forward_prop(X, weights, L, keep_prob):
     W.shape = (kx, nx), k being # of neurons
     """
     cache = { "A0": X }
-    for layer in range(1, L):
-        # Calculate Z
-        Z = np.matmul(weights["W" + str(layer)], cache["A" + str(layer-1)]) + weights["b" + str(layer)]
-
-        # Create Dropout mask and save it
-        dropout_mask = np.random.rand(Z.shape[0], Z.shape[1]) < keep_prob
-        dropout_mask = dropout_mask.astype(float) / keep_prob
-        cache["D" + str(layer)] = dropout_mask
-
-        # Calculate A, apply mask and save it
+    for i in range(1, L):
+        W = weights["W" + str(i)]
+        b = weights["b" + str(i)]
+        
+        # 1. Linear
+        Z = np.matmul(W, cache["A" + str(i-1)]) + b
+        
+        # 2. Activation
         A = np.tanh(Z)
-        cache["A" + str(layer)] = A * dropout_mask
+        
+        # 3. Mask (Generate exactly here to maintain random state)
+        mask = (np.random.rand(A.shape[0], A.shape[1]) < keep_prob).astype(float)
+        
+        # 4. Scale and Apply
+        mask /= keep_prob
+        cache["D" + str(i)] = mask
+        cache["A" + str(i)] = A * mask
     
     # Calculate final layer output
     Z = np.matmul(weights["W" + str(L)], cache["A" + str(L-1)]) + weights["b" + str(L)]
