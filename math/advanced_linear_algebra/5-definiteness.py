@@ -1,55 +1,49 @@
 #!/usr/bin/env python3
-"""
-Docstring for '5-definiteness' module
-"""
+""" Module: 5-definiteness """
 
 import numpy as np
 
 
 def definiteness(matrix):
-    """
-    Docstring for 'definiteness' function
-    """
+    """ Function: definiteness """
+    # Step 1: Check if the input is a numpy array
     if not isinstance(matrix, np.ndarray):
         raise TypeError("matrix must be a numpy.ndarray")
-
-    shape = matrix.shape
-    try:
-        is_square = shape[0] == shape[1]
-    except IndexError:
+    
+    # Step 2: Check if it's a valid square, symmetric matrix
+    # Definiteness is standardly applied to symmetric matrices
+    if len(matrix.shape) != 2 or matrix.shape[0] != matrix.shape[1]:
         return None
-
-    if not is_square:
-        return None
-
+    
     if not np.allclose(matrix, matrix.T):
         return None
 
-    dets = []
-    for i in range(shape[0]):
-        dets.append(np.linalg.det(matrix[:i+1, :i+1]))
-
-    # checking positive definiteness
-    check_successful = True
-    for elm in dets:
-        if elm <= 0:
-            check_successful = False
-            break
-    if check_successful:
-        return 'Positive definite'
-
-    # checking negative definiteness
-    check_successful = True
-    for idx, elm in enumerate(dets):
-        if ((idx % 2 == 0 and elm <= 0) or
-            (idx % 2 == 1 and elm >= 0)):
-            check_successful = False
-            break
-    if check_successful:
-        return 'Negative definite'
-
-    # checking indefiniteness
-    if dets[-1] != 0:
-        return 'Indefinite'
-
-    return None
+    try:
+        # Step 3: Calculate eigenvalues
+        eigenvalues = np.linalg.eigvals(matrix)
+        
+        # Step 4: Evaluate the signs of the eigenvalues
+        pos = np.all(eigenvalues > 0)
+        pos_semi = np.all(eigenvalues >= 0)
+        neg = np.all(eigenvalues < 0)
+        neg_semi = np.all(eigenvalues <= 0)
+        
+        # Step 5: Return the correct classification
+        if pos:
+            return "Positive definite"
+        elif pos_semi:
+            return "Positive semi-definite"
+        elif neg:
+            return "Negative definite"
+        elif neg_semi:
+            return "Negative semi-definite"
+        
+        # If there are both positive and negative values
+        if any(eigenvalues > 0) and any(eigenvalues < 0):
+            return "Indefinite"
+            
+        return None
+        
+    except Exception:
+        # Catch-all for any calculation errors (like non-convergent eigenvalues)
+        return None
