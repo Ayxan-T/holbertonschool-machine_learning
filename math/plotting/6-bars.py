@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+""" Module: 6-bars """
 import numpy as np
 import matplotlib.pyplot as plt
 
