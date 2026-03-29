@@ -25,8 +25,6 @@ def bars():
     plt.ylabel('Quantity of Fruit')
     plt.ylim(0, 80)
     plt.yticks(range(0, 81, 10))
-    
     plt.title("Number of Fruit per Person")
-    print("Plot saved as 6-bars.png")
 
-bars()
+    plt.show()
