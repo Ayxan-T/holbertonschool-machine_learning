@@ -47,4 +47,3 @@ def definiteness(matrix):
     except Exception:
         # Catch-all for any calculation errors
         return None
-    
