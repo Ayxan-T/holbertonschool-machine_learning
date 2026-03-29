@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-import matplotlib
-matplotlib.use('Agg')
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def bars():
     np.random.seed(5)
-    fruit = np.random.randint(0, 20, (4,3))
+    fruit = np.random.randint(0, 20, (4, 3))
     plt.figure(figsize=(6.4, 4.8))
 
     fruit_names = ['apples', 'bananas', 'oranges', 'peaches']
@@ -19,7 +18,8 @@ def bars():
         bottom = 0
         for i, fruit_name in enumerate(fruit_names):
             height = fruit[i, j]
-            plt.bar(x[j], height, width, bottom=bottom, label=fruit_name if j == 0 else "", color=colors[i])
+            plt.bar(x[j], height, width, bottom=bottom,
+                    label=fruit_name if j == 0 else "", color=colors[i])
             bottom += height
 
     plt.xticks(x, people_names)
