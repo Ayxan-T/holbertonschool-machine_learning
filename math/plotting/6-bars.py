@@ -14,17 +14,18 @@ def bars():
     colors = ['red', 'yellow', '#ff8000', '#ffe5b4']
     width = 0.5
 
-    # Calculate cumulative sums
-    fruit = np.cumsum(fruit, axis=0)
-
     x = np.arange(3)
-    for i in range(3, -1, -1):
-        plt.bar(x, fruit[i], width, label=f'{fruit_names[i]}', color=colors[i])
+    for j in range(3):
+        bottom = 0
+        for i, fruit_name in enumerate(fruit_names):
+            height = fruit[i, j]
+            plt.bar(x[j], height, width, bottom=bottom, label=fruit_name if j == 0 else "", color=colors[i])
+            bottom += height
+
     plt.xticks(x, people_names)
     plt.legend()
     plt.ylabel('Quantity of Fruit')
     plt.ylim(0, 80)
     plt.yticks(range(0, 81, 10))
     plt.title("Number of Fruit per Person")
-
     plt.show()
