@@ -68,7 +68,7 @@ class Binomial:
         return (1 + (2 / pi**0.5) *
                 (z - z**3 / 3 + z**5 / 10 -
                  z**7 / 42 + z**9 / 216)) / 2
-    
+
     def pmf(self, k):
         """ Method: pmf """
         k = int(k)
@@ -81,6 +81,7 @@ class Binomial:
                 result *= i
             return result
 
-        conbinations = factorial(self.n) // (factorial(self.n - k) * factorial(k))
+        conbinations = factorial(self.n) // \
+            (factorial(self.n - k) * factorial(k))
 
         return conbinations * self.p**k * (1 - self.p)**(self.n - k)
