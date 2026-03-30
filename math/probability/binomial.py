@@ -85,3 +85,15 @@ class Binomial:
             (factorial(self.n - k) * factorial(k))
 
         return conbinations * self.p**k * (1 - self.p)**(self.n - k)
+
+    def cdf(self, k):
+        """ Method: cdf """
+        k = int(k)
+        if k < 0 or k > self.n:
+            return 0
+
+        result = 0
+        for i in range(k + 1):
+            result += self.pmf(i)
+
+        return result
