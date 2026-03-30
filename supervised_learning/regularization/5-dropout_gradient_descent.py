@@ -19,7 +19,7 @@ def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
 
     # Apply dropout masks
     for layer in range(1, L):
-        cache["A" + layer] *= cache["D" + layer] / keep_prob
+        cache["A" + str(layer)] *= cache["D" + str(layer)] / keep_prob
 
     # Calculate last layer's output (before activation) grad
     dZ_cache = Y * (cache['A' + str(L)] - 1) + (1 - Y) * cache['A' + str(L)]
