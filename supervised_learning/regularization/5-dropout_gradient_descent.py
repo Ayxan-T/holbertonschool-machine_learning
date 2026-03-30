@@ -17,10 +17,6 @@ def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
 
     grads = dict()  # dW's, db's
 
-    # Apply dropout masks
-    for layer in range(1, L):
-        cache["A" + str(layer)] *= cache["D" + str(layer)] / keep_prob
-
     # Calculate last layer's output (before activation) grad
     dZ_cache = Y * (cache['A' + str(L)] - 1) + (1 - Y) * cache['A' + str(L)]
 
@@ -28,10 +24,15 @@ def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
     grads["db" + str(L)] = np.average(dZ_cache, axis=1, keepdims=True)
 
     for layer in range(L-1, 0, -1):
-        # Calculate dZ
-        dZ_cache = np.matmul(weights["W" + str(layer+1)].T,
-                             dZ_cache) * \
-            (1 - np.square(cache["A" + str(layer)]))
+        # 1. Backpropagate the error through the weights
+        dA = np.matmul(weights["W" + str(layer+1)].T, dZ_cache)
+        
+        # 2. TECHNICAL FIX: Apply the dropout mask to the GRADIENT
+        # This ensures 'dead' neurons don't get updated
+        dA = (dA * cache["D" + str(layer)]) / keep_prob
+
+        # 3. Complete dZ calculation (your tanh derivative logic)
+        dZ_cache = dA * (1 - np.square(cache["A" + str(layer)]))
 
         grads["dW" + str(layer)] = np.matmul(dZ_cache,
                                              cache["A" + str(layer-1)].T) / m
