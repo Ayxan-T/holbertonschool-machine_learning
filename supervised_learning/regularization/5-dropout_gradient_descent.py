@@ -6,7 +6,7 @@ import numpy as np
 
 def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
     """
-    Function: l2_reg_gradient_descent
+    Function: dropout_gradient_descent
 
     Y<#classes, m>,
     weights['Wn']<#neurons, #Ws>, weights['bn']<#neurons, 1>,
