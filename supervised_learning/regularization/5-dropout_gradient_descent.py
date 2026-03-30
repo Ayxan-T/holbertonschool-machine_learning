@@ -26,7 +26,7 @@ def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
     for layer in range(L-1, 0, -1):
         # 1. Backpropagate the error through the weights
         dA = np.matmul(weights["W" + str(layer+1)].T, dZ_cache)
-        
+
         # 2. TECHNICAL FIX: Apply the dropout mask to the GRADIENT
         # This ensures 'dead' neurons don't get updated
         dA = (dA * cache["D" + str(layer)]) / keep_prob
