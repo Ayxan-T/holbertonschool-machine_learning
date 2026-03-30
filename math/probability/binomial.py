@@ -81,6 +81,6 @@ class Binomial:
                 result *= i
             return result
 
-        conbinations = factorial(self.n) / factorial(self.n - k) * factorial(k)
+        conbinations = factorial(self.n) / (factorial(self.n - k) * factorial(k))
 
         return conbinations * self.p**k * (1 - self.p)**(self.n - k)
