@@ -15,7 +15,7 @@ def crop_image(image, size):
     Returns:
         3D tf.Tensor containing the cropped image
     """
-    new_height, new_width = size
+    new_height, new_width, _ = size
     original_height = tf.shape(image)[0]
     original_width = tf.shape(image)[1]
 
