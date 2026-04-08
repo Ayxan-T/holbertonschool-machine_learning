@@ -44,7 +44,7 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
     w_new = int((w_prev + 2 * pw - kw) / sw) + 1
 
     A_prev_pad = np.pad(A_prev, ((0, 0), (ph, ph),
-                                  (pw, pw), (0, 0)), mode='constant')
+                                 (pw, pw), (0, 0)), mode='constant')
     Z = np.zeros((m, h_new, w_new, c_new))
 
     for i in range(m):
@@ -57,7 +57,7 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
                     horiz_end = horiz_start + kw
 
                     A_slice = A_prev_pad[i, vert_start:vert_end,
-                                          horiz_start:horiz_end, :]
+                                         horiz_start:horiz_end, :]
                     Z[i, h, w, c] = \
                         np.sum(A_slice * W[:, :, :, c]) + b[:, :, :, c]
 
