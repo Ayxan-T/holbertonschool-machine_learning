@@ -7,7 +7,7 @@ import numpy as np
 def pool_forward(A_prev, kernel_shape, stride=(1, 1), mode='max'):
     """ Function that performs forward propagation over a pooling layer of a
         convolutional neural network """
-    
+
     m, h_prev, w_prev, c_prev = A_prev.shape
     kh, kw = kernel_shape
     sh, sw = stride
@@ -33,7 +33,7 @@ def pool_forward(A_prev, kernel_shape, stride=(1, 1), mode='max'):
                     horiz_end = horiz_start + kw
 
                     A_slice = A_prev[i, vert_start:vert_end,
-                                      horiz_start:horiz_end, c]
+                                     horiz_start:horiz_end, c]
                     A[i, h, w, c] = mode(A_slice)
-    
+
     return A
