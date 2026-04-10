@@ -20,8 +20,9 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
     stride is a tuple of (sh, sw) containing the strides for the convolution
         sh is the stride for the height
         sw is the stride for the width
-    Returns: the partial derivatives with respect to the previous layer (dA_prev),
-             the kernels (dW), and the biases (db), respectively
+    Returns: the partial derivatives with respect to 
+        the previous layer (dA_prev),
+        the kernels (dW), and the biases (db), respectively
     """
     m, h_prev, w_prev, c_prev = A_prev.shape
     m, h_new, w_new, c_new = dZ.shape
@@ -34,16 +35,16 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
     else:
         ph = 0
         pw = 0
-    
+
     dA_prev = np.zeros((m, h_prev, w_prev, c_prev))
     dW = np.zeros((kh, kw, c_prev, c_new))
     db = np.zeros((1, 1, 1, c_new))
 
     A_prev_pad = np.pad(A_prev, ((0, 0), (ph, ph),
-                                  (pw, pw), (0, 0)), mode='constant')
+                                 (pw, pw), (0, 0)), mode='constant')
     dA_prev_pad = np.pad(dA_prev, ((0, 0), (ph, ph),
-                                    (pw, pw), (0, 0)), mode='constant')
-    
+                                   (pw, pw), (0, 0)), mode='constant')
+
     for i in range(m):
         a_prev_pad = A_prev_pad[i]
         da_prev_pad = dA_prev_pad[i]
@@ -55,9 +56,12 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
                     horiz_start = w * sw
                     horiz_end = horiz_start + kw
 
-                    a_slice = a_prev_pad[vert_start:vert_end, horiz_start:horiz_end, :]
+                    a_slice = a_prev_pad[vert_start:vert_end,
+                                         horiz_start:horiz_end, :]
 
-                    dA_prev_pad[i, vert_start:vert_end, horiz_start:horiz_end, :] += W[:, :, :, c] * dZ[i, h, w, c]
+                    dA_prev_pad[i, vert_start:vert_end,
+                                horiz_start:horiz_end, :] +=\
+                        W[:, :, :, c] * dZ[i, h, w, c]
                     dW[:, :, :, c] += a_slice * dZ[i, h, w, c]
                     db[:, :, :, c] += dZ[i, h, w, c]
 
