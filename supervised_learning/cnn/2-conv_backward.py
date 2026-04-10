@@ -20,7 +20,7 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
     stride is a tuple of (sh, sw) containing the strides for the convolution
         sh is the stride for the height
         sw is the stride for the width
-    Returns: the partial derivatives with respect to 
+    Returns: the partial derivatives with respect to
         the previous layer (dA_prev),
         the kernels (dW), and the biases (db), respectively
     """
