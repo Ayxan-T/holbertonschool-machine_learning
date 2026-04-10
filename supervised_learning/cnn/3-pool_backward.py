@@ -36,11 +36,11 @@ def pool_backward(dA, A_prev, kernel_shape, stride=(1, 1), mode='max'):
                 h_start = j * sh
                 h_end = h_start + kh
                 w_start = k * sw
-                w_end = w_start + k * kw
+                w_end = w_start + kw
 
                 if mode == 'avg':
-                    dA_prev[m, h_start:h_end, w_start:w_end, :] += \
-                        dA[m, j, k, :] / (kh * kw)   # KEEP DIMS ?
+                    dA_prev[i, h_start:h_end, w_start:w_end, :] += \
+                        dA[i, j, k, :] / (kh * kw)
                     
                 if mode == 'max':
                     argmax_row = np.argmax(
@@ -49,6 +49,5 @@ def pool_backward(dA, A_prev, kernel_shape, stride=(1, 1), mode='max'):
                         A_prev[m, h_start:h_end, w_start:w_end, :], axis=0)
                     
                     dA_prev[m, h_start + argmax_row,
-                            w_start + argmax_col, :] += dA[m, j, k, :]
-    
+                            w_start + argmax_col, :] += dA[m, j, k, :]    
     return dA_prev
