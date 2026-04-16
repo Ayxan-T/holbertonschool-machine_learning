@@ -29,10 +29,10 @@ def inception_block(A_prev, filters):
     conv1 = K.layers.Conv2D(filters=F1, kernel_size=(1, 1), padding='same', activation='relu')(A_prev)
 
     conv3_reduced = K.layers.Conv2D(filters=F3R, kernel_size=(1, 1), padding='same', activation='relu')(A_prev)
-    conv3 = K.layers.Conv2D(filters=F3, kernel_size=(1, 1), padding='same', activation='relu')(conv3_reduced)
+    conv3 = K.layers.Conv2D(filters=F3, kernel_size=(3, 3), padding='same', activation='relu')(conv3_reduced)
 
     conv5_reduced = K.layers.Conv2D(filters=F5R, kernel_size=(1, 1), padding='same', activation='relu')(A_prev)
-    conv5 = K.layers.Conv2D(filters=F5, kernel_size=(1, 1), padding='same', activation='relu')(conv5_reduced)
+    conv5 = K.layers.Conv2D(filters=F5, kernel_size=(5, 5), padding='same', activation='relu')(conv5_reduced)
 
     pool = K.layers.MaxPooling2D(pool_size=(3, 3), strides=(1, 1), padding='same')(A_prev)
     pool_conv = K.layers.Conv2D(filters=FPP, kernel_size=(1, 1), padding='same', activation='relu')(pool)
