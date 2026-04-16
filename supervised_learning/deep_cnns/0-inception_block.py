@@ -24,4 +24,19 @@ def inception_block(A_prev, filters):
         A : the concatenated output of the inception block
     """
 
-    pass
+    F1, F3R, F3, F5R, F5, FPP = filters
+
+    conv1 = K.Conv2D(filters=F1, kernel_size=(1, 1), padding='same', activation='relu')(A_prev)
+
+    conv3_reduced = K.Conv2D(filters=F3R, kernel_size=(1, 1), padding='same', activation='relu')(A_prev)
+    conv3 = K.Conv2D(filters=F3, kernel_size=(1, 1), padding='same', activation='relu')(conv3_reduced)
+
+    conv5_reduced = K.Conv2D(filters=F5R, kernel_size=(1, 1), padding='same', activation='relu')(A_prev)
+    conv5 = K.Conv2D(filters=F5, kernel_size=(1, 1), padding='same', activation='relu')(conv5_reduced)
+
+    pool = K.MaxPooling2D(pool_size=(3, 3), strides=(1, 1), padding='same')(A_prev)
+    pool_conv = K.Conv2D(filters=FPP, kernel_size=(1, 1), padding='same', activation='relu')(pool)
+
+    output = K.Concatenate(axis=-1)([conv1, conv3, conv5, pool_conv])
+
+    return output
