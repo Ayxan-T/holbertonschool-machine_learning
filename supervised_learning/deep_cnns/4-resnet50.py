@@ -2,6 +2,8 @@
 """ Module: 4-resnet50 """
 
 from tensorflow import keras as K
+identity_block = __import__('2-identity_block').identity_block
+projection_block = __import__('3-projection_block').projection_block
 
 
 def resnet50():
@@ -13,9 +15,6 @@ def resnet50():
     identity_block = __import__('2-identity_block').identity_block
     projection_block = __import__('3-projection_block').projection_block
     Returns: the keras model"""
-
-    identity_block = __import__('2-identity_block').identity_block
-    projection_block = __import__('3-projection_block').projection_block
 
     X_input = K.Input(shape=(224, 224, 3))
     he_normal = K.initializers.he_normal(seed=0)
