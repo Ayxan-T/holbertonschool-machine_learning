@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Module: 3-projection_block """
 
-import tensorflow.keras as K
+from tensorflow import keras as K
 
 
 def projection_block(A_prev, filters, s=2):
