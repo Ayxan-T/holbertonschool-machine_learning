@@ -43,4 +43,4 @@ class NST:
 
         new_image = new_image[tf.newaxis, ...]
 
-        return new_image / 255.0
+        return tf.clip_by_value(new_image, 0, 255) / 255.0
