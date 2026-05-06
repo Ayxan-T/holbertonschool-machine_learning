@@ -27,13 +27,13 @@ def identity_block(A_prev, filters):
     X = K.layers.Conv2D(filters=F11, kernel_size=(1, 1),
                         padding='same', kernel_initializer=he_normal)(A_prev)
     X = K.layers.BatchNormalization(axis=3)(X)
-    X = K.layers.Activation('relu')(X)
+    X = K.layers.ReLU()(X)
 
     # Second component of main path
     X = K.layers.Conv2D(filters=F3, kernel_size=(3, 3),
                         padding='same', kernel_initializer=he_normal)(X)
     X = K.layers.BatchNormalization(axis=3)(X)
-    X = K.layers.Activation('relu')(X)
+    X = K.layers.ReLU()(X)
 
     # Third component of main path
     X = K.layers.Conv2D(filters=F12, kernel_size=(1, 1),
@@ -41,6 +41,6 @@ def identity_block(A_prev, filters):
     X = K.layers.BatchNormalization(axis=3)(X)
 
     X = K.layers.Add()([X, X_shortcut])
-    X = K.layers.Activation('relu')(X)
+    X = K.layers.ReLU()(X)
 
     return X

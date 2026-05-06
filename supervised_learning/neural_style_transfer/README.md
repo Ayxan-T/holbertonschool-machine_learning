@@ -1,0 +1,1 @@
+This folder contains my solutions for 'Neural Style Transfer' project.

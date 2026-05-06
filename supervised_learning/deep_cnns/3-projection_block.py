@@ -29,13 +29,13 @@ def projection_block(A_prev, filters, s=2):
     X = K.layers.Conv2D(filters=F11, kernel_size=(1, 1), strides=(s, s),
                         padding='same', kernel_initializer=he_normal)(A_prev)
     X = K.layers.BatchNormalization(axis=3)(X)
-    X = K.layers.Activation('relu')(X)
+    X = K.layers.ReLU()(X)
 
     # Second component of main path
     X = K.layers.Conv2D(filters=F3, kernel_size=(3, 3), strides=(1, 1),
                         padding='same', kernel_initializer=he_normal)(X)
     X = K.layers.BatchNormalization(axis=3)(X)
-    X = K.layers.Activation('relu')(X)
+    X = K.layers.ReLU()(X)
 
     # Third component of main path
     X = K.layers.Conv2D(filters=F12, kernel_size=(1, 1), strides=(1, 1),
@@ -51,6 +51,6 @@ def projection_block(A_prev, filters, s=2):
 
     # Final step: Add shortcut value to main path, and pass through a RELU
     X = K.layers.Add()([X, X_shortcut])
-    X = K.layers.Activation('relu')(X)
+    X = K.layers.ReLU()(X)
 
     return X
