@@ -24,8 +24,8 @@ class NST:
         if beta < 0:
             raise TypeError("beta must be a non-negative number")
 
-        self.style_image = style_image
-        self.content_image = content_image
+        self.style_image = self.scale_image(style_image)
+        self.content_image = self.scale_image(content_image)
         self.alpha = alpha
         self.beta = beta
     
@@ -43,4 +43,6 @@ class NST:
 
         new_image = new_image[tf.newaxis, ...]
 
+
+        # preventing bicubic 'overshoot'
         return tf.clip_by_value(new_image, 0, 255) / 255.0
