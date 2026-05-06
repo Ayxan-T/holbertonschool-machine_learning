@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+""" Module: 0-neural_style """
+
+import numpy as np
+import tensorflow as tf
+
+class NST:
+    def __init__(self, style_image, content_image, alpha=1e4, beta=1):
+        if len(style_image.shape) != 3 or style_image.shape[2] != 3:
+            raise TypeError("style_image must be a numpy.ndarray with shape"\
+                            " (h, w, 3)")
+        sh, sw, _ = style_image.shape
+
+        if len(content_image.shape) != 3 or content_image.shape[2] != 3:
+            raise TypeError("content_image must be a numpy.ndarray with shape"\
+                            " (h, w, 3)")
+        ch, cw, _ = content_image.shape
+
+        if alpha < 0:
+            raise TypeError("alpha must be a non-negative number")
+        if beta < 0:
+            raise TypeError("beta must be a non-negative number")
+
+        self.style_image = style_image
+        self.content_image = content_image
+        self.alpha = alpha
+        self.beta = beta
+    
+    @staticmethod
+    def scale_image(image):
+        if len(image.shape) != 3 or image.shape[2] != 3:
+            raise TypeError("image must be a numpy.ndarray with shape"\
+                            " (h, w, 3)")
+        new_image = tf.image.resize(
+            image,
+            size=[512, 512],
+            preserve_aspect_ratio=True,
+            method="bicubic"
+        )
+
+        new_image = new_image[tf.newaxis, ...]
+
+        return new_image / 255.0
