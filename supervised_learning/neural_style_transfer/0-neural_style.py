@@ -14,13 +14,14 @@ class NST:
     def __init__(self, style_image, content_image, alpha=1e4, beta=1):
         if not isinstance(style_image, np.ndarray) \
                 or len(style_image.shape) != 3 or style_image.shape[2] != 3:
-            raise TypeError("style_image must be a numpy.ndarray with shape"\
+            raise TypeError("style_image must be a numpy.ndarray with shape"
                             " (h, w, 3)")
         sh, sw, _ = style_image.shape
 
         if not isinstance(content_image, np.ndarray) \
-                or len(content_image.shape) != 3 or content_image.shape[2] != 3:
-            raise TypeError("content_image must be a numpy.ndarray with shape"\
+                or len(content_image.shape) != 3 \
+                or content_image.shape[2] != 3:
+            raise TypeError("content_image must be a numpy.ndarray with shape"
                             " (h, w, 3)")
         ch, cw, _ = content_image.shape
 
@@ -38,7 +39,7 @@ class NST:
     def scale_image(image):
         if not isinstance(image, np.ndarray) or len(image.shape) != 3 \
                 or image.shape[2] != 3:
-            raise TypeError("image must be a numpy.ndarray with shape"\
+            raise TypeError("image must be a numpy.ndarray with shape"
                             " (h, w, 3)")
 
         new_image = tf.image.resize(
