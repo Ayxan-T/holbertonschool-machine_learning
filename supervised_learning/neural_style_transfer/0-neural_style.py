@@ -34,7 +34,7 @@ class NST:
         self.content_image = self.scale_image(content_image)
         self.alpha = alpha
         self.beta = beta
-    
+
     @staticmethod
     def scale_image(image):
         if not isinstance(image, np.ndarray) or len(image.shape) != 3 \
