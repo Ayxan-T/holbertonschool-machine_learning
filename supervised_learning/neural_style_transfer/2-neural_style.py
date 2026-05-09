@@ -111,11 +111,10 @@ class NST:
         #         matrix[1, i, j] = tf.reduce_sum(prods)
 
         maps_flat = tf.reshape(input_layer, [-1, map_count])
-        
+
         # MC by Values x Values by MC = MC by MC
         matrix = tf.matmul(maps_flat, maps_flat, transpose_a=True)
         matrix = matrix / scaler
 
         # inplace dimension expansion
         return matrix[tf.newaxis, ...]
-
