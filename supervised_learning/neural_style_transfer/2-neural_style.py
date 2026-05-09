@@ -102,7 +102,7 @@ class NST:
             if not is_valid_type or not is_rank_4:
                 raise TypeError("input_layer must be a tensor of rank 4")
 
-            map_count = input_layer.shape[2]    # number of feature maps
+            map_count = input_layer.shape[-1]    # number of feature maps
 
             # initializing a tensor
             matrix = tf.zeros([1, map_count, map_count])
