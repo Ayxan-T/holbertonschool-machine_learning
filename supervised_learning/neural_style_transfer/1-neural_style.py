@@ -54,10 +54,13 @@ class NST:
 
         # preventing bicubic 'overshoot'
         return tf.clip_by_value(new_image, 0, 255) / 255.0
-    
+
     def load_model(self):
         """ Function: load_model """
-        vgg = tf.keras.applications.VGG19(include_top=False, pooling='avg', weights='imagenet')
+        vgg = tf.keras.applications.VGG19(
+            include_top=False,
+            weights='imagenet'
+        )
 
         vgg.trainable = False
 
@@ -81,8 +84,8 @@ class NST:
             if layer.name == self.content_layer:
                 content_output = x
 
-
-        # style_layer_objects = [vgg.get_layer(name) for name in self.style_layers]
+        # style_layer_objects = [
+        #   vgg.get_layer(name) for name in self.style_layers]
         # content_layer_object = vgg.get_layer(self.content_layer)
 
         # style_object_outputs = [obj.output for obj in style_layer_objects]
