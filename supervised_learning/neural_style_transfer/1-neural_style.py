@@ -57,9 +57,9 @@ class NST:
     
     def load_model(self):
       """ Function: load_model """
-      vgg = tf.keras.applications.VGG19(include_top=False, weights='imagenet')
+      vgg = tf.keras.applications.VGG19(include_top=False, pooling='avg', weights='imagenet')
 
-      # vgg.trainable = False
+      vgg.trainable = False
 
       style_layer_objects = [vgg.get_layer(name) for name in self.style_layers]
       content_layer_object = vgg.get_layer(self.content_layer)
