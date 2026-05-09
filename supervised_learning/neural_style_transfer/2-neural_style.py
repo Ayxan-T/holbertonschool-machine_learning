@@ -104,9 +104,6 @@ class NST:
 
             map_count = input_layer.shape[-1]    # number of feature maps
 
-            # initializing a tensor
-            matrix = tf.zeros([1, map_count, map_count])
-
             # for i in range(map_count):
             #     for j in range(map_count):
             #         prods = input_layer[0, :, :, i] * input_layer[0, :, :, j]
