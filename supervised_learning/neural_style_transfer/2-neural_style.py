@@ -102,6 +102,7 @@ class NST:
         if not is_valid_type or not is_rank_4:
             raise TypeError("input_layer must be a tensor of rank 4")
 
+        scaler = input_layer.shape[1] * input_layer.shape[2]    # denominator
         map_count = input_layer.shape[-1]    # number of feature maps
 
         # for i in range(map_count):
@@ -113,6 +114,7 @@ class NST:
         
         # MC by Values x Values by MC = MC by MC
         matrix = tf.matmul(maps_flat, maps_flat, transpose_a=True)
+        matrix = matrix / scaler
 
         # inplace dimension expansion
         return matrix[tf.newaxis, ...]
