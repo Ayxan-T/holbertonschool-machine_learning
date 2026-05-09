@@ -95,25 +95,25 @@ class NST:
 
         self.model = tf.keras.Model(inputs=vgg.input, outputs=model_outputs)
 
-        def gram_matrix(input_layer):
-            """ Function: gram_matrix """
-            is_valid_type = isinstance(input_layer, (tf.Variable, tf.Tensor))
-            is_rank_4 = len(input_layer.shape) == 4
-            if not is_valid_type or not is_rank_4:
-                raise TypeError("input_layer must be a tensor of rank 4")
+    def gram_matrix(input_layer):
+        """ Function: gram_matrix """
+        is_valid_type = isinstance(input_layer, (tf.Variable, tf.Tensor))
+        is_rank_4 = len(input_layer.shape) == 4
+        if not is_valid_type or not is_rank_4:
+            raise TypeError("input_layer must be a tensor of rank 4")
 
-            map_count = input_layer.shape[-1]    # number of feature maps
+        map_count = input_layer.shape[-1]    # number of feature maps
 
-            # for i in range(map_count):
-            #     for j in range(map_count):
-            #         prods = input_layer[0, :, :, i] * input_layer[0, :, :, j]
-            #         matrix[1, i, j] = tf.reduce_sum(prods)
+        # for i in range(map_count):
+        #     for j in range(map_count):
+        #         prods = input_layer[0, :, :, i] * input_layer[0, :, :, j]
+        #         matrix[1, i, j] = tf.reduce_sum(prods)
 
-            maps_flat = tf.reshape(input_layer, [-1, map_count])
-            
-            # MC by Values x Values by MC = MC by MC
-            matrix = tf.matmul(maps_flat, maps_flat, transpose_a=True)
+        maps_flat = tf.reshape(input_layer, [-1, map_count])
+        
+        # MC by Values x Values by MC = MC by MC
+        matrix = tf.matmul(maps_flat, maps_flat, transpose_a=True)
 
-            # inplace dimension expansion
-            return matrix[tf.newaxis, ...]
+        # inplace dimension expansion
+        return matrix[tf.newaxis, ...]
 
