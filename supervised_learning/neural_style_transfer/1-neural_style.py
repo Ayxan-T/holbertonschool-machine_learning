@@ -56,17 +56,38 @@ class NST:
         return tf.clip_by_value(new_image, 0, 255) / 255.0
     
     def load_model(self):
-      """ Function: load_model """
-      vgg = tf.keras.applications.VGG19(include_top=False, pooling='avg', weights='imagenet')
+        """ Function: load_model """
+        vgg = tf.keras.applications.VGG19(include_top=False, pooling='avg', weights='imagenet')
 
-      vgg.trainable = False
+        vgg.trainable = False
 
-      style_layer_objects = [vgg.get_layer(name) for name in self.style_layers]
-      content_layer_object = vgg.get_layer(self.content_layer)
+        style_outputs = []
+        content_output = None
 
-      style_object_outputs = [obj.output for obj in style_layer_objects]
-      content_object_output = content_layer_object.output
+        x = vgg.input
+        for layer in vgg.layers[1:]:
+            if isinstance(layer, tf.keras.layers.MaxPooling2D):
+                x = tf.keras.layers.AveragePooling2D(
+                    pool_size=layer.pool_size,
+                    strides=layer.strides,
+                    padding=layer.padding,
+                    name=layer.name
+                )(x)
+            else:
+                x = layer(x)
 
-      model_outputs = style_object_outputs + [content_object_output]
+            if layer.name in self.style_layers:
+                style_outputs.append(x)
+            if layer.name == self.content_layer:
+                content_output = x
 
-      self.model = tf.keras.Model(inputs=vgg.input, outputs=model_outputs)
+
+        # style_layer_objects = [vgg.get_layer(name) for name in self.style_layers]
+        # content_layer_object = vgg.get_layer(self.content_layer)
+
+        # style_object_outputs = [obj.output for obj in style_layer_objects]
+        # content_object_output = content_layer_object.output
+
+        model_outputs = style_outputs + [content_output]
+
+        self.model = tf.keras.Model(inputs=vgg.input, outputs=model_outputs)
