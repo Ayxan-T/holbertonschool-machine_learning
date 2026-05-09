@@ -99,7 +99,7 @@ class NST:
             """ Function: gram_matrix """
             is_valid_type = isinstance(input_layer, (tf.Variable, tf.Tensor))
             is_rank_4 = len(input_layer.shape) == 4
-            if not is_valid_type and not is_rank_4:
+            if not is_valid_type or not is_rank_4:
                 raise TypeError("input_layer must be a tensor of rank 4")
 
             map_count = input_layer.shape[2]    # number of feature maps
