@@ -34,4 +34,4 @@ def initialize(X, k):
     except (np.core._exceptions.UFuncTypeError, IndexError, ValueError):
         centroids = None
 
-    return centroids, k if centroids is not None else None
+    return centroids if centroids is not None else None
