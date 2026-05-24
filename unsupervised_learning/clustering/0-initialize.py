@@ -21,7 +21,7 @@ def initialize(X, k):
         centroids: a numpy.ndarray of shape (k, num_dimensions) containing
             the initialized centroids for each cluster, or None on failure
     """
-    if k <= 0:
+    if k is not int or k <= 0:
         return None
     
     try:
