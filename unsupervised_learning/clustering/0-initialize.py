@@ -30,6 +30,4 @@ def initialize(X, k):
     except:
         centroids = None
 
-    return centroids if not len(centroids) == 0 else None
-
-
+    return centroids if centroids is not None else None
