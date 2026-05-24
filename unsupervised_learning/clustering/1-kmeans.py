@@ -28,7 +28,7 @@ def kmeans(X, k, iterations=1000):
 
     # Validate X
     if (type(X) is not np.ndarray
-        or X.ndims != 2
+        or X.ndim != 2
         or (X.shape[0] == 0 or X.shape[1] == 0)):
         return None, None
     
