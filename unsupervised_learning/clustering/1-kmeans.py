@@ -47,7 +47,11 @@ def kmeans(X, k, iterations=1000):
         size=(k, X.shape[1])
     )
 
-    # Initialize class labels (indices based on order of centroids)
+    # Initialize helper variable for holding centroids. It will be used
+    # to compare new centroids to previous ones for early stopping
+    C_helper = np.zeros_like(C)
+
+    # Initialize cluster labels (indices based on order of centroids)
     clss = np.zeros(X.shape[0])
 
     # Repeat for the number of 'iterations'
@@ -58,20 +62,31 @@ def kmeans(X, k, iterations=1000):
         # distances.shape: [n, k]
         distances = np.sum((X[:, np.newaxis, :] - C) ** 2, axis=2)
 
-        # Update class labels of all data points
+        # Update cluster labels of all data points
         clss = np.argmin(distances, axis=1)
 
         # Update centroids to new centers of clusters   
         # Repeat for every centroid
         for i in range(len(C)):
 
-            # Calculate the new location of centroid
-            new_loc = np.avg(X[np.where(clss == i)], axis=0)
+            # Select indices of elements belonging to that cluster
+            elements = np.where(clss == i)
 
-            # Update the centroid
-            C[i] = new_loc
+            # Reinitialize the centroid if it has no elements
+            if len(elements) == 0:
+                C_helper[i] = np.random.uniform(
+                    low=np.min(X, axis=0), high=np.max(X, axis=0),
+                    size=(C.shape[1])
+                )
+
+                # Skip the rest of iteration
+                continue
+
+            # Calculate the new location of centroid and update it
+            C_helper[i] = np.avg(X[np.where(clss == i)], axis=0)
+
+        # End the process if no change happened in centroid locations
+        if np.allclose(C, C_helper):
+            break
 
     return C, clss
-
-            # If a cluster contains no data points during the update step, reinitialize its centroid
-            # If a cluster contains no data points during the update step, reinitialize its centroidIf no change in the cluster centroids occurs between iterations, your function should return
