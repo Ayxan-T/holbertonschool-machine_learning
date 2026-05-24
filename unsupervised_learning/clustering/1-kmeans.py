@@ -73,6 +73,7 @@ def kmeans(X, k, iterations=1000):
         # Sum data points per cluster
         sums = np.dot(one_hot.T, X)  # (k, d)
 
+<<<<<<< HEAD
         C_helper = np.where(
             counts > 0, sums / np.maximum(counts, 1),
             np.random.uniform(
@@ -80,6 +81,13 @@ def kmeans(X, k, iterations=1000):
                 size=(C.shape[1])
             )
         )
+=======
+                # Skip the rest of iteration
+                continue
+
+            # Calculate the new location of centroid and update it
+            C_helper[i] = np.avg(X[np.where(clss == i)], axis=0)
+>>>>>>> parent of 069e5a4 (Fix: correct the np.avg method reference to np.mean)
 
         # End the process if no change happened in centroid locations
         if np.allclose(C, C_helper):
