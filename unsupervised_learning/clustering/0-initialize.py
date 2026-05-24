@@ -21,12 +21,11 @@ def initialize(X, k):
         centroids: a numpy.ndarray of shape (k, num_dimensions) containing
             the initialized centroids for each cluster, or None on failure
     """
-    mins = np.min(X, axis=0)
-    maxs = np.max(X, axis=0)
+    lows = np.min(X, axis=0)
+    highs = np.max(X, axis=0)
     d = X.shape[1]
 
-    rng = np.random.default_rng()
-    centroids = rng.integers(low=mins, high=maxs, size=(k, d))
+    centroids = np.random.uniform(low=lows, high=highs, size=(k, d))
 
     return centroids
 
