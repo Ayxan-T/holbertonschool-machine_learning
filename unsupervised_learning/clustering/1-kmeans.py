@@ -83,7 +83,7 @@ def kmeans(X, k, iterations=1000):
                 continue
 
             # Calculate the new location of centroid and update it
-            C_helper[i] = np.avg(X[np.where(clss == i)], axis=0)
+            C_helper[i] = np.mean(X[np.where(clss == i)], axis=0)
 
         # End the process if no change happened in centroid locations
         if np.allclose(C, C_helper):
