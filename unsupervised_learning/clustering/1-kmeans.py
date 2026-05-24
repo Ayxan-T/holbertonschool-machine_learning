@@ -47,14 +47,14 @@ def kmeans(X, k, iterations=1000):
         size=(k, X.shape[1])
     )
 
-    # Initialize helper variable for holding centroids. It will be used
-    # to compare new centroids to previous ones for early stopping
+    # Initialize helper variable to hold centroids. It will be used
+    # to compare new centroids to previous ones (early stopping)
     C_helper = np.zeros_like(C)
 
     # Initialize cluster labels (indices based on order of centroids)
     clss = np.zeros(X.shape[0])
 
-    # Repeat for the number of 'iterations'
+    # Repeat the number of 'iterations'
     for _ in range(iterations):
 
         # Calculate distances from every data point to every centroid
