@@ -58,32 +58,28 @@ def kmeans(X, k, iterations=1000):
     for _ in range(iterations):
 
         # Calculate distances from every data point to every centroid
-        # C.shape: [k, d];  X.shape: [n, d] -> [n, 1, d] for broadcasting;
-        # distances.shape: [n, k]
-        distances = np.sum((X[:, np.newaxis, :] - C) ** 2, axis=2)
+        # C.shape: [k, d];  X.shape: [n, d] -> [n, 1, d] for broadcasting
+        distances = np.sum((X[:, np.newaxis, :] - C) ** 2, axis=2) # (n, k)
 
         # Update cluster labels of all data points
-        clss = np.argmin(distances, axis=1)
+        clss = np.argmin(distances, axis=1) # (n,)
 
-        # Update centroids to new centers of clusters   
-        # Repeat for every centroid
-        for i in range(len(C)):
+        # Create one-hot encoded cluster labels
+        one_hot = (clss == np.arange(k)[:, np.newaxis]).T # (n, k)
 
-            # Select indices of elements belonging to that cluster
-            elements = np.where(clss == i)
+        # Count number of elements per cluster
+        counts = np.sum(one_hot, axis=0, keepdims=True).T # (k, 1)
 
-            # Reinitialize the centroid if it has no elements
-            if len(elements) == 0:
-                C_helper[i] = np.random.uniform(
-                    low=np.min(X, axis=0), high=np.max(X, axis=0),
-                    size=(C.shape[1])
-                )
+        # Sum data points per cluster
+        sums = np.dot(one_hot.T, X)  # (k, d)
 
-                # Skip the rest of iteration
-                continue
-
-            # Calculate the new location of centroid and update it
-            C_helper[i] = np.mean(X[np.where(clss == i)], axis=0)
+        C_helper = np.where(
+            counts > 0, sums / np.maximum(counts, 1),
+            np.random.uniform(
+                low=np.min(X, axis=0), high=np.max(X, axis=0),
+                size=(C.shape[1])
+            )
+        )
 
         # End the process if no change happened in centroid locations
         if np.allclose(C, C_helper):
