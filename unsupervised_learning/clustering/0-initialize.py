@@ -30,7 +30,7 @@ def initialize(X, k):
         d = X.shape[1]
 
         centroids = np.random.uniform(low=lows, high=highs, size=(k, d))
-    except ValueError:
+    except np.core._exceptions.UFuncTypeError:
         centroids = None
 
     return centroids if centroids is not None else None
