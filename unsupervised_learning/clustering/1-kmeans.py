@@ -58,7 +58,7 @@ def kmeans(X, k, iterations=1000):
     for _ in range(iterations):
 
         # Calculate distances from every data point to every centroid
-        # C.shape: [k, d];  X.shape: [n, d] -> [n, 1, d] for broadcasting;
+        # C.shape: [k, d];  X.shape: [n, d] -> [n, 1, d] broadcasting;
         # distances.shape: [n, k]
         distances = np.sum((X[:, np.newaxis, :] - C) ** 2, axis=2)
 
@@ -66,7 +66,7 @@ def kmeans(X, k, iterations=1000):
         clss = np.argmin(distances, axis=1)
 
         # Update centroids to new centers of clusters   
-        # Repeat for every centroid
+        # Repeat every centroid
         for i in range(len(C)):
 
             # Select indices of elements belonging to that cluster
