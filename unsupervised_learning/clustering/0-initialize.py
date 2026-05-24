@@ -25,7 +25,10 @@ def initialize(X, k):
     highs = np.max(X, axis=0)
     d = X.shape[1]
 
-    centroids = np.random.uniform(low=lows, high=highs, size=(k, d))
+    try:
+        centroids = np.random.uniform(low=lows, high=highs, size=(k, d))
+    except:
+        centroids = None
 
     return centroids
 
