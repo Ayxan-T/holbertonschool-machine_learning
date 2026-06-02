@@ -137,7 +137,7 @@ class Node:
             child.update_bounds_below()
 
     def update_indicator(self):
-        """ 
+        """
         Function: update_indicator
         """
         def is_large_enough(x):
