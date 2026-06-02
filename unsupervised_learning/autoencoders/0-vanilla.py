@@ -18,22 +18,21 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
 
     encoder = keras.models.Sequential()
     decoder = keras.models.Sequential()
-    auto = keras.models.Sequential()
 
     # Encoder path
     encoder.add(keras.layers.Input(shape=(input_dims,)))
     for nodes in hidden_layers:
         encoder.add(keras.layers.Dense(nodes, activation='relu'))
-    encoder.add(keras.layers.Dense(latent_dims, activation='relu', name='encoder_output'))
+    encoder.add(keras.layers.Dense(latent_dims, activation='relu')) # Removed name='encoder_output'
 
     # Decoder path
     decoder.add(keras.layers.Input(shape=(latent_dims,)))
     for nodes in reversed(hidden_layers):
         decoder.add(keras.layers.Dense(nodes, activation='relu'))
     # The last layer in the decoder should use sigmoid activation
-    decoder.add(keras.layers.Dense(input_dims, activation='sigmoid', name='decoder_output'))
+    decoder.add(keras.layers.Dense(input_dims, activation='sigmoid')) # Removed name='decoder_output'
 
-    # Autoencoder path (combining encoder and decoder)
+    # Autoencoder path (combining encoder and decoder using functional API)
     auto_input = keras.layers.Input(shape=(input_dims,))
     encoded = encoder(auto_input)
     decoded = decoder(encoded)
