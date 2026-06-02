@@ -127,10 +127,10 @@ class Node:
             # 2. Update the specific bound changed by this split
             if child == self.left_child:
                 # Left child takes values <= threshold
-                child.lower[self.feature] = self.threshold
+                child.upper[self.feature] = self.threshold
             else:
                 # Right child takes values > threshold
-                child.upper[self.feature] = self.threshold
+                child.lower[self.feature] = self.threshold
 
         # Recursively call the method for children to propagate further down
         for child in [self.left_child, self.right_child]:
