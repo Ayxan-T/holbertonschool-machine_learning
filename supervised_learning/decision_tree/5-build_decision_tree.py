@@ -143,10 +143,12 @@ class Node:
             #<- fill the gap : this function returns a 1D numpy array of size 
             #`n_individuals` so that the `i`-th element of the later is `True` 
             # if the `i`-th individual has all its features > the lower bounds
-            return np.array([
+            one_hot = np.array([
                 np.greater(x[:,key],self.lower[key]) \
                     for key in list(self.lower.keys())
             ])
+
+            return np.sum(one_hot, axis=1)
 
 
         def is_small_enough(x):
@@ -154,10 +156,12 @@ class Node:
             #<- fill the gap : this function returns a 1D numpy array of size 
             #`n_individuals` so that the `i`-th element of the later is `True` 
             # if the `i`-th individual has all its features <= the lower bounds
-            return np.array([
-                np.greater(self.upper[key], x[:, key]) \
+            one_hot = np.array([
+                self.upper[key] >= x[:, key] \
                     for key in list(self.upper.keys())
             ])
+
+            return np.sum(one_hot, axis=1)
 
         self.indicator = \
             lambda x : np.all(
