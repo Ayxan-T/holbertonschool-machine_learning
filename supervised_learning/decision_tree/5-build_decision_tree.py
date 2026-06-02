@@ -135,8 +135,8 @@ class Node:
         # Recursively call the method for children to propagate further down
         for child in [self.left_child, self.right_child]:
             child.update_bounds_below()
-    
-    def update_indicator(self) :
+
+    def update_indicator(self):
 
         def is_large_enough(x):
             return np.logical_and.reduce([
