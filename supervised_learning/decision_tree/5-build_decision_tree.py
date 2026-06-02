@@ -139,33 +139,21 @@ class Node:
     def update_indicator(self) :
 
         def is_large_enough(x):
-
-            #<- fill the gap : this function returns a 1D numpy array of size 
-            #`n_individuals` so that the `i`-th element of the later is `True` 
-            # if the `i`-th individual has all its features > the lower bounds
-            one_hot = np.array([
-                np.greater(x[:,key],self.lower[key]) \
-                    for key in list(self.lower.keys())
+            return np.logical_and.reduce([
+                x[:, key] > self.lower[key]
+                for key in self.lower
             ])
-
-            return np.sum(one_hot, axis=1)
-
 
         def is_small_enough(x):
-
-            #<- fill the gap : this function returns a 1D numpy array of size 
-            #`n_individuals` so that the `i`-th element of the later is `True` 
-            # if the `i`-th individual has all its features <= the lower bounds
-            one_hot = np.array([
-                self.upper[key] >= x[:, key] \
-                    for key in list(self.upper.keys())
+            return np.logical_and.reduce([
+                x[:, key] <= self.upper[key]
+                for key in self.upper
             ])
 
-            return np.sum(one_hot, axis=1)
-
-        self.indicator = \
-            lambda x : np.all(
-                np.array([is_large_enough(x),is_small_enough(x)]),axis=0)
+        self.indicator = lambda x: np.logical_and(
+            is_large_enough(x),
+            is_small_enough(x)
+        )
 
 
 class Leaf(Node):
