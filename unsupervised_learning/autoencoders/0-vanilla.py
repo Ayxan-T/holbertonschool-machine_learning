@@ -16,27 +16,27 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     auto is the full autoencoder model
     """
 
-    encoder = keras.models.Sequential()
-    decoder = keras.models.Sequential()
-
-    # Encoder path
-    encoder.add(keras.layers.Input(shape=(input_dims,)))
+    # Encoder path using Functional API
+    encoder_input = keras.layers.Input(shape=(input_dims,))
+    x = encoder_input
     for nodes in hidden_layers:
-        encoder.add(keras.layers.Dense(nodes, activation='relu'))
-    encoder.add(keras.layers.Dense(latent_dims, activation='relu')) # Removed name='encoder_output'
+        x = keras.layers.Dense(nodes, activation='relu')(x)
+    encoder_output = keras.layers.Dense(latent_dims, activation='relu')(x)
+    encoder = keras.models.Model(inputs=encoder_input, outputs=encoder_output, name='encoder')
 
-    # Decoder path
-    decoder.add(keras.layers.Input(shape=(latent_dims,)))
+    # Decoder path using Functional API
+    decoder_input = keras.layers.Input(shape=(latent_dims,))
+    x = decoder_input
     for nodes in reversed(hidden_layers):
-        decoder.add(keras.layers.Dense(nodes, activation='relu'))
-    # The last layer in the decoder should use sigmoid activation
-    decoder.add(keras.layers.Dense(input_dims, activation='sigmoid')) # Removed name='decoder_output'
+        x = keras.layers.Dense(nodes, activation='relu')(x)
+    decoder_output = keras.layers.Dense(input_dims, activation='sigmoid')(x)
+    decoder = keras.models.Model(inputs=decoder_input, outputs=decoder_output, name='decoder')
 
-    # Autoencoder path (combining encoder and decoder using functional API)
+    # Autoencoder path (combining encoder and decoder)
     auto_input = keras.layers.Input(shape=(input_dims,))
     encoded = encoder(auto_input)
     decoded = decoder(encoded)
-    auto = keras.models.Model(inputs=auto_input, outputs=decoded)
+    auto = keras.models.Model(inputs=auto_input, outputs=decoded, name='autoencoder')
 
     # Compile the autoencoder model
     auto.compile(optimizer='adam', loss='binary_crossentropy')
