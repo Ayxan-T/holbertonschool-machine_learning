@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" This module provides a function that creates a sparse autoencoder. 
+""" This module provides a function that creates a sparse autoencoder.
 
 Function:
     autoencoder(input_dims, hidden_layers, latent_dims, lambtha)
@@ -9,22 +9,22 @@ import tensorflow.keras as keras
 
 
 def autoencoder(input_dims, hidden_layers, latent_dims, lambtha):
-    """ Creates and returns a sparse autoencoder. 
-    
+    """ Creates and returns a sparse autoencoder.
+
     Args:
         input_dims: an integer containing the dimensions of the model input
-        hidden_layers: a list containing the number of nodes 
+        hidden_layers: a list containing the number of nodes
             for each hidden layer
         latent_dims: an integer containing the dimensions of the latent space
             representation
         lambtha: the regularization parameter used for L1 regularization
             on the encoded output
-    
+
     Returns:
         encoder: the encoder model
         decoder: the decoder model
         auto: the sparse autoencoder model
-    """ 
+    """
 
     # IMPLEMENTING ENCODER
     encoder_input = keras.layers.Input(shape=(input_dims,))
@@ -49,7 +49,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims, lambtha):
     # Add hidden layers in reversed order
     for num_neurons in reversed(hidden_layers):
         x = keras.layers.Dense(num_neurons, activation="relu")(x)
-    
+
     decoder_output = keras.layers.Dense(input_dims, activation="sigmoid")(x)
 
     decoder = keras.models.Model(inputs=decoder_input, outputs=decoder_output)
@@ -64,4 +64,3 @@ def autoencoder(input_dims, hidden_layers, latent_dims, lambtha):
     auto.compile(optimizer="adam", loss="binary_crossentropy")
 
     return encoder, decoder, auto
-
