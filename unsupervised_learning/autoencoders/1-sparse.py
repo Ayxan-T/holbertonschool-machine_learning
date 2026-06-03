@@ -34,7 +34,11 @@ def autoencoder(input_dims, hidden_layers, latent_dims, lambtha):
     for num_neurons in hidden_layers:
         x = keras.layers.Dense(num_neurons, activation="relu")(x)
 
-    encoder_output = keras.layers.Dense(latent_dims, activation="relu")(x)
+    encoder_output = keras.layers.Dense(
+        latent_dims,
+        activation="relu",
+        activity_regularizer=keras.regularizers.l1(lambtha)
+    )(x)
 
     encoder = keras.models.Model(input=encoder_input, output=encoder_output)
 
