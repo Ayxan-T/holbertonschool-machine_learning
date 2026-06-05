@@ -53,7 +53,7 @@ def autoencoder(input_dims, filters, latent_dims):
     decoder_input = keras.layers.Input(shape=latent_dims)
     x = decoder_input
     
-    for num_filters in reversed(filters[2:]):
+    for num_filters in reversed(filters[1:]):
         x = keras.layers.Conv2D(
             num_filters, (3, 3), padding='same', activation='relu'
         )(x)
