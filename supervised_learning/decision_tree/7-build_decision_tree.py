@@ -114,10 +114,8 @@ class Node:
         Function: update_bounds_below
         """
         if self.is_root:
-            # Initialize root with infinite bounds for feature 0
-            # (or all features if the dataset dimensions were known)
-            self.upper = {0: np.inf}
-            self.lower = {0: -1 * np.inf}
+            self.upper = {}
+            self.lower = {}
 
         for child in [self.left_child, self.right_child]:
             # 1. Copy the current node's bounds to the child
@@ -309,3 +307,46 @@ class Decision_Tree():
         x = self.rng.uniform()
         threshold = (1 - x) * feature_min + x * feature_max
         return feature, threshold
+    
+    def fit_node(self, node):
+        node.feature, node.threshold = self.split_criterion(node)
+
+        left_population  =
+        right_population =
+
+        # Is left node a leaf ?
+        is_left_leaf =
+
+        if is_left_leaf :
+                node.left_child = self.get_leaf_child(node,left_population)                                                         
+        else :
+                node.left_child = self.get_node_child(node,left_population)
+                self.fit_node(node.left_child)
+
+        # Is right node a leaf ?
+        is_right_leaf =
+
+        if is_right_leaf :
+                node.right_child = self.get_leaf_child(node,right_population)
+        else :
+                node.right_child = self.get_node_child(node,right_population)
+                self.fit_node(node.right_child)    
+
+    def get_leaf_child(self, node, sub_population):
+        value =
+        leaf_child = Leaf(value)
+        leaf_child.depth = node.depth + 1
+        leaf_child.subpopulation = sub_population
+        return leaf_child
+
+    def get_node_child(self, node, sub_population):
+        n = Node()
+        n.depth = node.depth + 1
+        n.sub_population = sub_population
+        return n
+
+    def accuracy(self, test_explanatory, test_target):
+        return np.sum(np.equal(
+            self.predict(test_explanatory),
+            test_target
+        )) / test_target.size
