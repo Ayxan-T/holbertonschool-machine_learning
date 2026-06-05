@@ -350,7 +350,9 @@ class Decision_Tree():
                 self.fit_node(node.right_child)    
 
     def get_leaf_child(self, node, sub_population):
-        value =
+        values = self.target[sub_population]
+        unique, counts = np.unique(values, return_counts=True)
+        value = unique[np.argmax(counts)] # mode value
         leaf_child = Leaf(value)
         leaf_child.depth = node.depth + 1
         leaf_child.subpopulation = sub_population
