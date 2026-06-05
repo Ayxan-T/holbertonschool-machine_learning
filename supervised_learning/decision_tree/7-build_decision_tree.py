@@ -315,7 +315,7 @@ class Decision_Tree():
         left_population  = \
             node.sub_population & (feature_values > node.threshold)
         right_population = \
-            node.sup_population & (feature_values <= node.threshold)
+            node.sub_population & (feature_values <= node.threshold)
 
         # Is left node a leaf ?
         is_left_leaf = (
