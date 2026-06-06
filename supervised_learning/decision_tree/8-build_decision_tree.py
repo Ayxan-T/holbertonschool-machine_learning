@@ -403,7 +403,8 @@ class Decision_Tree():
             classes, class_ids = np.unique(targets, return_inverse=True)
             right_mask = np.eye(len(classes))[class_ids]  # (n, c)
 
-            Left_F = left_mask[:, :, None] & right_mask[:, None, :] # (n, t, c)
+            Left_F = np.logical_and(
+                left_mask[:, :, None], right_mask[:, None, :]) # (n, t, c)
 
             # Calculate total number of left leaf points for every threshold
             totals = np.sum(Left_F, axis=(0, 2), keepdims=False) # (t,)
