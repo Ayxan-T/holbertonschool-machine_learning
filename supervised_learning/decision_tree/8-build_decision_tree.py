@@ -407,14 +407,14 @@ class Decision_Tree():
                 left_mask[:, :, None], right_mask[:, None, :]) # (n, t, c)
 
             # Calculate total number of left leaf points for every threshold
-            totals = np.sum(Left_F, axis=(0, 2), keepdims=False) # (t,)
+            left_totals = np.sum(Left_F, axis=(0, 2), keepdims=False) # (t,)
 
             # Calculate sum of squared probabilities
             squared_probs = np.square(
                 np.sum(Left_F, axis=0, keepdims=False)) # (t, c)
             sumof_sqrd_probs = np.sum(squared_probs, axis=1) # (t,)
 
-            Gini_Left = 1 - sumof_sqrd_probs / totals ** 2
+            Gini_Left = 1 - sumof_sqrd_probs / left_totals ** 2
 
             # 2. Calculating rigth leaf Gini impurities (<= threshold)
             left_mask = values[:, None] <= thresholds[None, :] # (n, t)
@@ -422,16 +422,19 @@ class Decision_Tree():
             Right_F = np.logical_and(
                 left_mask[:, :, None], right_mask[:, None, :]) #(n, t, c)
 
-            totals = np.sum(Right_F, axis=(0, 2), keepdims=False) # (t,)
+            right_totals = np.sum(Right_F, axis=(0, 2), keepdims=False) # (t,)
 
             squared_probs = np.square(
                 np.sum(Right_F, axis=0, keepdims=False)) # (t, c)
             sumof_sqrd_probs = np.sum(squared_probs, axis=1) # (t,)
 
-            Gini_Right = 1 - sumof_sqrd_probs / totals ** 2
+            Gini_Right = 1 - sumof_sqrd_probs / right_totals ** 2
 
             # 3. Calculate Gini average
-            Gini_ave = (Gini_Right + Gini_Left) / 2
+            Gini_ave = (
+                left_totals * Gini_Left +
+                right_totals * Gini_Right
+            ) / (left_totals + right_totals)
 
             best_index = np.argmin(Gini_ave)
             return thresholds[best_index], Gini_ave[best_index]
