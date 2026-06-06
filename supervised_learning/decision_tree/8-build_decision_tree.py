@@ -394,7 +394,7 @@ class Decision_Tree():
             # Then  return the threshold and the Gini average  for which the
             # Gini average is the smallest
             values = self.explanatory[:, feature][node.sub_population] # (n, d)
-            targets = self.target[:, feature][node.sub_population]     # (n,)
+            targets = self.target[node.sub_population]     # (n,)
             thresholds = self.possible_thresholds(node, feature)       # (t,)
 
             # 1. Calculating left leaf Gini impurities (> threshold)
