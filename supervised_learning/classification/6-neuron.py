@@ -100,4 +100,4 @@ class Neuron:
             # Do gradient decsent update
             self.gradient_descent(X, Y, A, alpha)
         
-        return evaluate(X, Y)
+        return self.evaluate(X, Y)
