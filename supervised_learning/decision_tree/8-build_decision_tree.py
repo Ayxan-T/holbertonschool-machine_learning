@@ -414,7 +414,7 @@ class Decision_Tree():
                 np.sum(Left_F, axis=0, keepdims=False)) # (t, c)
             sumof_sqrd_probs = np.sum(squared_probs, axis=1) # (t,)
 
-            Gini_Left = 1 - sumof_sqrd_probs
+            Gini_Left = 1 - sumof_sqrd_probs / totals ** 2
 
             # 2. Calculating rigth leaf Gini impurities (<= threshold)
             left_mask = values[:, None] <= thresholds[None, :] # (n, t)
@@ -428,7 +428,7 @@ class Decision_Tree():
                 np.sum(Right_F, axis=0, keepdims=False)) # (t, c)
             sumof_sqrd_probs = np.sum(squared_probs, axis=1) # (t,)
 
-            Gini_Right = 1 - sumof_sqrd_probs
+            Gini_Right = 1 - sumof_sqrd_probs / totals ** 2
 
             # 3. Calculate Gini average
             Gini_ave = (Gini_Right + Gini_Left) / 2
