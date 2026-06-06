@@ -419,7 +419,8 @@ class Decision_Tree():
             # 2. Calculating rigth leaf Gini impurities (<= threshold)
             left_mask = targets[:, None] <= thresholds[None, :] # (n, t)
 
-            Right_F = left_mask[:, :, None] & right_mask[:, None, :] #(n, t, c)
+            Right_F = np.logical_and(
+                left_mask[:, :, None], right_mask[:, None, :]) #(n, t, c)
 
             totals = np.sum(Right_F, axis=(0, 2), keepdims=False) # (t,)
 
