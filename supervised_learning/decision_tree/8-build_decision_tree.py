@@ -398,7 +398,7 @@ class Decision_Tree():
             thresholds = self.possible_thresholds(node, feature)       # (t,)
 
             # 1. Calculating left leaf Gini impurities (> threshold)
-            left_mask = targets[:, None] > thresholds[None, :] # (n, t)
+            left_mask = values[:, None] > thresholds[None, :] # (n, t)
 
             classes, class_ids = np.unique(targets, return_inverse=True)
             right_mask = np.eye(len(classes))[class_ids]  # (n, c)
@@ -417,7 +417,7 @@ class Decision_Tree():
             Gini_Left = 1 - sumof_sqrd_probs
 
             # 2. Calculating rigth leaf Gini impurities (<= threshold)
-            left_mask = targets[:, None] <= thresholds[None, :] # (n, t)
+            left_mask = values[:, None] <= thresholds[None, :] # (n, t)
 
             Right_F = np.logical_and(
                 left_mask[:, :, None], right_mask[:, None, :]) #(n, t, c)
