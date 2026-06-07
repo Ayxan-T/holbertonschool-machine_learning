@@ -27,7 +27,7 @@ class NeuralNetwork:
         # Initialize parameters in hidden layer
         self.W1 = np.random.normal(size=(nodes, nx))
         self.b1 = np.zeros(shape=(nodes, 1))
-        self.A1 = 0 # activations
+        self.A1 = 0     # activations
 
         # Initialize parameters in output neuron
         self.W2 = np.random.normal(size=(1, nodes))
