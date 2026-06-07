@@ -44,7 +44,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     )
 
     encoder = keras.models.Model(
-        inputs=encoder_input, outputs=[z_mean, z_log_var, z],
+        inputs=encoder_input, outputs=[z, z_mean, z_log_var],
     )
 
     # 2. Decoder
@@ -64,7 +64,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
 
     # 3. VAE model
     auto_input = keras.layers.Input(shape=(input_dims,))
-    z_mean, z_log_var, z = encoder(auto_input)
+    z, z_mean, z_log_var = encoder(auto_input)
     auto_output = decoder(z)
 
     auto = keras.models.Model(
@@ -78,7 +78,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     )
     auto.add_loss(keras.backend.mean(kl_loss))
 
-    auto.compile(optimizer='adam', loss='binary_crossentropy')
+    auto.compile(optimizer=keras.optimizers.Adam(), loss='binary_crossentropy')
 
     return encoder, decoder, auto
         
