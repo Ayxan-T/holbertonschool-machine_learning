@@ -24,12 +24,12 @@ class NeuralNetwork:
         if nodes < 1:
             raise ValueError("nodes must be a positive integer")
 
-        # Initialize parameters for hidden layer
+        # Initialize parameters in hidden layer
         self.W1 = np.random.normal(size=(nodes, nx))
         self.b1 = np.zeros(size=(nodes, 1))
         self.A1 = np.zeros(size=(nodes, 1)) # activations
 
-        # Initialize parameters for output neuron
+        # Initialize parameters in output neuron
         self.W2 = np.random.normal(size=(1, nodes))
         self.b2 = 0
         self.A2 = 0
