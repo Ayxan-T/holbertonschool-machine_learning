@@ -87,7 +87,9 @@ class NeuralNetwork:
         X.shape: (nx, m)
         Y.shape: (1, m)
         """
-        preds = np.where(0.5 <= self.forward_prop(X)[1], 1, 0)
-        cost = self.cost(Y, preds)
+
+        A = self.forward_prop(X)[1]
+        preds = np.where(0.5 <= A, 1, 0)
+        cost = self.cost(Y, A)
 
         return preds, cost
