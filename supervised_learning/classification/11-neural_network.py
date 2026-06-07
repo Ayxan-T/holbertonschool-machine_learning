@@ -74,7 +74,7 @@ class NeuralNetwork:
 
     def cost(self, Y, A):
         """ cost(Y, A)
-    
+
         Y.shape: (1, m)
         A.shape: (1, m)
         """
