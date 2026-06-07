@@ -78,7 +78,10 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     )
     auto.add_loss(keras.backend.mean(kl_loss))
 
-    auto.compile(optimizer="adam", loss='binary_crossentropy')
+    auto.compile(
+        optimizer=keras.optimizers.Adam(),
+        loss=keras.losses.BinaryCrossentropy()
+    )
 
     return encoder, decoder, auto
         
