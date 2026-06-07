@@ -57,10 +57,10 @@ class NeuralNetwork:
     @property
     def A2(self):
         return self.__A2
-    
+
     def forward_prop(self, X):
         """ forward_prop(X)
-        
+
         X.shape: (nx, m)
         """
 
