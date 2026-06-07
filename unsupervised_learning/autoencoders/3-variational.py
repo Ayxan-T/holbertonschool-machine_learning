@@ -26,10 +26,10 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     x = encoder_input
 
     for layer_dim in hidden_layers:
-        x = keras.layer.Dense(layer_dim, activation='relu')(x)
+        x = keras.layers.Dense(layer_dim, activation='relu')(x)
     
-    z_mean = keras.layers.Dense(latent_dims, name='z_mean')(x)
-    z_log_var = keras.layers.Dense(latent_dims, name='z_log_var')(x)
+    z_mean = keras.layers.Dense(latent_dims)(x)
+    z_log_var = keras.layers.Dense(latent_dims)(x)
 
     def sampling(args):
         z_mean, z_log_var = args
