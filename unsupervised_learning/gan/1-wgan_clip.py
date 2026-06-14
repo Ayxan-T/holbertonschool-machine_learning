@@ -76,7 +76,7 @@ class WGAN_clip(keras.Model):
                 discr_loss = self.discriminator.loss(fake_pred, real_pred)
 
             gradients = tape.gradient(discr_loss,
-                                     self.discriminator.trainable_variables)
+                                      self.discriminator.trainable_variables)
             self.discriminator.optimizer.apply_gradients(
                 zip(gradients, self.discriminator.trainable_variables)
             )
