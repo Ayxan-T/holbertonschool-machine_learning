@@ -7,6 +7,12 @@ import numpy as np
 
 
 class RNNCell:
+    """A class that represents a cell of a simple RNN.
+
+    Attributes:
+        Wh, bh: weights for the concatenated hidden state and input data
+        Wy, by: weights for the output
+    """
 
     def __init__(self, i, h, o):
         self.Wh = np.random.normal(size=(i+h, h))
