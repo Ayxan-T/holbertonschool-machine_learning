@@ -24,8 +24,8 @@ class RNNCell:
         """Performs a forward pass on the RNN cell.
 
         Args:
-            h_prev: np.ndarray -hidden state from the previous RNN cell
-            x_t: np.ndarray -input data to the current RNN cell
+            h_prev: np.ndarray(m, h) -hidden state from the previous RNN cell
+            x_t: np.ndarray(m, i) -input data to the current RNN cell
 
         Returns:
             calculated hidden state of this RNN cell
