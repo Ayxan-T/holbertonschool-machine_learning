@@ -19,11 +19,11 @@ def deep_rnn(rnn_cells, X, h_0):
         Y: numpy.ndarray -all of the outputs
     """
     t, m, _ = X.shape
-    l = len(rnn_cells)
+    leng = len(rnn_cells)
     _, _, h = h_0.shape
     o = rnn_cells[-1].Wy.shape[1]
 
-    H = np.zeros((t + 1, l, m, h))
+    H = np.zeros((t + 1, leng, m, h))
     Y = np.zeros((t, m, o))
     H[0] = h_0
 
