@@ -30,7 +30,7 @@ def deep_rnn(rnn_cells, X, h_0):
     for time_step in range(t):
         layer_input = X[time_step]
 
-        for layer in range(l):
+        for layer in range(leng):
             h_prev = H[time_step, layer]
             h_next, y = rnn_cells[layer].forward(h_prev, layer_input)
             H[time_step + 1, layer] = h_next
