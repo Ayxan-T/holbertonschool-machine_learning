@@ -27,6 +27,4 @@ def rnn(rnn_cell, X, h_0):
         H.append(h_new)
         Y.append(y_new)
 
-    H.pop(0)
-
     return np.array(H), np.array(Y)
