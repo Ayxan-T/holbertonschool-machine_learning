@@ -21,6 +21,16 @@ class RNNCell:
         self.by = np.zeros((1, o))
 
     def forward(self, h_prev, x_t):
+        """Performs a forward pass on the RNN cell.
+        
+        Args:
+            h_prev: np.ndarray -hidden state from the previous RNN cell
+            x_t: np.ndarray -input data to the current RNN cell
+        
+        Returns:
+            calculated hidden state of this RNN cell
+            the output value of this RNN cell
+        """
         concat = np.concatenate((h_prev, x_t), axis=1)
         h_next = np.tanh(np.matmul(concat, self.Wh) + self.bh)
         y_linear = np.matmul(h_next, self.Wy) + self.by
