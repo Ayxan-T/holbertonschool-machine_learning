@@ -29,4 +29,4 @@ def rnn(rnn_cell, X, h_0):
 
     H.pop(0)
 
-    return np.ndarray(H), np.ndarray(Y)
+    return np.array(H), np.array(Y)
