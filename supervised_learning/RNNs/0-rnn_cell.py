@@ -22,11 +22,11 @@ class RNNCell:
 
     def forward(self, h_prev, x_t):
         """Performs a forward pass on the RNN cell.
-        
+
         Args:
             h_prev: np.ndarray -hidden state from the previous RNN cell
             x_t: np.ndarray -input data to the current RNN cell
-        
+
         Returns:
             calculated hidden state of this RNN cell
             the output value of this RNN cell
