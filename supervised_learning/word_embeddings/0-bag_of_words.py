@@ -23,7 +23,7 @@ def bag_of_words(sentences, vocab=None):
     vectorizer = CountVectorizer(
         vocabulary=vocab,  # Use custom vocab if provided
         lowercase=True,
-        token_pattern=r'\b[a-z]+\b',  # Only alphabetic words (filters symbols)
+        token_pattern=r'[a-z]+',  # Only alphabetic words (filters symbols)
         stop_words=None  # Keep all words
     )
     
