@@ -23,7 +23,7 @@ def tf_idf(sentences, vocab=None):
     vectorizer = TfidfVectorizer(
         vocabulary=vocab,  # Use custom vocab if provided
         lowercase=True,
-        token_pattern=r'[a-z]+',  # Only alphabetic words
+        token_pattern=r'[a-z]{2,}',  # Only alphabetic words
         stop_words=None  # Keep all words
     )
     

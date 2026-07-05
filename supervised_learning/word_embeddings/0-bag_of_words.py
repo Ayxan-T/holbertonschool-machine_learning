@@ -18,7 +18,7 @@ def bag_of_words(sentences, vocab=None):
 
     Returns:
         embeddings: (numpy.ndarray)[num_sentences, num_features]
-        features: (list)
+        features: (numpy.ndarray)
     """
 
     # CountVectorizer handles all parsing, lowercasing, symbol removal
