@@ -4,7 +4,7 @@
 Function: word2vec_model()
 """
 
-from gensim.models import Word2Vec
+import gensim
 
 
 def word2vec_model(sentences, vector_size=100, min_count=5, window=5, negative=5, cbow=True, epochs=5, seed=0, workers=1):
@@ -29,7 +29,7 @@ def word2vec_model(sentences, vector_size=100, min_count=5, window=5, negative=5
     # sg=0 for CBOW, sg=1 for Skip-gram
     sg = 0 if cbow else 1
     
-    model = Word2Vec(
+    model = gensim.models.Word2Vec(
         sentences=sentences,
         vector_size=vector_size,
         min_count=min_count,
