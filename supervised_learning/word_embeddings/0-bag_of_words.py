@@ -19,11 +19,11 @@ def bag_of_words(sentences, vocab=None):
         embeddings: (numpy.ndarray)[num_sentences, num_features]
         features: (list)
     """
-    # CountVectorizer handles all parsing, lowercasing, symbol removal automatically
+    # CountVectorizer handles all parsing, lowercasing, symbol removal
     vectorizer = CountVectorizer(
         vocabulary=vocab,  # Use custom vocab if provided
         lowercase=True,
-        token_pattern=r'[a-z]+',  # Only alphabetic words (filters symbols)
+        token_pattern=r'[a-z]+',  # Only alphabetic words
         stop_words=None  # Keep all words
     )
     
