@@ -21,14 +21,10 @@ def bag_of_words(sentences, vocab=None):
         features: (list)
     """
 
-    def preprocess(text):
-        return re.sub(r"[^a-z\s]", " ", text)
-
     # CountVectorizer handles all parsing, lowercasing, symbol removal
     vectorizer = CountVectorizer(
         vocabulary=vocab,  # Use custom vocab if provided
         lowercase=True,
-        preprocessor=preprocess,
         token_pattern=r'[a-z]+',  # Only alphabetic words
         stop_words=None  # Keep all words
     )
