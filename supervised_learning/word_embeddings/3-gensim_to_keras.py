@@ -4,7 +4,7 @@
 Function: gensim_to_keras()
 """
 
-import tensorflow
+import tensorflow as tf
 
 
 def gensim_to_keras(model):
@@ -26,7 +26,7 @@ def gensim_to_keras(model):
     # Create Keras Embedding layer with gensim weights
     # input_dim = vocabulary size (including index 0 for unknown words)
     # output_dim = vector dimensions
-    embedding = tensorflow.keras.layersEmbedding(
+    embedding = tf.keras.layersEmbedding(
         input_dim=vocab_size,
         output_dim=vector_size,
         weights=[weights],
