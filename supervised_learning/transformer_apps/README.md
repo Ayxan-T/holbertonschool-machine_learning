@@ -1,0 +1,1 @@
+This folder contains my solutions for 'Transformer apps' project.
