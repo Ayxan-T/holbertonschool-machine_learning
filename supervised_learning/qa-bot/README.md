@@ -1,0 +1,1 @@
+This folder contain my solutions for the qa-bot project.
