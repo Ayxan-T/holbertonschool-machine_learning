@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+"""Module: 0-dataset"""
+
+import setup
+from transformers import AutoTokenizer
+
+
+class Dataset:
+    """Class: Dataset"""
+    def __init__(self):
+        self.data_train = setup.load_pt2en('train')
+        self.data_valid = setup.load_pt2en('validation')
+        self.tokenizer_pt = None
+        self.tokenizer_en = None
+
+    def tokenize_dataset(self, data):
+        """Create sub-word tokenizers for the Portuguese and English text."""
+
+        def _decode_sentence(sentence):
+            """Decode a tensor or bytes value into a Python string."""
+            if hasattr(sentence, "numpy"):
+                sentence = sentence.numpy()
+            if isinstance(sentence, bytes):
+                return sentence.decode("utf-8")
+            return str(sentence)
+
+        def _portuguese_sentences():
+            """Yield the Portuguese sentences from the dataset."""
+            for pt, _ in data:
+                yield _decode_sentence(pt)
+
+        def _english_sentences():
+            """Yield the English sentences from the dataset."""
+            for _, en in data:
+                yield _decode_sentence(en)
+
+        # Start from pretrained BERT tokenizers and fine-tune them on the
+        # dataset with a maximum vocabulary size of 2**13.
+        tokenizer_pt = AutoTokenizer.from_pretrained(
+            "neuralmind/bert-base-portuguese-cased"
+        )
+        tokenizer_en = AutoTokenizer.from_pretrained("bert-base-uncased")
+
+        tokenizer_pt = tokenizer_pt.train_new_from_iterator(
+            _portuguese_sentences(),
+            vocab_size=2**13,
+            special_tokens=["[PAD]", "[UNK]", "[CLS]", "[SEP]", "[MASK]"],
+        )
+        tokenizer_en = tokenizer_en.train_new_from_iterator(
+            _english_sentences(),
+            vocab_size=2**13,
+            special_tokens=["[PAD]", "[UNK]", "[CLS]", "[SEP]", "[MASK]"],
+        )
+
+        self.tokenizer_pt = tokenizer_pt
+        self.tokenizer_en = tokenizer_en
+        return tokenizer_pt, tokenizer_en
+
