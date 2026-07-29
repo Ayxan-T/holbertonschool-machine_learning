@@ -369,3 +369,71 @@ class Decision_Tree():
             self.predict(test_explanatory),
             test_target
         )) / test_target.size
+
+    def possible_thresholds(self,node,feature):
+        values = np.unique((self.explanatory[:,feature])[node.sub_population])
+        return (values[1:]+values[:-1])/2
+
+    def Gini_split_criterion_one_feature(self,node,feature):
+            # Compute a numpy array of booleans Left_F of shape (n,t,c) where
+            #    -> n is the number of individuals in the sub_population
+            #       corresponding to node
+            #    -> t is the number of possible thresholds
+            #    -> c is the number of classes represented in node
+        values = self.explanatory[:, feature][node.sub_population] #shape: (n,)
+        thresholds = self.possible_thresholds(node, feature)  # shape: (t,)
+        classes = np.unique(self.target[node.sub_population])  # shape: (c,)
+        y = self.target[node.sub_population]       # shape: (n,)
+
+        left_F = ( # (n, t, c)
+            (values[:, None] > thresholds[None, :])[:, :, None]
+            & (y[:, None] == classes[None, None, :])
+        )
+
+        right_F = (
+            (values[:, None] <= thresholds[None, :])[:, :, None]
+            & (y[:, None] == classes[None, None, :])
+        )
+
+        counts = np.sum(left_F, axis=0) # (t, c)
+        sums = np.sum(counts, axis=1) # (t,)
+        probs = np.divide(
+            counts,
+            sums[:, None],
+            out=np.zeros_like(counts, dtype=float),
+            where=sums[:, None] != 0
+        )
+        sqrd_probs = probs**2
+        gini_left = 1 - np.sum(sqrd_probs, axis=1) # (t,)
+
+        counts = np.sum(right_F, axis=0) # (t, c)
+        sums = np.sum(counts, axis=1) # (t,)
+        probs = np.divide(
+            counts,
+            sums[:, None],
+            out=np.zeros_like(counts, dtype=float),
+            where=sums[:, None] != 0
+        )
+        sqrd_probs = probs**2
+        gini_right = 1 - np.sum(sqrd_probs, axis=1) # (t,)   
+
+        total = len(values)
+
+        # among the subpopulation of node, how many are above the threshold
+        # (how many left)
+        left_size = np.sum(values[:, None] > thresholds[None, :], axis=0)
+        right_size = np.sum(values[:, None] <= thresholds[None, :], axis=0)
+        left_pop_proportion = left_size / total
+        right_pop_proportion = right_size / total
+        gini = left_pop_proportion * gini_left + \
+            right_pop_proportion * gini_right
+
+        smallest_id = np.argmin(gini)
+        return thresholds[smallest_id], gini[smallest_id]
+
+    def Gini_split_criterion(self,node):
+            X=np.array(
+                [self.Gini_split_criterion_one_feature(node,i)
+                 for i in range(self.explanatory.shape[1])])
+            i=np.argmin(X[:,1])
+            return i, X[i,0] # feature, threshold
