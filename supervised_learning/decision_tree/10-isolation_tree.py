@@ -62,10 +62,11 @@ class Isolation_Random_Tree() :
         threshold = (1 - x) * feature_min + x * feature_max
         return feature, threshold
 
-    def get_leaf_child(self, node, sub_population) :        
-        leaf_child =          <--- to be filled (different from Decision_Tree)
-        leaf_child.depth=node.depth+1
-        leaf_child.subpopulation=sub_population
+    def get_leaf_child(self, node, sub_population):
+        """Create a leaf node for a terminal subtree."""
+        leaf_child = Leaf(value=None)
+        leaf_child.depth = node.depth + 1
+        leaf_child.sub_population = sub_population
         return leaf_child
 
     def get_node_child(self, node, sub_population):
