@@ -375,55 +375,55 @@ class Decision_Tree():
             #
             # Then  return the threshold and the Gini average  for which the
             # Gini average is the smallest
-            values = self.explanatory[:, feature][node.sub_population] # (n, d)
-            targets = self.target[node.sub_population]     # (n,)
-            thresholds = self.possible_thresholds(node, feature)       # (t,)
+        values = self.explanatory[:, feature][node.sub_population] # (n, d)
+        targets = self.target[node.sub_population]     # (n,)
+        thresholds = self.possible_thresholds(node, feature)       # (t,)
 
-            # 1. Calculating left leaf Gini impurities (> threshold)
-            left_mask = values[:, None] > thresholds[None, :] # (n, t)
+        # 1. Calculating left leaf Gini impurities (> threshold)
+        left_mask = values[:, None] > thresholds[None, :] # (n, t)
 
-            classes, class_ids = np.unique(targets, return_inverse=True)
-            right_mask = np.eye(len(classes))[class_ids]  # (n, c)
+        classes, class_ids = np.unique(targets, return_inverse=True)
+        right_mask = np.eye(len(classes))[class_ids]  # (n, c)
 
-            Left_F = np.logical_and(
-                left_mask[:, :, None], right_mask[:, None, :]) # (n, t, c)
+        Left_F = np.logical_and(
+            left_mask[:, :, None], right_mask[:, None, :]) # (n, t, c)
 
-            # Calculate total number of left leaf points for every threshold
-            left_totals = np.sum(Left_F, axis=(0, 2), keepdims=False) # (t,)
+        # Calculate total number of left leaf points for every threshold
+        left_totals = np.sum(Left_F, axis=(0, 2), keepdims=False) # (t,)
 
-            # Calculate sum of squared probabilities
-            squared_probs = np.square(
-                np.sum(Left_F, axis=0, keepdims=False)) # (t, c)
-            sumof_sqrd_probs = np.sum(squared_probs, axis=1) # (t,)
+        # Calculate sum of squared probabilities
+        squared_probs = np.square(
+            np.sum(Left_F, axis=0, keepdims=False)) # (t, c)
+        sumof_sqrd_probs = np.sum(squared_probs, axis=1) # (t,)
 
-            Gini_Left = 1 - sumof_sqrd_probs / left_totals ** 2
+        Gini_Left = 1 - sumof_sqrd_probs / left_totals ** 2
 
-            # 2. Calculating rigth leaf Gini impurities (<= threshold)
-            left_mask = values[:, None] <= thresholds[None, :] # (n, t)
+        # 2. Calculating rigth leaf Gini impurities (<= threshold)
+        left_mask = values[:, None] <= thresholds[None, :] # (n, t)
 
-            Right_F = np.logical_and(
-                left_mask[:, :, None], right_mask[:, None, :]) #(n, t, c)
+        Right_F = np.logical_and(
+            left_mask[:, :, None], right_mask[:, None, :]) #(n, t, c)
 
-            right_totals = np.sum(Right_F, axis=(0, 2), keepdims=False) # (t,)
+        right_totals = np.sum(Right_F, axis=(0, 2), keepdims=False) # (t,)
 
-            squared_probs = np.square(
-                np.sum(Right_F, axis=0, keepdims=False)) # (t, c)
-            sumof_sqrd_probs = np.sum(squared_probs, axis=1) # (t,)
+        squared_probs = np.square(
+            np.sum(Right_F, axis=0, keepdims=False)) # (t, c)
+        sumof_sqrd_probs = np.sum(squared_probs, axis=1) # (t,)
 
-            Gini_Right = 1 - sumof_sqrd_probs / right_totals ** 2
+        Gini_Right = 1 - sumof_sqrd_probs / right_totals ** 2
 
-            # 3. Calculate Gini average
-            Gini_ave = (
-                left_totals * Gini_Left +
-                right_totals * Gini_Right
-            ) / (left_totals + right_totals)
+        # 3. Calculate Gini average
+        Gini_ave = (
+            left_totals * Gini_Left +
+            right_totals * Gini_Right
+        ) / (left_totals + right_totals)
 
-            best_index = np.argmin(Gini_ave)
-            return thresholds[best_index], Gini_ave[best_index]
+        best_index = np.argmin(Gini_ave)
+        return thresholds[best_index], Gini_ave[best_index]
 
 
     def Gini_split_criterion(self, node):
         """Choose the best feature and threshold using Gini impurity."""
         X = np.array([self.Gini_split_criterion_one_feature(node, i) for i in range(self.explanatory.shape[1])])
-            i = np.argmin(X[:, 1])
-            return i, X[i, 0]
+        i = np.argmin(X[:, 1])
+        return i, X[i, 0]
