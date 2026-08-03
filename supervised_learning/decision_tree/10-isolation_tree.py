@@ -64,7 +64,7 @@ class Isolation_Random_Tree() :
 
     def get_leaf_child(self, node, sub_population):
         """Create a leaf node for a terminal subtree."""
-        leaf_child = Leaf(value=None)
+        leaf_child = Leaf(value=node.depth + 1)
         leaf_child.depth = node.depth + 1
         leaf_child.sub_population = sub_population
         return leaf_child
