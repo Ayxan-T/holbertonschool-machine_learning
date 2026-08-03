@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Module: 10-isolation_tree"""
 
+Node = __import__('8-build_decision_tree').Node
+Leaf = __import__('8-build_decision_tree').Leaf
 import numpy as np
 
 
