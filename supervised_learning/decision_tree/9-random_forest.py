@@ -86,5 +86,8 @@ class Random_Forest:
                                                       self.target)}""")
 
     def accuracy(self, test_explanatory, test_target):
+        """Calculates model accuracy - proportion of data that was predicted
+        correctly.
+        """
         return np.sum(np.equal(self.predict(test_explanatory), test_target)) /\
             test_target.size
