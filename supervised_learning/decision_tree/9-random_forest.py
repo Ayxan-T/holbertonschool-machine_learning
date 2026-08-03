@@ -30,7 +30,7 @@ class Random_Forest:
             explanatory = explanatory.reshape(1, -1)
 
         if not self.numpy_preds:
-            raise ValueError("The forest has not been trained yet. Call fit first.")
+            raise ValueError("The forest has not been trained yet.")
 
         tree_preds = np.array([
             tree_predict(explanatory) for tree_predict in self.numpy_preds
@@ -80,7 +80,9 @@ class Random_Forest:
     - Mean number of nodes           : {np.array(nodes).mean()}
     - Mean number of leaves          : {np.array(leaves).mean()}
     - Mean accuracy on training data : {np.array(accuracies).mean()}
-    - Accuracy of the forest on td   : {self.accuracy(self.explanatory, self.target)}""")
+    - Accuracy of the forest on td   : {self.accuracy(self.explanatory,
+                                                      self.target)}""")
 
     def accuracy(self, test_explanatory, test_target):
-        return np.sum(np.equal(self.predict(test_explanatory), test_target)) / test_target.size
+        return np.sum(np.equal(self.predict(test_explanatory), test_target)) /\
+            test_target.size
