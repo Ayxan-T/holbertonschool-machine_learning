@@ -7,6 +7,8 @@ Decision_Tree = __import__('8-build_decision_tree').Decision_Tree
 
 
 class Random_Forest:
+    """Build a forest of decision trees and combine their predictions."""
+
     def __init__(self, n_trees=100, max_depth=10, min_pop=1, seed=0):
         self.numpy_predicts = []
         self.target = None
