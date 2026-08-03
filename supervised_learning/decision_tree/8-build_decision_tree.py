@@ -274,6 +274,16 @@ class Decision_Tree():
         return self.root.pred(x)
     
     def fit(self,explanatory, target, verbose=0):
+        """Train the decision tree on the provided data.
+        
+                Args:
+                    explanatory: A 2D array of feature values for the training data.
+                    target: A 1D array of labels corresponding to the training data.
+                    verbose: If set to 1, print training summary information.
+        
+                Returns:
+                    None
+        """
         if self.split_criterion == "random": 
             self.split_criterion = self.random_split_criterion
         else:
