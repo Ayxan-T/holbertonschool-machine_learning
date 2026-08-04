@@ -41,4 +41,4 @@ class Isolation_Random_Forest() :
         """ returns the n_suspects rows in explanatory that have the smallest mean depth """
         depths = self.predict(explanatory)
         order = np.argsort(depths)[:n_suspects]
-        return explanatory[order]
+        return explanatory[order], depths[order]
