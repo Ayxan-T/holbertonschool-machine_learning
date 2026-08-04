@@ -114,6 +114,33 @@ class Isolation_Random_Tree:
             node.right_child = self.get_node_child(node, right_population)
             self.fit_node(node.right_child)
 
+    def predict(self, explanatory):
+        """Predict labels for one or more samples using the trained forest.
+
+        Args:
+            explanatory: A 1D or 2D array of feature values for the samples
+                to classify.
+
+        Returns:
+            A NumPy array containing the predicted label for each sample.
+        """
+        if explanatory.ndim == 1:
+            explanatory = explanatory.reshape(1, -1)
+
+        if not self.numpy_preds:
+            raise ValueError("The forest has not been trained yet.")
+
+        tree_preds = np.array([
+            tree_predict(explanatory) for tree_predict in self.numpy_preds
+        ])
+
+        preds = []
+        for i in range(tree_preds.shape[1]):
+            values, counts = np.unique(tree_preds[:, i], return_counts=True)
+            preds.append(values[np.argmax(counts)])
+
+        return np.array(preds)
+
     def fit(self, explanatory, verbose=0):
         """Fit the isolation tree to the explanatory data."""
         self.split_criterion = self.random_split_criterion
