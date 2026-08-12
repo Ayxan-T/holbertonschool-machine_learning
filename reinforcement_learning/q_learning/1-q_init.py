@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Module: 1-q_init"""
 
-import gymnasium as gym
 import numpy as np
 
 
