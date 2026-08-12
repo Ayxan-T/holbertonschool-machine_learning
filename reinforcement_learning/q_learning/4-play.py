@@ -21,16 +21,18 @@ def play(env, Q, max_steps=100):
 
     state, info = env.reset()
     render = env.render()
-    print(render)
     renders.append(render)
 
     for _ in range(max_steps):
-        action = np.argmax(Q[state])
+
+        # action = np.argmax(Q[state])
+        best_actions = np.flatnonzero(Q[state] == Q[state].max())
+        action = np.random.choice(best_actions)
+
         state, reward, terminated, truncated, info = env.step(action)
 
         total_rewards += reward
         render = env.render()
-        print(render)
         renders.append(render)
 
         if terminated or truncated:
