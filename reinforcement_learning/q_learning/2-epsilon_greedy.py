@@ -20,7 +20,7 @@ def epsilon_greedy(Q, state, epsilon):
     p = np.random.uniform()
     if p > epsilon:
         # find idx of best action col for state
-        action_idx = np.argmax(Q[state, :], axis=1)
+        action_idx = np.argmax(Q[state, :])
     else:
         action_idx = np.random.randint(num_actions)
 
