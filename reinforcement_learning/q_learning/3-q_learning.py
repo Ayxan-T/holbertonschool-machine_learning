@@ -44,9 +44,9 @@ def train(
                 break
 
         total_rewards.append(episode_reward)
-        
+
         # update 'epsilon' by 'epsilon_decay' and continue
         epsilon = min_epsilon + (initial_epsilon - min_epsilon) * \
             np.exp(-epsilon_decay * episode)
 
-    return Q
+    return Q, total_rewards
