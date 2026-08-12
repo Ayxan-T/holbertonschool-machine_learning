@@ -10,11 +10,13 @@ def train(
         epsilon=1, min_epsilon=0.1, epsilon_decay=0.05
 ):
 
+    total_rewards = []
     initial_epsilon = epsilon
 
     # Need to play 'episodes' times
     for episode in range(episodes):
         state, info = env.reset()
+        episode_reward = 0
         steps = 0
         # while not terminal state (lake or goal), and not max_steps, play
         while steps < max_steps: 
@@ -34,12 +36,15 @@ def train(
                 reward + gamma * best_next - Q[state, action]
             )
 
+            episode_reward += reward
             state = next_state
             steps += 1
 
             if terminated or truncated:
                 break
 
+        total_rewards.append(episode_reward)
+        
         # update 'epsilon' by 'epsilon_decay' and continue
         epsilon = min_epsilon + (initial_epsilon - min_epsilon) * \
             np.exp(-epsilon_decay * episode)
