@@ -14,5 +14,3 @@ def q_init(env):
         numpy.ndarray (n_observations, n_actions): Q-table initialized to zeros
     """
     return np.zeros((env.observation_space.n, env.action_space.n))
-
-
