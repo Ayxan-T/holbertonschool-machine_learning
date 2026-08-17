@@ -6,7 +6,7 @@ import tensorflow as tf
 
 class SelfAttention(tf.keras.layers.Layer):
     """Calculate the attention for RNN-based machine translation."""
-    
+
     def __init__(self, units):
         super().__init__()
         self.units = units
