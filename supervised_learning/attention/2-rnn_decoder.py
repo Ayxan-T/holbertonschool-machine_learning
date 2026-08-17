@@ -34,7 +34,7 @@ class RNNDecoder(tf.keras.layers.Layer):
 
         # Concatenate context vector with x (embedded) in that order
         # Result shape: (batch, 1, units + embedding)
-        x_concat = tf.concat([context, x_embedded], axis=-1)
+        x_concat = tf.concat([x_embedded, context], axis=-1)
 
         # Pass concatenated tensor through GRU layer
         output, s = self.gru(x_concat, initial_state=s_prev)
