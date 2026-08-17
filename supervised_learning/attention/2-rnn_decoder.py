@@ -14,6 +14,7 @@ class RNNDecoder(tf.keras.layers.Layer):
         self.attention = SelfAttention(units)
         self.gru = tf.keras.layers.GRU(
                 units,
+                return_sequences=True,
                 return_state=True,
                 recurrent_initializer="glorot_uniform"
             )
