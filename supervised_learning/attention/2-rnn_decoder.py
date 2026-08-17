@@ -22,7 +22,6 @@ class RNNDecoder(tf.keras.layers.Layer):
     def call(self, x, s_prev, hidden_states):
         """Compute the next decoder output and hidden state."""
         context, _ = self.attention(s_prev, hidden_states)
-        context = tf.expand_dims(context, axis=1)
         embedded = self.embedding(x)
         decoder_input = tf.concat([context, embedded], axis=-1)
         _, s = self.gru(decoder_input, initial_state=s_prev)
