@@ -4,7 +4,7 @@
 import tensorflow as tf
 
 
-def sdp_attention(Q : tf.Tensor, K : tf.Tensor, V : tf.Tensor, mask=None):
+def sdp_attention(Q: tf.Tensor, K: tf.Tensor, V: tf.Tensor, mask=None):
     """
         Q: (..., seq_len_q, dk)
         K: (..., seq_len_v, dk)
