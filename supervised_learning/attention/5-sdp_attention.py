@@ -10,12 +10,12 @@ def sdp_attention(Q : tf.Tensor, K : tf.Tensor, V : tf.Tensor, mask=None):
         K: (..., seq_len_v, dk)
         V: (..., seq_len_v, dv)
     """
-    dk_root = Q.shape[-1] ** -2
+    dk_root = tf.math.sqrt(Q.shape[-1])
 
-    scores = tf.matmul(Q, K, transpose_b=True)
+    scores = tf.matmul(Q, K, transpose_b=True)  # (..., seq_len_q, seq_len_v)
 
     # Scaling
-    scores = scores / dk_root   # (..., seq_len_q, seq_len_v)
+    scores = scores / dk_root
 
     # Masking if needed
     if mask is not None:
