@@ -11,15 +11,15 @@ class EncoderBlock(tf.keras.layers.Layer):
 
         # Multi-Head Attention layer
         self.mha = MultiHeadAttention(dm, h)
-        
+
         # Dense Feed-Forward layers
         self.dense_hidden = tf.keras.layers.Dense(hidden, activation='relu')
         self.dense_output = tf.keras.layers.Dense(dm)
-        
+
         # Layer Normalization layers
         self.layernorm1 = tf.keras.layers.LayerNormalization(epsilon=1e-6)
         self.layernorm2 = tf.keras.layers.LayerNormalization(epsilon=1e-6)
-        
+
         # Dropout layers
         self.dropout1 = tf.keras.layers.Dropout(drop_rate)
         self.dropout2 = tf.keras.layers.Dropout(drop_rate)
