@@ -24,13 +24,16 @@ class MultiHeadAttention(tf.keras.layers.Layer):
         V = self.Wv(V)  # (batch, seq_len_v, dm)
 
         # Multi-head splitting: (batch, h, seq_len_q/v, depth)
-        batch_size = Q.shape[0]
-        Q = tf.transpose(tf.reshape(Q, (batch_size, -1, self.h, tf.cast(
-            self.depth, tf.int32))), perm=[0, 2, 1, 3])
-        K = tf.transpose(tf.reshape(K, (batch_size, -1, self.h, tf.cast(
-            self.depth, tf.int32))), perm=[0, 2, 1, 3])
-        V = tf.transpose(tf.reshape(V, (batch_size, -1, self.h, tf.cast(
-            self.depth, tf.int32))), perm=[0, 2, 1, 3])
+        batch_size = tf.shape(Q)[0]
+        Q = tf.transpose(
+            tf.reshape(
+                Q, (batch_size, -1, self.h, self.depth)), perm=[0, 2, 1, 3])
+        K = tf.transpose(
+            tf.reshape(
+                K, (batch_size, -1, self.h, self.depth)), perm=[0, 2, 1, 3])
+        V = tf.transpose(
+            tf.reshape(
+                V, (batch_size, -1, self.h, self.depth)), perm=[0, 2, 1, 3])
 
         # (batch, h, seq_len_q, depth), (batch, h, seq_len_q, seq_len_v)
         output, weights = sdp_attention(Q, K, V, mask=mask)
