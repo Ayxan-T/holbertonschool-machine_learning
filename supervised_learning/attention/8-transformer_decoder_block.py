@@ -33,7 +33,8 @@ class DecoderBlock(tf.keras.layers.Layer):
         out1 = self.layernorm1(x + attn1)
 
         # 2. Cross-Attention (Queries from decoder, Keys & Values from encoder)
-        attn2, weights_block2 = self.mha2(out1, encoder_output, encoder_output, mask=padding_mask)
+        attn2, weights_block2 = self.mha2(
+            out1, encoder_output, encoder_output, mask=padding_mask)
         attn2 = self.dropout2(attn2, training=training)
         out2 = self.layernorm2(out1 + attn2)
 
