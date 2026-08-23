@@ -6,6 +6,7 @@ MultiHeadAttention = __import__('6-multihead_attention').MultiHeadAttention
 
 
 class EncoderBlock(tf.keras.layers.Layer):
+    """Performs Encoder block operations: MHA and FeedForward"""
     def __init__(self, dm, h, hidden, drop_rate=0.1):
         super().__init__()
 
