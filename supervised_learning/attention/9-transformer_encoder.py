@@ -20,7 +20,6 @@ class Encoder(tf.keras.layers.Layer):
                        for _ in range(N)]
         self.dropout = tf.keras.layers.Dropout(drop_rate)
 
-
     def call(self, x, training, mask):
         """Performs encoder mechanism.
         Args: x (batch, seq_len), training, mask"""
@@ -30,8 +29,10 @@ class Encoder(tf.keras.layers.Layer):
         x *= tf.math.sqrt(tf.cast(self.dm, tf.float32))
 
         # 1. Add positional encoding up to input_seq_len
-        # Cast to x.dtype in case x is float32/float64 and positional_encoding is float64/float32
-        pos_encoding = tf.cast(self.positional_encoding[:seq_len, :], dtype=x.dtype)
+        # Cast to x.dtype in case x is float32/float64 and positional_encoding 
+        # is float64/float32
+        pos_encoding = tf.cast(
+            self.positional_encoding[:seq_len, :], dtype=x.dtype)
         x += pos_encoding
 
         # 2. Apply dropout to the sum of input and positional encoding
