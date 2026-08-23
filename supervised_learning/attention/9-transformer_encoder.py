@@ -27,6 +27,7 @@ class Encoder(tf.keras.layers.Layer):
         seq_len = tf.shape(x)[1]
 
         x = self.embedding(x)  # (batch, seq_len, dm)
+        x *= tf.math.sqrt(tf.cast(self.dm, tf.float32))
 
         # 1. Add positional encoding up to input_seq_len
         # Cast to x.dtype in case x is float32/float64 and positional_encoding is float64/float32
