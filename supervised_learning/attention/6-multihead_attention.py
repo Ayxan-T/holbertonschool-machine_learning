@@ -17,7 +17,8 @@ class MultiHeadAttention(tf.keras.layers.Layer):
         self.Wv = tf.keras.layers.Dense(dm)
         self.linear = tf.keras.layers.Dense(dm)
 
-    def call(self, Q, K, V, mask):
+    def call(self, Q, K, V, mask=None):
+        """Call to perform multi head attention with args of Q, K, V."""
         Q = self.Wq(Q)  # (batch, seq_len_q, dm)
         K = self.Wk(K)  # (batch, seq_len_v, dm)
         V = self.Wv(V)  # (batch, seq_len_v, dm)
