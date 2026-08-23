@@ -8,6 +8,7 @@ sdp_attention = __import__('5-sdp_attention').sdp_attention
 class MultiHeadAttention(tf.keras.layers.Layer):
     """Performs multi head attention."""
     def __init__(self, dm, h):
+        super().__init__()
         self.h = h
         self.dm = dm  # dv*h
         self.depth = dm // h  # dv
