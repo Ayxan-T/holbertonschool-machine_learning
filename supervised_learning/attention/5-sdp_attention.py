@@ -25,6 +25,6 @@ def sdp_attention(Q: tf.Tensor, K: tf.Tensor, V: tf.Tensor, mask=None):
     # Softmaxing
     weights = tf.nn.softmax(scores, axis=-1)
 
-    output = tf.matmul(weights, V)
+    output = tf.matmul(weights, V)  # (..., seq_len_q, dv)
 
     return output, weights
