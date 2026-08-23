@@ -44,4 +44,4 @@ class DecoderBlock(tf.keras.layers.Layer):
         ffn_output = self.dropout3(ffn_output, training=training)
         out3 = self.layernorm3(out2 + ffn_output)
 
-        return out3, weights_block1, weights_block2
+        return out3
