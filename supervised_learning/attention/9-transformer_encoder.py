@@ -23,12 +23,11 @@ class Encoder(tf.keras.layers.Layer):
 
     def call(self, x, training, mask):
         """Performs encoder mechanism.
-        Args: x, training, mask"""
+        Args: x (batch, seq_len), training, mask"""
         seq_len = tf.shape(x)[1]
 
-        x = self.embedding(x)  # (batch, seq_len, dm, dm)
-        print("x shape:", x.shape)
-        
+        x = self.embedding(x)  # (batch, seq_len, dm)
+
         # 1. Add positional encoding up to input_seq_len
         # Cast to x.dtype in case x is float32/float64 and positional_encoding is float64/float32
         pos_encoding = tf.cast(self.positional_encoding[:seq_len, :], dtype=x.dtype)
