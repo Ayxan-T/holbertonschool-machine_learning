@@ -2,47 +2,65 @@
 """Module: 2-rnn_decoder"""
 
 import tensorflow as tf
+
 SelfAttention = __import__('1-self_attention').SelfAttention
 
 
 class RNNDecoder(tf.keras.layers.Layer):
-    """Perform decoder part of RNN-based machine translation."""
+    """RNN Decoder class for machine translation using Bahdanau Attention."""
 
     def __init__(self, vocab, embedding, units, batch):
-        """Initialize RNNDecoder attributes."""
-        super().__init__()
-        self.embedding = tf.keras.layers.Embedding(vocab, embedding)
+        """Initializes the RNNDecoder layer.
+
+        Args:
+            vocab (int): Size of the output vocabulary.
+            embedding (int): Dimensionality of the embedding vector.
+            units (int): Number of hidden units in the GRU cell.
+            batch (int): Batch size.
+        """
+        super(RNNDecoder, self).__init__()
+
+        self.embedding = tf.keras.layers.Embedding(
+            input_dim=vocab,
+            output_dim=embedding
+        )
         self.gru = tf.keras.layers.GRU(
-            units,
+            units=units,
             return_sequences=True,
             return_state=True,
-            recurrent_initializer="glorot_uniform"
+            recurrent_initializer='glorot_uniform'
         )
-        self.F = tf.keras.layers.Dense(vocab)
+        self.F = tf.keras.layers.Dense(units=vocab)
         self.attention = SelfAttention(units)
 
     def call(self, x, s_prev, hidden_states):
-        """Compute the next decoder output and hidden state."""
-        # Calculate context vector: shape (batch, units)
+        """Executes the forward pass of the decoder step.
+
+        Args:
+            x (Tensor): Tensor of shape (batch, 1) containing the previous target word.
+            s_prev (Tensor): Tensor of shape (batch, units) containing previous decoder hidden state.
+            hidden_states (Tensor): Tensor of shape (batch, input_seq_len, units) from encoder outputs.
+
+        Returns:
+            y (Tensor): Tensor of shape (batch, vocab) with predicted word distribution.
+            s (Tensor): Tensor of shape (batch, units) with new decoder hidden state.
+        """
+        # Calculate context vector and attention weights using attention mechanism
         context, _ = self.attention(s_prev, hidden_states)
 
-        # Embed input x: x shape (batch, 1) -> x embedding shape (batch, 1, embedding)
-        x_embedded = self.embedding(x)
+        # Convert previous target token into embedding vector: shape (batch, 1, embedding)
+        x = self.embedding(x)
 
-        # Expand context vector: shape (batch, 1, units)
-        context = tf.expand_dims(context, 1)
+        # Concatenate context vector and embedded input along feature axis: shape (batch, 1, units + embedding)
+        x = tf.concat([tf.expand_dims(context, 1), x], axis=-1)
 
-        # Concatenate context vector with x (embedded) in that order
-        # Result shape: (batch, 1, units + embedding)
-        x_concat = tf.concat([x_embedded, context], axis=-1)
+        # Pass concatenated vector through GRU cell
+        output, s = self.gru(x)
 
-        # Pass concatenated tensor through GRU layer
-        output, s = self.gru(x_concat, initial_state=s_prev)
-
-        # Reshape/squeeze output from (batch, 1, units) to (batch, units)
+        # Reshape GRU output from (batch, 1, units) to (batch, units)
         output = tf.reshape(output, (-1, output.shape[2]))
 
-        # Pass through Dense layer to get vocabulary distribution
+        # Pass through final Dense layer to project to target vocabulary size
         y = self.F(output)
 
         return y, s
