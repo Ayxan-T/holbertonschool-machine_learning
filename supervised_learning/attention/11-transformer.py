@@ -35,7 +35,8 @@ class Transformer(tf.keras.Model):
         )
         self.linear = tf.keras.layers.Dense(units=target_vocab)
 
-    def call(self, inputs, target, training, encoder_mask, look_ahead_mask, decoder_mask):
+    def call(self, inputs, target, training, encoder_mask, look_ahead_mask,
+             decoder_mask):
         """Executes the forward pass of the Transformer network.
 
         Args:
@@ -47,7 +48,8 @@ class Transformer(tf.keras.Model):
             decoder_mask (Tensor): Padding mask for the decoder.
 
         Returns:
-            Tensor: Output tensor of shape (batch, target_seq_len, target_vocab).
+            Tensor: Output tensor of shape (batch, target_seq_len,
+            target_vocab).
         """
         # Pass inputs through the encoder
         enc_output = self.encoder(inputs, training, encoder_mask)
