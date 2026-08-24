@@ -37,21 +37,26 @@ class RNNDecoder(tf.keras.layers.Layer):
         """Executes the forward pass of the decoder step.
 
         Args:
-            x (Tensor): Tensor of shape (batch, 1) containing the previous target word.
-            s_prev (Tensor): Tensor of shape (batch, units) containing previous decoder hidden state.
-            hidden_states (Tensor): Tensor of shape (batch, input_seq_len, units) from encoder outputs.
+            x (Tensor): Tensor of shape (batch, 1)
+              containing the previous target word.
+            s_prev (Tensor): Tensor of shape (batch, units)
+              containing previous decoder hidden state.
+            hidden_states (Tensor): Tensor of shape
+              (batch, input_seq_len, units) from encoder outputs.
 
         Returns:
-            y (Tensor): Tensor of shape (batch, vocab) with predicted word distribution.
-            s (Tensor): Tensor of shape (batch, units) with new decoder hidden state.
+            y (Tensor): Tensor of shape (batch, vocab) with predicted
+              word distribution.
+            s (Tensor): Tensor of shape (batch, units) with new
+              decoder hidden state.
         """
-        # Calculate context vector and attention weights using attention mechanism
+        # Calculate context vector and attention weights using attention
         context, _ = self.attention(s_prev, hidden_states)
 
-        # Convert previous target token into embedding vector: shape (batch, 1, embedding)
+        # Convert target token into embedding: shape (batch, 1, embedding)
         x = self.embedding(x)
 
-        # Concatenate context vector and embedded input along feature axis: shape (batch, 1, units + embedding)
+        # Concatenate context vector and embedded (batch, 1, units + embedding)
         x = tf.concat([tf.expand_dims(context, 1), x], axis=-1)
 
         # Pass concatenated vector through GRU cell
@@ -64,3 +69,4 @@ class RNNDecoder(tf.keras.layers.Layer):
         y = self.F(output)
 
         return y, s
+    
