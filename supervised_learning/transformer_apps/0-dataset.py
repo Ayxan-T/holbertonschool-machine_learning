@@ -18,11 +18,7 @@ class Dataset:
 
         def _decode_sentence(sentence):
             """Decode a tensor or bytes value into a Python string."""
-            if hasattr(sentence, "numpy"):
-                sentence = sentence.numpy()
-            # if isinstance(sentence, bytes):
-            #     return sentence.decode("utf-8")
-            return str(sentence.decode('utf-8'))
+            return sentence.numpy().decode('utf-8')
 
         def _portuguese_sentences():
             """Yield the Portuguese sentences from the dataset."""
