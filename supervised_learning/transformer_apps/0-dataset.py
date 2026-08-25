@@ -45,13 +45,11 @@ class Dataset:
 
         tokenizer_pt = tokenizer_pt.train_new_from_iterator(
             _portuguese_sentences(),
-            vocab_size=2**13,
-            special_tokens=["[PAD]", "[UNK]", "[CLS]", "[SEP]", "[MASK]"],
+            vocab_size=2**13
         )
         tokenizer_en = tokenizer_en.train_new_from_iterator(
             _english_sentences(),
-            vocab_size=2**13,
-            special_tokens=["[PAD]", "[UNK]", "[CLS]", "[SEP]", "[MASK]"],
+            vocab_size=2**13
         )
 
         self.tokenizer_pt = tokenizer_pt
