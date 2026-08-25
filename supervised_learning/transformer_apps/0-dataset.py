@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """Module: 0-dataset"""
 
-import setup
 from transformers import AutoTokenizer
+from setup import load_pt2en
 
 
 class Dataset:
     """Class: Dataset"""
     def __init__(self):
-        self.data_train = setup.load_pt2en('train')
-        self.data_valid = setup.load_pt2en('validation')
+        self.data_train = load_pt2en('train')
+        self.data_valid = load_pt2en('validation')
         self.tokenizer_pt = None
         self.tokenizer_en = None
 
@@ -39,7 +39,9 @@ class Dataset:
         tokenizer_pt = AutoTokenizer.from_pretrained(
             "neuralmind/bert-base-portuguese-cased"
         )
-        tokenizer_en = AutoTokenizer.from_pretrained("bert-base-uncased")
+        tokenizer_en = AutoTokenizer.from_pretrained(
+            "bert-base-uncased"
+        )
 
         tokenizer_pt = tokenizer_pt.train_new_from_iterator(
             _portuguese_sentences(),
@@ -55,4 +57,3 @@ class Dataset:
         self.tokenizer_pt = tokenizer_pt
         self.tokenizer_en = tokenizer_en
         return tokenizer_pt, tokenizer_en
-
