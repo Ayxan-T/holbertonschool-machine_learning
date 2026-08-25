@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Module: 0-dataset"""
 
-from transformers import AutoTokenizer
+import transformers
 from setup import load_pt2en
 
 
@@ -36,10 +36,10 @@ class Dataset:
 
         # Start from pretrained BERT tokenizers and fine-tune them on the
         # dataset with a maximum vocabulary size of 2**13.
-        tokenizer_pt = AutoTokenizer.from_pretrained(
+        tokenizer_pt = transformers.AutoTokenizer.from_pretrained(
             "neuralmind/bert-base-portuguese-cased"
         )
-        tokenizer_en = AutoTokenizer.from_pretrained(
+        tokenizer_en = transformers.AutoTokenizer.from_pretrained(
             "bert-base-uncased"
         )
 
