@@ -121,7 +121,7 @@ class NeuralNetwork:
 
         # --- Layer 1 (Hidden Layer) Backprop ---
         dA1 = np.matmul(self.__W2.T, dZ2)  # (nodes, m)
-        dZ1 = dA1 * A1 * (1 - A1)  # Derivative of sigmoid activation, shape: (nodes, m)
+        dZ1 = dA1 * A1 * (1 - A1)  # (nodes, m)
         db1 = (1 / m) * np.sum(dZ1, axis=1, keepdims=True)  # (nodes, 1)
         dW1 = (1 / m) * np.matmul(dZ1, X.T)  # (nodes, nx)
 
