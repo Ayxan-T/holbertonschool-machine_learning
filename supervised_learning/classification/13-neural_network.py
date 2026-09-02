@@ -102,17 +102,31 @@ class NeuralNetwork:
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
         """
+        Calculates one pass of gradient descent on the neural network.
+
+        X: (nx, m)
+        W1: (nodes, nx)
         W2: (1, nodes)
         A1: (nodes, m)
         A2: (1, m)
         Y: (1, m)
         """
         m = Y.shape[1]
-    
+
+        # --- Layer 2 (Output Layer) Backprop ---
         dA2 = np.where(Y == 1, -1 / A2, 1 / (1 - A2))  # (1, m)
-        dZ2 = dA2 * A2 * (1 - A2)  # unreduced (1, m)
+        dZ2 = dA2 * A2 * (1 - A2)  # Simplifies to (A2 - Y), shape: (1, m)
         db2 = (1 / m) * np.sum(dZ2, axis=1, keepdims=True)  # (1, 1)
         dW2 = (1 / m) * np.matmul(dZ2, A1.T)  # (1, nodes)
 
+        # --- Layer 1 (Hidden Layer) Backprop ---
+        dA1 = np.matmul(self.__W2.T, dZ2)  # (nodes, m)
+        dZ1 = dA1 * A1 * (1 - A1)  # Derivative of sigmoid activation, shape: (nodes, m)
+        db1 = (1 / m) * np.sum(dZ1, axis=1, keepdims=True)  # (nodes, 1)
+        dW1 = (1 / m) * np.matmul(dZ1, X.T)  # (nodes, nx)
+
+        # --- Update Parameters ---
         self.__b2 -= alpha * db2
         self.__W2 -= alpha * dW2
+        self.__b1 -= alpha * db1
+        self.__W1 -= alpha * dW1
