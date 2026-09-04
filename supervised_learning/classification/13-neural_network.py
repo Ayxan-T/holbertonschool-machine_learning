@@ -130,3 +130,33 @@ class NeuralNetwork:
         self.__W2 -= alpha * dW2
         self.__b1 -= alpha * db1
         self.__W1 -= alpha * dW1
+
+    def train(self, X, Y, iterations=5000, alpha=0.05):
+        """train(X, Y, iterations=5000, alpha=0.05)
+        Trains the network `iterations` times, and returns preds and cost
+        on newly trained network.
+        """
+        # Validate iterations
+        if type(iterations) is not int:
+            raise TypeError("iterations must be an integer")
+        if iterations < 1:
+            raise ValueError("iterations must be a positive integer")
+
+        # Validate alpha
+        if type(alpha) is not int:
+            raise TypeError("alpha must be a float")
+        if alpha <= 0:
+            raise ValueError("alpha must be positive")
+
+        # Repeat `iterations` times:
+            # Calculate A1, A2 (discard return values and use priv attributes)
+            # Do a pass of gradient descent
+        for _ in range(iterations):
+            self.forward_prop(X)
+            self.gradient_descent(
+                X, Y,
+                self.__A1, self.__A2,
+                alpha
+            )
+
+        return self.evaluate(X, Y)
