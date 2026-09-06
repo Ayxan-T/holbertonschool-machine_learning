@@ -1,4 +1,4 @@
-#!/usr/bin/env pyhton3
+#!/usr/bin/env python3
 """Module: 11-learning_rate_decay"""
 
 import numpy as np
