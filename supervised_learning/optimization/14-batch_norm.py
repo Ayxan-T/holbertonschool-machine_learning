@@ -12,6 +12,7 @@ def create_batch_norm_layer(prev, n, activation):
         kernel_initializer=tf.keras.initializers.VarianceScaling(
             mode="fan_avg"
         ),
+        activation=activation
     )(prev)
 
     # Batch normalization layer applied before activation
@@ -21,7 +22,4 @@ def create_batch_norm_layer(prev, n, activation):
         epsilon=1e-7
     )(dense)
 
-    # Apply the activation function if provided
-    if activation is not None:
-        return activation(bn)
     return bn
