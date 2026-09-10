@@ -12,7 +12,7 @@ def resnet50():
     Returns:
         the keras model
     """
-    init = K.initializers.HeNormal(seed=0)
+    init = K.initializers.he_normal(seed=0)
     X_input = K.Input(shape=(224, 224, 3))
 
     # Stage 1: Conv1 & MaxPool
@@ -20,7 +20,7 @@ def resnet50():
         64, (7, 7), strides=(2, 2), padding='same', kernel_initializer=init
     )(X_input)
     X = K.layers.BatchNormalization(axis=3)(X)
-    X = K.layers.Activation('relu')(X)
+    X = X = K.layers.ReLU()(X)
     X = K.layers.MaxPooling2D((3, 3), strides=(2, 2), padding='same')(X)
 
     # Stage 2: conv2_x (3 blocks)
