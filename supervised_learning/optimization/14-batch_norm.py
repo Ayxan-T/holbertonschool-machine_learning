@@ -9,7 +9,6 @@ def create_batch_norm_layer(prev, n, activation):
     # Base dense layer with requested initializer and no internal bias
     dense = tf.keras.layers.Dense(
         units=n,
-        use_bias=False,
         kernel_initializer=tf.keras.initializers.VarianceScaling(
             mode="fan_avg"
         ),
