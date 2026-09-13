@@ -157,4 +157,8 @@ class Yolo:
             box_classes.append(boxs_classes[keep])
             box_scores.append(boxs_scores[keep])
 
-        return filtered_boxes, box_classes, box_scores
+        return (
+            np.array(filtered_boxes, dtype=float),
+            np.array(box_scores, dtype=float),
+            np.array(box_classes, dtype=int)
+        )
