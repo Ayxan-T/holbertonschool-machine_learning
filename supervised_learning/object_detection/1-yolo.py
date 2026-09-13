@@ -69,8 +69,8 @@ class Yolo:
             center_y = (txty_sigmoid[:, :, :, 1] + y_index) * cell_h
 
             # widths and heights in the original image
-            width = twth_exp[:, :, :, 0]
-            height = twth_exp[:, :, :, 1]
+            width = twth_exp[:, :, :, 0] * cell_w
+            height = twth_exp[:, :, :, 1] * cell_h
 
             # boundary boxes: (x1, y1, x2, y2)
             x1 = center_x - (width / 2)
