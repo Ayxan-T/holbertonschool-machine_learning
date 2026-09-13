@@ -15,14 +15,15 @@ class Yolo:
 
         self.class_t = class_t
         self.nms_t = nms_t  # IOU threshold
-        self.anchors = anchors  # (num_gridcells, anchor_boxes, 2)
+        self.anchors = anchors  # (num_outputs, anchor_boxes, 2)
 
     def process_outputs(self, outputs, image_size):
         """Process model output.
 
         Args:
             outputs (list): a list of numpy.ndarrays,
-                each of shape (grid_height, grid_width, anchor_boxes, 4 + 1 + classes)
+                each of shape (grid_height, grid_width, anchor_boxes,
+                4 + 1 + classes)
             image_size (numpy.ndarray): [image_height, image_width]
 
         Returns:
