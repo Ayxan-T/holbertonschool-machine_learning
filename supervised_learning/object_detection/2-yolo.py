@@ -88,33 +88,36 @@ class Yolo:
     def filter_boxes(self, boxes, box_confidences, box_class_probs):
         """Filter boxes using confidence threshold and non-max suppression."""
         filtered_boxes = []
-        box_classes = []
-        box_scores = []
+        filtered_scores = []
+        filtered_classes = []
 
         for i, grid in enumerate(boxes):
-            # Compute class-specific score for each anchor prediction
-            box_scores_per_class = box_confidences[i] * box_class_probs[i]
-            box_scores_per_class = box_scores_per_class.reshape(
+            # combine confidence and class probabilities
+            combined = box_confidences[i] * box_class_probs[i]
+            combined = combined.reshape(
                 grid.shape[0], grid.shape[1], grid.shape[2], -1
             )
 
-            # Keep the strongest class score for each box
-            best_scores = np.max(box_scores_per_class, axis=-1)
-            best_classes = np.argmax(box_scores_per_class, axis=-1)
+            # keep the strongest class for each anchor box
+            best_scores = np.max(combined, axis=-1)
+            best_classes = np.argmax(combined, axis=-1)
 
-            # Apply class threshold
+            # apply confidence threshold
             mask = best_scores > self.class_t
+            if not np.any(mask):
+                continue
+
             boxs = grid[mask]
             boxs_scores = best_scores[mask]
             boxs_classes = best_classes[mask]
 
-            # Sort boxes by descending score
+            # sort by descending score
             order = np.argsort(boxs_scores)[::-1]
             boxs = boxs[order]
             boxs_scores = boxs_scores[order]
             boxs_classes = boxs_classes[order]
 
-            # Apply non-max suppression
+            # non-max suppression
             keep = []
             delete = set()
 
@@ -124,11 +127,11 @@ class Yolo:
 
                 keep.append(a)
 
+                box_a = boxs[a]
                 for b in range(a + 1, len(boxs)):
                     if b in delete:
                         continue
 
-                    box_a = boxs[a]
                     box_b = boxs[b]
 
                     inter_x1 = max(box_a[0], box_b[0])
@@ -152,13 +155,24 @@ class Yolo:
                     if iou > self.nms_t:
                         delete.add(b)
 
+            if len(keep) == 0:
+                continue
+
             keep = np.array(keep, dtype=int)
+
             filtered_boxes.append(boxs[keep])
-            box_classes.append(boxs_classes[keep])
-            box_scores.append(boxs_scores[keep])
+            filtered_scores.append(boxs_scores[keep])
+            filtered_classes.append(boxs_classes[keep])
+
+        if len(filtered_boxes) == 0:
+            return (
+                np.empty((0, 4), dtype=float),
+                np.empty((0,), dtype=float),
+                np.empty((0,), dtype=int)
+            )
 
         return (
-            np.array(filtered_boxes, dtype=float),
-            np.array(box_scores, dtype=float),
-            np.array(box_classes, dtype=int)
+            np.concatenate(filtered_boxes, axis=0),
+            np.concatenate(filtered_scores, axis=0),
+            np.concatenate(filtered_classes, axis=0)
         )
