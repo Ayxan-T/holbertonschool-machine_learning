@@ -122,15 +122,16 @@ class NST:
 
     def generate_features(self):
         """Extracts the features used to calculate neural style cost."""
-        content_feature = self.model.predict(
-            self.content_image,
-            verbose=0)[5]
-
-        style_features = self.model.predict(
-            self.style_image,
-            verbose=0)[:5]
+        content_feature = self.model.predict(self.content_image, verbose=0)[5]
+        
+        style_features = self.model.predict(self.style_image, verbose=0)[:5]
 
         self.gram_style_features = [
-            NST.gram_matrix(feature) for feature in style_features
+            NST.gram_matrix(feature).numpy() for feature in style_features
         ]
-        self.content_feature = content_feature
+
+        self.content_feature = (
+            content_feature.numpy()
+            if hasattr(content_feature, "numpy")
+            else content_feature
+        )
