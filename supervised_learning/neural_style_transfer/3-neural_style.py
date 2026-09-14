@@ -35,8 +35,7 @@ class NST:
         self.alpha = alpha
         self.beta = beta
         self.load_model()
-        self.gram_style_features = None
-        self.content_feature = None
+        self.generate_features()
 
     @staticmethod
     def scale_image(image):
@@ -99,9 +98,9 @@ class NST:
 
     def gram_matrix(input_layer):
         """ Function: gram_matrix """
-        is_valid_type = isinstance(input_layer, (tf.Variable, tf.Tensor))
-        is_rank_4 = len(input_layer.shape) == 4
-        if not is_valid_type or not is_rank_4:
+        input_layer = tf.convert_to_tensor(input_layer)
+
+        if len(input_layer.shape) != 4:
             raise TypeError("input_layer must be a tensor of rank 4")
 
         scaler = input_layer.shape[1] * input_layer.shape[2]    # denominator
@@ -116,7 +115,7 @@ class NST:
 
         # MC by Values x Values by MC = MC by MC
         matrix = tf.matmul(maps_flat, maps_flat, transpose_a=True)
-        matrix = matrix / scaler
+        matrix = matrix / tf.cast(scaler, dtype=matrix.dtype)
 
         # inplace dimension expansion
         return matrix[tf.newaxis, ...]
@@ -129,12 +128,9 @@ class NST:
 
         style_features = self.model.predict(
             self.style_image,
-            verbose=0)[:5]  # list of 4
-        style_features = self.model.predict(self.style_image, verbose=0)[:5]
+            verbose=0)[:5]
 
-        gram_style_features = tf.stack([
+        self.gram_style_features = [
             NST.gram_matrix(feature) for feature in style_features
-        ], axis=0)
-
-        self.gram_style_features = gram_style_features
+        ]
         self.content_feature = content_feature
