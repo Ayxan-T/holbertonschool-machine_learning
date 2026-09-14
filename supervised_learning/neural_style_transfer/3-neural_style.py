@@ -130,7 +130,11 @@ class NST:
         style_features = self.model.predict(
             self.style_image,
             verbose=0)[:5]  # list of 4
-        gram_style_features = self.gram_matrix(tf.stack(style_features))
+        style_features = self.model.predict(self.style_image, verbose=0)[:5]
+
+        gram_style_features = tf.stack([
+            NST.gram_matrix(feature) for feature in style_features
+        ], axis=0)
 
         self.gram_style_features = gram_style_features
         self.content_feature = content_feature
