@@ -35,6 +35,8 @@ class NST:
         self.alpha = alpha
         self.beta = beta
         self.load_model()
+        self.gram_style_features = None
+        self.content_feature = None
 
     @staticmethod
     def scale_image(image):
@@ -126,4 +128,5 @@ class NST:
         style_features = self.model.predict(self.style_image)[:5]  # list of 4
         gram_style_features = self.gram_matrix(tf.stack(style_features))
 
-        return gram_style_features, content_feature
+        self.gram_style_features = gram_style_features
+        self.content_feature = content_feature
